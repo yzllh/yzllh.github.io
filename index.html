@@ -29,8 +29,8 @@
     </div>
     <div class="site-facts">
       <div>◉ 建站时间：2024-01-30</div>
-      <div>◉ 最后更新：2026-08-01 <b class="new-badge">NEW!</b></div>
-      <div>▣ 文章总数：14 篇</div>
+      <div>◉ 最后更新：2026-08-14 <b class="new-badge">NEW!</b></div>
+      <div>▣ 文章总数：15 篇</div>
     </div>
   </div>
   <div class="welcome-bar">
@@ -44,6 +44,14 @@
     <a href="/search/">搜索 Search</a>
     <a href="/about/">关于我 About Me</a>
     <a href="/rss.xml">RSS Feed</a>
+    <span class="language-switcher" aria-label="语言切换">
+      <span>语言:</span>
+      <button type="button" data-site-language="zh-CN">中文</button>
+      <button type="button" data-site-language="en">English</button>
+      <button type="button" data-site-language="ru">Русский</button>
+      <button type="button" data-site-language="ja">日本語</button>
+      <span id="google_translate_element" aria-hidden="true"></span>
+    </span>
   </nav>
 </header>
 
@@ -98,6 +106,28 @@
   <small>Latest Updates</small>
 </div>
 <div class="post-list">
+  
+    <article class="post-card">
+  <div class="post-card-heading">
+    <span class="paper-icon">▤</span>
+    <h2><a href="/2026/08/14/udon-nes-emulator/">【WIP】Udon NES模拟器</a></h2>
+    <time datetime="2026-08-14T04:00:00.000Z">(2026-08-14)</time>
+  </div>
+  <div class="post-excerpt">
+这是草稿，根据项目进度我们会更新文章。
+
+前言我一直都对udon有很浓厚的兴趣。根据官方的wiki，udon有高达1000倍的性能损失。简单查询后得知，这会导致现代cpu的性能降低到大概是80486数量级还不如的性能，这非常的难绷。
+不过，除了udon，我们还有同样图灵完备，但是高性能计算的shader可用：我们可以使用udon-shader协同，来获得现代化计算的性能。根据这个思想，我已经做了一个基于ShaderGPT但是使用gemma3 1b的地图，和中国象棋AI的地图。在中国象棋地图中，我们的udon-sh……</div>
+  <div class="post-card-meta">
+    分类：
+    <a href="/categories/VRChat/">VRChat</a>
+    <span>|</span>
+    标签：
+    <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><a href="/tags/VRChat/">VRChat</a><a href="/tags/Udon/">Udon</a><a href="/tags/Shader/">Shader</a><a href="/tags/NES%E6%A8%A1%E6%8B%9F%E5%99%A8/">NES模拟器</a><a href="/tags/%E7%A1%AC%E4%BB%B6%E6%A8%A1%E6%8B%9F/">硬件模拟</a>
+    <a class="read-more" href="/2026/08/14/udon-nes-emulator/">[阅读全文...]</a>
+  </div>
+</article>
+
   
     <article class="post-card">
   <div class="post-card-heading">
@@ -405,6 +435,8 @@ Udon密码锁用静态的密码锁解锁更高级的功能。
     <h2 class="box-heading"><span class="title-mark">☷</span>最近更新 <small>Recent Updates</small></h2>
     <ul class="bullet-list">
       
+        <li><a href="/2026/08/14/udon-nes-emulator/">【WIP】Udon NES模拟器</a> <time>(08-14)</time></li>
+      
         <li><a href="/2026/08/01/vrchat-udon-chinese-chess/">Udon实现的AI中国象棋地图</a> <time>(08-01)</time></li>
       
         <li><a href="/2026/07/27/vrchat-gemma3-1b/">在VRChat中本地部署大语言模型Gemma 3 1B</a> <time>(07-27)</time></li>
@@ -412,8 +444,6 @@ Udon密码锁用静态的密码锁解锁更高级的功能。
         <li><a href="/2026/05/05/vrchat-avatar-obfuscator/">VRChat模型混淆/反盗模插件</a> <time>(05-05)</time></li>
       
         <li><a href="/2026/04/21/oracle-qwen35-35b-a3b/">oracle免费服务器跑Qwen3.5 35b a3b测试</a> <time>(04-21)</time></li>
-      
-        <li><a href="/2026/02/03/vrchat-private-server/">VRChat私服的搭建和简单游玩</a> <time>(02-03)</time></li>
       
     </ul>
   </section>

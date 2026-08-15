@@ -9,8 +9,47 @@
     <atom:link href="https://yzllh.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>个人写的垃圾的存档之处，或许会对你有一些帮助。</description>
-    <pubDate>Sat, 15 Aug 2026 10:54:17 GMT</pubDate>
+    <pubDate>Sat, 15 Aug 2026 12:16:42 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>【WIP】Udon NES模拟器</title>
+      <link>https://yzllh.github.io/2026/08/14/udon-nes-emulator/</link>
+      <guid>https://yzllh.github.io/2026/08/14/udon-nes-emulator/</guid>
+      <pubDate>Fri, 14 Aug 2026 04:00:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;blockquote&gt;
+&lt;p&gt;这是草稿，根据项目进度我们会更新文章。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;我一直都对udon有很浓厚的兴趣</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<blockquote><p>这是草稿，根据项目进度我们会更新文章。</p></blockquote><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我一直都对udon有很浓厚的兴趣。根据官方的wiki，udon有高达1000倍的性能损失。简单查询后得知，这会导致现代cpu的性能降低到大概是80486数量级还不如的性能，这非常的难绷。</p><p>不过，除了udon，我们还有同样图灵完备，但是高性能计算的shader可用：我们可以使用udon-shader协同，来获得现代化计算的性能。根据这个思想，我已经做了一个基于ShaderGPT但是使用gemma3 1b的地图，和中国象棋AI的地图。在中国象棋地图中，我们的udon-shader架构实现了远超纯udon100倍的性能，在搜索节点的性能上。</p><p>这让我不禁想象，我们是否能在vrchat中使用udon真正的模拟一个硬件。我的目标瞄准了nes这一款经典的游戏机。</p><p><img src="/images/udon-nes-super-mario.png" alt="Udon NES模拟器运行超级玛丽"></p><h2 id="性能预估"><a href="#性能预估" class="headerlink" title="性能预估"></a>性能预估</h2><p>udon的性能和80486处于同一个数量级，所以我自然会去查看dos平台上80486的nes模拟器做的怎么样。我调研的结果是，80486的性能不足以模拟6502，对于最简单的超级玛丽，都充满了大量的硬件软件上的hack，来尽量达到满速。它并不能通用的模拟整个NES硬件，虽然纸面上486强于6502一个数量级。</p><p>不过，根据之前中国象棋ai的经验，我有信心将性能提升100倍。</p><h2 id="Udon初版"><a href="#Udon初版" class="headerlink" title="Udon初版"></a>Udon初版</h2><p>那就开干。我们制作了Udon初版的nes原型机。</p><p>试下来确实性能难绷，高达3秒一帧，基本达到了可观测的下限。这时候我已经感到很不妙了，毕竟象棋ai算法不是模拟硬件，难度不在一个数量级。</p><h2 id="Udon-shader协同版"><a href="#Udon-shader协同版" class="headerlink" title="Udon-shader协同版"></a>Udon-shader协同版</h2><p>我们的nes模拟器在晚期带额外芯片的游戏如梦之泉物语，只能达到20%左右的模拟速度。其他任何游戏也都是在20-80%左右浮动，几乎无法达到可玩。</p><p>幸运的是，我们对着超级玛丽进行了优化，这让X3D高频CPU+高频内存+5090的PC几乎达到了全程90-100%的速度。而在我的安卓电脑上，他也能达到高达60-100%的速度，就当玩tas吧！</p><p><img src="/images/udon-nes-menu.png" alt="Udon NES模拟器菜单与调试界面"></p><h2 id="瓶颈在哪里"><a href="#瓶颈在哪里" class="headerlink" title="瓶颈在哪里"></a>瓶颈在哪里</h2><p>我们设计了四个实验来探讨我们当前的Udon-Shader NES模拟器的瓶颈。</p><p>首先，我怀疑瓶颈出在了Udon身上，即Udon为了读取和写入状态花费了最多的时间导致没法达成速度。因此我们先设计了下面这四个实验：</p><p><strong>实验1：</strong>NES运算全部变成no-op，但保留完整CRT&#x2F;pass&#x2F;submission结构，看最高realtime能到多少，测测udon的性能。</p><p><strong>实验2：</strong>完全关闭telemetry&#x2F;checkpoint&#x2F;readback&#x2F;audio回传，看吞吐提升多少。</p><p><strong>实验3：</strong>保持相同NES工作量，但是尽可能把pass合并，看瓶颈到底是Shader计算还是submission&#x2F;pass overhead。</p><p><strong>实验4：</strong>让GPU一次连续模拟大量cycles，暂时牺牲输入&#x2F;音频实时性，测模拟吞吐上限。</p><p>最后的结果很有意思，如下表：</p><table><thead><tr><th>模式</th><th align="right">Realtime</th></tr></thead><tbody><tr><td>完整系统</td><td align="right"><strong>94.45%</strong></td></tr><tr><td>131-pass no-op</td><td align="right"><strong>317.45%</strong> *</td></tr><tr><td>完全关闭回传</td><td align="right"><strong>98.12%</strong></td></tr><tr><td>32-pass合并工作量代理</td><td align="right"><strong>317.45%</strong> *</td></tr><tr><td>128-microchunk大chunk</td><td align="right"><strong>85.45%</strong></td></tr></tbody></table><p>这个结果直接推翻了我的猜测，瓶颈实际上是在shader里面！！并且减少pass数量毫无用处，因此我们需要重新设计实验，来看我们可以怎么优化shader。我们设计了：</p><p><strong>实验1：</strong>逐shader pass实验：看gpu到底在我们的shader的pass上花费了过多时间。</p><p><strong>实验2：</strong>模块拔除实验：我们直接测试NES模拟器模拟原机的多个模块，分别为CPU&#x2F;PPU&#x2F;APU&#x2F;Commit&#x2F;Mapper。</p><p><strong>实验3：</strong>重复执行计数实验：把我们的shader pass访问做成热力图，看谁被最多的执行在那白干活的。</p><p><strong>实验4：</strong>根据实验3的结果，进一步统计模块内部各段逻辑的执行次数与耗时，精确定位真正的冗余计算。</p><p>实验的结果：</p><table><thead><tr><th>Hotspot</th><th align="right">真实可测替代指标</th></tr></thead><tbody><tr><td>APU pass14</td><td align="right"><code>658.3 → 793.3 submissions/s</code>，+20.5%</td></tr><tr><td>pass10 PPU&#x2F;hardware</td><td align="right">clean ablation <code>658.1 → 774.2</code>，+17.6%</td></tr><tr><td>Commit pass6</td><td align="right"><code>658.1 → 744.0</code>，+13.0%</td></tr><tr><td>Mapper&#x2F;finalize pass9</td><td align="right"><code>658.3 → 739.1</code>，+12.3%</td></tr><tr><td>CPU&#x2F;6502</td><td align="right"><code>658.3 → 658.1</code>，约0%</td></tr></tbody></table><p>我们的瓶颈在于，大量本应只执行一次的NES运算，在Shader中被重复执行了几十甚至上百次！</p><p>因此，我们完全可以把我们这个优化到完全ok的结果！不过我不想做了。</p>]]></content:encoded>
+      
+      
+      <category domain="https://yzllh.github.io/categories/VRChat/">VRChat</category>
+      
+      
+      <category domain="https://yzllh.github.io/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</category>
+      
+      <category domain="https://yzllh.github.io/tags/VRChat/">VRChat</category>
+      
+      <category domain="https://yzllh.github.io/tags/Udon/">Udon</category>
+      
+      <category domain="https://yzllh.github.io/tags/Shader/">Shader</category>
+      
+      <category domain="https://yzllh.github.io/tags/NES%E6%A8%A1%E6%8B%9F%E5%99%A8/">NES模拟器</category>
+      
+      <category domain="https://yzllh.github.io/tags/%E7%A1%AC%E4%BB%B6%E6%A8%A1%E6%8B%9F/">硬件模拟</category>
+      
+      
+      <comments>https://yzllh.github.io/2026/08/14/udon-nes-emulator/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Udon实现的AI中国象棋地图</title>
@@ -103,7 +142,7 @@
       
       
       
-      <content:encoded><![CDATA[<p><a href="https://www.bilibili.com/video/BV19fdDBgEN9/?spm_id_from=333.1387.upload.video_card.click">oracle免费服务器跑Qwen3.5 35b a3b测试</a></p><h2 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h2><p>测试环境是Oracle的免费4C24GARM服务器，4核A76，3GHz。这个机器的性能非常弱，免费服务器也就不要指望它能跑出什么好成绩了。</p><p>使用的是原版llama.cpp，同时编译时开启了KleidiAI等ARM专属优化。Kleidi会把权重重排成更适合ARM寄存器的布局，多少能救一点性能。</p><h2 id="Q4-0量化测试"><a href="#Q4-0量化测试" class="headerlink" title="Q4_0量化测试"></a>Q4_0量化测试</h2><p>先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占用刚好，基本可以把上下文开满，几乎正好用完这台机器的内存。</p><p>在前1000个token左右，prefill可以到40t&#x2F;s，decode大概13t&#x2F;s。这个速度对于一台4C24G的ARM免费机来说已经差不多是极限了。</p><p>但是上下文一长就不行了。到了32k上下文以后，prefill和decode都会掉到5t&#x2F;s左右，继续往上也没有什么实用价值，做个测试记录就差不多了。</p><h2 id="视频里的测试"><a href="#视频里的测试" class="headerlink" title="视频里的测试"></a>视频里的测试</h2><p>视频里面测试的是Qwen3.5 35B A3B abliterated模型，使用IQ4_NL量化，上下文长度开到了128k，理论上开到256k也不会发生swap。</p><p>IQ4_NL的量化效果略弱于Q4_K_M，但是推理速度稍微快一点。短上下文情况下，prefill大约22tok&#x2F;s，decode大约9tok&#x2F;s，基本已经跑到了这台机器的硬件极限，prefill可能还剩一点优化空间。</p><p>编译时开启了ARM专属的Kleidi优化，并且特意选择了IQ4_NL量化。这个量化是下载FP16模型以后在本地完成的，省下来的内存刚好可以支撑满上下文运行。</p><p>另外配合<code>--mlock</code>把模型锁定在内存里，并关闭mmap，完全不使用swap。最终速度相比默认参数提升了约50%，decode从6-7t&#x2F;s提升到了9-10t&#x2F;s。</p><h2 id="ik-llama-cpp"><a href="#ik-llama-cpp" class="headerlink" title="ik_llama.cpp"></a>ik_llama.cpp</h2><p>视频发出去以后又继续测了一些东西。现在看来，如果使用Q4_0量化，decode可以跑到14t&#x2F;s，prefill能到40t&#x2F;s，但是上下文一长就会掉到5t&#x2F;s以下，所以也懒得再单独录视频了。</p><p>如果换成ik_llama.cpp，速度还会有比较明显的提升。同样是16k上下文，prefill大概快了三倍，长上下文下也会快很多，更适合拿来跑点后台任务。</p><p>我们还做了一个<a href="https://github.com/cocokoishi/ik_llama.cpp-disk-cache">ik_llama.cpp-disk-cache</a>，把现在比较流行的DeepSeek硬盘缓存技术也加进了ik_llama.cpp里，主要是为了节约本来就不多的内存空间。</p><h2 id="这台服务器适合干什么"><a href="#这台服务器适合干什么" class="headerlink" title="这台服务器适合干什么"></a>这台服务器适合干什么</h2><p>一个比较好的利用方式是跑Qwen3.5 35B A3B IQ2_XXS。这个量化版本只有10G左右，可以给上下文留出更多空间。</p><p>当然速度会低到只有5t&#x2F;s左右的prefill和decode，但如果只是跑一些后台不间断的任务，倒也不是完全不能用。</p><p>至于拿它当聊天服务器实时用，体验就比较一般了。上下文短的时候还能忍，长上下文掉速以后基本只能看着它慢慢生成。</p><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>做了个记录，没什么实用价值。</p><p>Oracle免费服务器的优点就是免费、内存大，缺点就是CPU性能实在太弱。Q4_0短上下文看起来还行，但32k左右以后就会明显掉速；IQ4_NL可以换来更大的上下文，配合Kleidi和<code>--mlock</code>以后也只是勉强能用。</p><p>如果只是想白嫖一台ARM机器跑后台任务，配合ik_llama.cpp和硬盘缓存还是可以折腾一下的。想要正常聊天，还是别对它抱太大希望。</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p><a href="https://www.bilibili.com/video/BV19fdDBgEN9/?spm_id_from=333.1387.upload.video_card.click">oracle免费服务器跑Qwen3.5 35b a3b测试</a></p><h2 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h2><p>测试环境是Oracle的免费4C24GARM服务器，4核A76，3GHz。这个机器的性能非常弱，免费服务器也就不要指望它能跑出什么好成绩了。</p><p>使用的是原版llama.cpp，同时编译时开启了KleidiAI等ARM专属优化。Kleidi会把权重重排成更适合ARM寄存器的布局，多少能救一点性能。</p><h2 id="Q4-0量化测试"><a href="#Q4-0量化测试" class="headerlink" title="Q4_0量化测试"></a>Q4_0量化测试</h2><p>先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占用刚好，基本可以把上下文开满，几乎正好用完这台机器的内存。</p><p>在前1000个token左右，prefill可以到40t&#x2F;s，decode大概13t&#x2F;s。这个速度对于一台4C24G的ARM免费机来说已经差不多是极限了。</p><h2 id="视频里的测试"><a href="#视频里的测试" class="headerlink" title="视频里的测试"></a>视频里的测试</h2><p>视频里面测试的是Qwen3.5 35B A3B abliterated模型，使用IQ4_NL量化，上下文长度开到了128k，理论上开到256k也不会发生swap。</p><p>IQ4_NL的量化效果略弱于Q4_K_M，但是推理速度稍微快一点。短上下文情况下，prefill大约22tok&#x2F;s，decode大约9tok&#x2F;s，基本已经跑到了这台机器的硬件极限，prefill可能还剩一点优化空间。</p><p>编译时开启了ARM专属的Kleidi优化，并且特意选择了IQ4_NL量化。这个量化是下载FP16模型以后在本地完成的，省下来的内存刚好可以支撑满上下文运行。</p><p>另外配合<code>--mlock</code>把模型锁定在内存里，并关闭mmap，完全不使用swap。最终速度相比默认参数提升了约50%，decode从6-7t&#x2F;s提升到了9-10t&#x2F;s。</p><h2 id="ik-llama-cpp"><a href="#ik-llama-cpp" class="headerlink" title="ik_llama.cpp"></a>ik_llama.cpp</h2><p>视频发出去以后又继续测了一些东西。现在看来，如果使用Q4_0量化，decode可以跑到14t&#x2F;s，prefill能到40t&#x2F;s，但是上下文一长就会掉到5t&#x2F;s以下，所以也懒得再单独录视频了。</p><p>如果换成ik_llama.cpp，速度还会有比较明显的提升。同样是16k上下文，prefill大概快了三倍，长上下文下也会快很多，更适合拿来跑点后台任务。具体而言，即使到了128k上下文，也能达到30t的prefill和8t左右的decode，当然你可能先要花半天给跑到128k的prefill（笑</p><p>我们还做了一个<a href="https://github.com/cocokoishi/ik_llama.cpp-disk-cache">ik_llama.cpp-disk-cache</a>，把现在比较流行的DeepSeek硬盘缓存技术也加进了ik_llama.cpp里，主要是为了节约本来就不多的内存空间。</p><h2 id="这台服务器适合干什么"><a href="#这台服务器适合干什么" class="headerlink" title="这台服务器适合干什么"></a>这台服务器适合干什么</h2><p>一个比较好的利用方式是跑Qwen3.5 35B A3B IQ2_XXS。这个量化版本只有10G左右，可以给上下文留出更多空间。</p><p>当然速度会低到只有5t&#x2F;s左右的prefill和decode，但如果只是跑一些后台不间断的任务，倒也不是完全不能用。</p><p>至于拿它当聊天服务器实时用，体验就比较一般了。上下文短的时候还能忍，长上下文掉速以后基本只能看着它慢慢生成。</p><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>做了个记录，没什么实用价值。我可不觉得40t的prefill和10t的decode有任何作用，给qq机器人用都嫌慢。有这时间折腾这坨a76不如买deepseek的api了。</p>]]></content:encoded>
       
       
       <category domain="https://yzllh.github.io/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</category>

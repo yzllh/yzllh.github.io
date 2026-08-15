@@ -29,8 +29,8 @@
     </div>
     <div class="site-facts">
       <div>◉ 建站时间：2024-01-30</div>
-      <div>◉ 最后更新：2026-08-01 <b class="new-badge">NEW!</b></div>
-      <div>▣ 文章总数：14 篇</div>
+      <div>◉ 最后更新：2026-08-14 <b class="new-badge">NEW!</b></div>
+      <div>▣ 文章总数：15 篇</div>
     </div>
   </div>
   <div class="welcome-bar">
@@ -44,6 +44,14 @@
     <a href="/search/">搜索 Search</a>
     <a href="/about/">关于我 About Me</a>
     <a href="/rss.xml">RSS Feed</a>
+    <span class="language-switcher" aria-label="语言切换">
+      <span>语言:</span>
+      <button type="button" data-site-language="zh-CN">中文</button>
+      <button type="button" data-site-language="en">English</button>
+      <button type="button" data-site-language="ru">Русский</button>
+      <button type="button" data-site-language="ja">日本語</button>
+      <span id="google_translate_element" aria-hidden="true"></span>
+    </span>
   </nav>
 </header>
 
@@ -113,20 +121,17 @@
 <p>使用的是原版llama.cpp，同时编译时开启了KleidiAI等ARM专属优化。Kleidi会把权重重排成更适合ARM寄存器的布局，多少能救一点性能。</p>
 <h2 id="Q4-0量化测试"><a href="#Q4-0量化测试" class="headerlink" title="Q4_0量化测试"></a>Q4_0量化测试</h2><p>先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占用刚好，基本可以把上下文开满，几乎正好用完这台机器的内存。</p>
 <p>在前1000个token左右，prefill可以到40t&#x2F;s，decode大概13t&#x2F;s。这个速度对于一台4C24G的ARM免费机来说已经差不多是极限了。</p>
-<p>但是上下文一长就不行了。到了32k上下文以后，prefill和decode都会掉到5t&#x2F;s左右，继续往上也没有什么实用价值，做个测试记录就差不多了。</p>
 <h2 id="视频里的测试"><a href="#视频里的测试" class="headerlink" title="视频里的测试"></a>视频里的测试</h2><p>视频里面测试的是Qwen3.5 35B A3B abliterated模型，使用IQ4_NL量化，上下文长度开到了128k，理论上开到256k也不会发生swap。</p>
 <p>IQ4_NL的量化效果略弱于Q4_K_M，但是推理速度稍微快一点。短上下文情况下，prefill大约22tok&#x2F;s，decode大约9tok&#x2F;s，基本已经跑到了这台机器的硬件极限，prefill可能还剩一点优化空间。</p>
 <p>编译时开启了ARM专属的Kleidi优化，并且特意选择了IQ4_NL量化。这个量化是下载FP16模型以后在本地完成的，省下来的内存刚好可以支撑满上下文运行。</p>
 <p>另外配合<code>--mlock</code>把模型锁定在内存里，并关闭mmap，完全不使用swap。最终速度相比默认参数提升了约50%，decode从6-7t&#x2F;s提升到了9-10t&#x2F;s。</p>
 <h2 id="ik-llama-cpp"><a href="#ik-llama-cpp" class="headerlink" title="ik_llama.cpp"></a>ik_llama.cpp</h2><p>视频发出去以后又继续测了一些东西。现在看来，如果使用Q4_0量化，decode可以跑到14t&#x2F;s，prefill能到40t&#x2F;s，但是上下文一长就会掉到5t&#x2F;s以下，所以也懒得再单独录视频了。</p>
-<p>如果换成ik_llama.cpp，速度还会有比较明显的提升。同样是16k上下文，prefill大概快了三倍，长上下文下也会快很多，更适合拿来跑点后台任务。</p>
+<p>如果换成ik_llama.cpp，速度还会有比较明显的提升。同样是16k上下文，prefill大概快了三倍，长上下文下也会快很多，更适合拿来跑点后台任务。具体而言，即使到了128k上下文，也能达到30t的prefill和8t左右的decode，当然你可能先要花半天给跑到128k的prefill（笑</p>
 <p>我们还做了一个<a target="_blank" rel="noopener" href="https://github.com/cocokoishi/ik_llama.cpp-disk-cache">ik_llama.cpp-disk-cache</a>，把现在比较流行的DeepSeek硬盘缓存技术也加进了ik_llama.cpp里，主要是为了节约本来就不多的内存空间。</p>
 <h2 id="这台服务器适合干什么"><a href="#这台服务器适合干什么" class="headerlink" title="这台服务器适合干什么"></a>这台服务器适合干什么</h2><p>一个比较好的利用方式是跑Qwen3.5 35B A3B IQ2_XXS。这个量化版本只有10G左右，可以给上下文留出更多空间。</p>
 <p>当然速度会低到只有5t&#x2F;s左右的prefill和decode，但如果只是跑一些后台不间断的任务，倒也不是完全不能用。</p>
 <p>至于拿它当聊天服务器实时用，体验就比较一般了。上下文短的时候还能忍，长上下文掉速以后基本只能看着它慢慢生成。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>做了个记录，没什么实用价值。</p>
-<p>Oracle免费服务器的优点就是免费、内存大，缺点就是CPU性能实在太弱。Q4_0短上下文看起来还行，但32k左右以后就会明显掉速；IQ4_NL可以换来更大的上下文，配合Kleidi和<code>--mlock</code>以后也只是勉强能用。</p>
-<p>如果只是想白嫖一台ARM机器跑后台任务，配合ik_llama.cpp和硬盘缓存还是可以折腾一下的。想要正常聊天，还是别对它抱太大希望。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>做了个记录，没什么实用价值。我可不觉得40t的prefill和10t的decode有任何作用，给qq机器人用都嫌慢。有这时间折腾这坨a76不如买deepseek的api了。</p>
 
     </div>
     

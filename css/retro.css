@@ -551,3 +551,20 @@ a:hover { color: #ff0000; background: #ffff00; }
 .search-result h2 { margin: 0 90px 2px 0; font-size: 16px; }
 .search-result time { position: absolute; top: 8px; right: 0; color: #404040; font: 11px "Courier New", monospace; }
 .search-result p { margin: 2px 0 0; font: 12px/1.5 SimSun, serif; }
+.language-switcher { display: inline-flex; align-items: center; gap: 3px; margin-left: 5px; color: #000000; font-size: 11px; }
+.language-switcher button {
+  padding: 1px 4px;
+  border: 2px outset #ffffff;
+  border-radius: 0;
+  background: #c0c0c0;
+  color: #000080;
+  font: 11px "MS Sans Serif", Tahoma, Arial, sans-serif;
+  cursor: pointer;
+}
+.language-switcher button:active { border-style: inset; }
+#google_translate_element { display: none; }
+body { top: 0 !important; }
+.goog-te-banner-frame.skiptranslate { display: none !important; }
+.goog-te-balloon-frame { display: none !important; }
+.goog-tooltip { display: none !important; }
+.goog-text-highlight { background: transparent !important; box-shadow: none !important; }
