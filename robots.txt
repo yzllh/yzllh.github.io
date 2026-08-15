@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cocokoishi.github.io/sitemap.xml
+Sitemap: https://yzllh.github.io/sitemap.xml

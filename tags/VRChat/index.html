@@ -11,7 +11,7 @@
   <meta name="theme-color" content="#234970">
   <link rel="icon" href="/img/favicon.ico">
   <link rel="stylesheet" href="/css/retro.css">
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="cocokoishi's homepage" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/rss.xml" title="cocokoishi's homepage" type="application/rss+xml">
 </head>
 <body>
   <div class="browser-frame">
@@ -30,7 +30,7 @@
     <div class="site-facts">
       <div>◉ 建站时间：2024-01-30</div>
       <div>◉ 最后更新：2026-08-01 <b class="new-badge">NEW!</b></div>
-      <div>▣ 文章总数：13 篇</div>
+      <div>▣ 文章总数：14 篇</div>
     </div>
   </div>
   <div class="welcome-bar">
@@ -41,8 +41,9 @@
   <nav class="top-links" aria-label="主导航">
     <a href="/">首页 Home</a>
     <a href="/archives/">归档 Archives</a>
+    <a href="/search/">搜索 Search</a>
     <a href="/about/">关于我 About Me</a>
-    <a href="/atom.xml">RSS Feed</a>
+    <a href="/rss.xml">RSS Feed</a>
   </nav>
 </header>
 
@@ -56,8 +57,19 @@
       <li><span>▣</span><a href="/categories/">分类 <small>(Categories)</small></a></li>
       <li><span>▣</span><a href="/tags/">标签 <small>(Tags)</small></a></li>
       <li><span>▣</span><a href="/about/">关于我 <small>(About Me)</small></a></li>
-      <li><span>▣</span><a href="/atom.xml">RSS 订阅 <small>(RSS)</small></a></li>
+      <li><span>▣</span><a href="/rss.xml">RSS 订阅 <small>(RSS)</small></a></li>
     </ul>
+  </section>
+
+  <section class="side-box search-box">
+    <h2 class="box-heading"><span class="title-mark">⌕</span>站内搜索 <small>Search</small></h2>
+    <form class="sidebar-search" action="/search/" method="get">
+      <label for="sidebar-search-input">查找文章：</label>
+      <div class="sidebar-search-row">
+        <input id="sidebar-search-input" name="q" type="search" placeholder="输入关键词">
+        <button type="submit">搜索</button>
+      </div>
+    </form>
   </section>
 
   <section class="side-box">
@@ -154,6 +166,28 @@ A local GPT World.powered by ShaderGPT https://gitlab.com/lox9973/ShaderGPT.
     标签：
     <a href="/tags/VRChat/">VRChat</a><a href="/tags/%E6%A8%A1%E5%9E%8B%E4%BF%9D%E6%8A%A4/">模型保护</a><a href="/tags/Unity%E5%B7%A5%E5%85%B7/">Unity工具</a><a href="/tags/%E6%B7%B7%E6%B7%86%E6%8F%92%E4%BB%B6/">混淆插件</a>
     <a class="read-more" href="/2026/05/05/vrchat-avatar-obfuscator/">[阅读全文...]</a>
+  </div>
+</article>
+
+  
+    <article class="post-card">
+  <div class="post-card-heading">
+    <span class="paper-icon">▤</span>
+    <h2><a href="/2026/02/03/vrchat-private-server/">VRChat私服的搭建和简单游玩</a></h2>
+    <time datetime="2026-02-02T16:00:00.000Z">(2026-02-03)</time>
+  </div>
+  <div class="post-excerpt">更多主要信息请参考视频：https://www.bilibili.com/video/BV1r3FLzcE1y/
+
+在这个视频中，我们搭建了VRChat build1207(2022EAC前最后一个版本)的私服。
+具体而言，我们制作了一个Melonloader mod，用于劫持所有的通讯到本地的伺服器中。我们需要解决VRChat基本https和photon同步等问题。vrchat早已引入证书固定，所以在melonloader这一块我们就遇到了巨大困难。
+在解决了melonloader问题后，所有数据都被路由到了本地……</div>
+  <div class="post-card-meta">
+    分类：
+    <a href="/categories/VRChat/">VRChat</a>
+    <span>|</span>
+    标签：
+    <a href="/tags/VRChat/">VRChat</a><a href="/tags/%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/">私服搭建</a><a href="/tags/MelonLoader/">MelonLoader</a><a href="/tags/Photon/">Photon</a><a href="/tags/%E9%80%86%E5%90%91%E7%A0%94%E7%A9%B6/">逆向研究</a>
+    <a class="read-more" href="/2026/02/03/vrchat-private-server/">[阅读全文...]</a>
   </div>
 </article>
 
