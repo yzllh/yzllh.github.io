@@ -1,0 +1,177 @@
+
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>混淆的liltoon增加盗模盗工程文件难度 | cocokoishi&#39;s homepage</title>
+  <meta name="description" content="引言最近倒模非常猖獗，甚至能直接还原成工程文件. 从原理上来说，倒模者仅能获取AssetBundle及其序列化数据，而无法直接恢复 Shader 的源代码。然而在实际环境中，由于社区高度集中使用lilToon这一标准化 Shader，而解包后material又完整保留了键值，信息几乎决定了最终渲染效果，导致即使缺失 Shader 源码，也能通过直接导入liltoon然后手动选中来100%复刻源模型">
+  <meta name="author" content="椰子梨梨花">
+  <meta name="theme-color" content="#234970">
+  <link rel="icon" href="/img/favicon.ico">
+  <link rel="stylesheet" href="/css/retro.css">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="cocokoishi's homepage" type="application/atom+xml">
+</head>
+<body>
+  <div class="browser-frame">
+    
+<header class="site-header">
+  <div class="construction-bar">
+    <span class="construction-label">UNDER CONSTRUCTION</span>
+    <span>本站正在慢慢建设中……内容持续更新……</span>
+    <span class="browser-badge">Best viewed with <b>e</b> any modern browser</span>
+  </div>
+  <div class="brand-panel">
+    <a class="brand-avatar" href="/"><img src="/img/yzllh.png" alt="椰子梨梨花头像"></a>
+    <div class="brand-copy">
+      <div class="site-title">cocokoishi's homepage</div>
+    </div>
+    <div class="site-facts">
+      <div>◉ 建站时间：2024-01-30</div>
+      <div>◉ 最后更新：2026-08-01 <b class="new-badge">NEW!</b></div>
+      <div>▣ 文章总数：13 篇</div>
+    </div>
+  </div>
+  <div class="welcome-bar">
+    <span class="speaker">◖))</span>
+    <span>欢迎光临 cocokoishi's homepage！希望你能在这里找到有用的内容 ^_^</span>
+    <time data-clock>正在读取时间……</time>
+  </div>
+  <nav class="top-links" aria-label="主导航">
+    <a href="/">首页 Home</a>
+    <a href="/archives/">归档 Archives</a>
+    <a href="/about/">关于我 About Me</a>
+    <a href="/atom.xml">RSS Feed</a>
+  </nav>
+</header>
+
+    <main class="page-grid">
+      <aside class="sidebar">
+  <section class="side-box">
+    <h2 class="box-heading"><span class="title-mark">⌂</span>栏目导航 <small>Menu</small></h2>
+    <ul class="menu-list">
+      <li><span>▣</span><a href="/">首页 <small>(Home)</small></a></li>
+      <li><span>▣</span><a href="/archives/">归档 <small>(Archives)</small></a></li>
+      <li><span>▣</span><a href="/categories/">分类 <small>(Categories)</small></a></li>
+      <li><span>▣</span><a href="/tags/">标签 <small>(Tags)</small></a></li>
+      <li><span>▣</span><a href="/about/">关于我 <small>(About Me)</small></a></li>
+      <li><span>▣</span><a href="/atom.xml">RSS 订阅 <small>(RSS)</small></a></li>
+    </ul>
+  </section>
+
+  <section class="side-box">
+    <h2 class="box-heading"><span class="title-mark">♧</span>更多链接 <small>More Links</small></h2>
+    <div class="friend-links">
+      <a href="https://space.bilibili.com/5145514" target="_blank" rel="noopener">Bilibili</a>
+      <a href="https://github.com/cocokoishi" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="side-note">欢迎通过 Bilibili 或 Email 联系站长<br><a href="/about/">查看关于我……</a></div>
+  </section>
+
+  <section class="side-box email-box">
+    <h2 class="box-heading"><span class="title-mark">✉</span>Email me <small>Contact</small></h2>
+    <div class="email-panel">
+      <div>欢迎来信！</div>
+      <a class="email-button" href="mailto:asters.rumored-8n@icloud.com">✉ 给站长发邮件</a>
+      <div class="email-address">asters.rumored-8n@icloud.com</div>
+    </div>
+  </section>
+</aside>
+
+      <section class="main-column">
+        <article class="content-box post-page">
+  <div class="box-heading">
+    <span class="title-mark">▧</span>
+    <span>日志详情</span>
+    <small>Article / 2026-01-04</small>
+  </div>
+  <div class="post-inner">
+    <h1 class="post-title">混淆的liltoon增加盗模盗工程文件难度</h1>
+    <div class="post-meta">
+      发表于 <time datetime="2026-01-04T04:23:00.000Z">2026-01-04</time>
+      <span>|</span>
+      
+        <a href="/categories/VRChat/">VRChat</a>
+      
+    </div>
+    <div class="article-content">
+      <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>最近倒模非常猖獗，甚至能直接还原成工程文件.</p>
+<p>从原理上来说，倒模者仅能获取AssetBundle及其序列化数据，而无法直接恢复 Shader 的源代码。然而在实际环境中，由于社区高度集中使用lilToon这一标准化 Shader，而解包后material又完整保留了键值，信息几乎决定了最终渲染效果，导致<strong>即使缺失 Shader 源码，也能通过直接导入liltoon然后手动选中来100%复刻源模型效果。</strong> liltoon又是比较新的广泛使用的shader，社区里面的混淆方案并不成熟，相关的变种shader极少，不像隔壁poiyomi有成熟的密码锁方案。所以针对liltoon的加密在社区里面非常匮乏。</p>
+<h2 id="VRC模型是如何转换成原始工程文件的"><a href="#VRC模型是如何转换成原始工程文件的" class="headerlink" title="VRC模型是如何转换成原始工程文件的"></a>VRC模型是如何转换成原始工程文件的</h2><img src="/images/pasted-14.png" alt="" width="600">
+
+<p>因为vrc也是标准的unity游戏，存储方式也是正常的unity形式，在通过外挂等方式获取了你的角色文件之后（我们一般称为assetbundle），就可以使用通用的unity解包工具进行解包复原。assetbundle并不是特别抽象的形式，里面包含了你的工程文件的绝大部分内容，除了原始的shader和scripts。然而大家都是vrchat sdk scripts，用的已知的着色器，自然还原成工程文件不是难事。<br>社区里面的工具早已大把，我主要使用assetripper和facs utilities来进行解包。我试着解包了我自己的较为复杂的模型。由于本笨比只会用lilToon这一shader，因此在facs的近乎一键的攻势下基本上十分钟就完美解包出来了，除了gesture层损坏（事实上在知道素体的情况下是完全可以用原版的gesture层的）。复原出来的工程文件就和原版没什么区别，功能全正常，也能上传。<br><strong>（申明:我没有解包过其他人的模型）</strong></p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>assetripper对assetbundle进行解包的时候，着色器永远是坏的。可能是因为这个时候着色器已经转换成目标平台图形接口的格式，没有源代码形式了。这也是解包模型最大的难点：<strong>如果使用未知的着色器，那就会难以复原。</strong></p>
+<h3 id="直接调用着色器缓存？"><a href="#直接调用着色器缓存？" class="headerlink" title="直接调用着色器缓存？"></a>直接调用着色器缓存？</h3><img src="/images/pasted-15.png" alt="" width="600">
+
+<p>我发现有评论说能直接调用着色器缓存。我不知道是怎么实现的，但是正好facs utilities有直接load assetbundle的功能，我发现即使是工程文件没有的shader，也可以完美的load，所以我觉得确实是存在这种方式的，只是我水平低没研究出来而已。</p>
+<h3 id="神秘俄罗斯工具"><a href="#神秘俄罗斯工具" class="headerlink" title="神秘俄罗斯工具"></a>神秘俄罗斯工具</h3><img src="/images/pasted-16.png" alt="" width="600">
+
+<p>一位友人为我指明了一个神秘俄罗斯黑客软件，声称能直接复原着色器。我看了一下他们官网的视频，勉强认为是真的吧，反正我没有这么多零花钱去验证。</p>
+<h2 id="混淆的liltoon增加盗模盗工程文件难度"><a href="#混淆的liltoon增加盗模盗工程文件难度" class="headerlink" title="混淆的liltoon增加盗模盗工程文件难度"></a>混淆的liltoon增加盗模盗工程文件难度</h2><p>从上面的可以看出，如果我们使用未知的着色器，或许会为ripper带来极大的困扰，最次的混淆也能让他人完全无法修改我们的效果。据此，我vibe coding了一组能混淆着色器，转换material的脚本。见于视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GeBLBfE3M/">https://www.bilibili.com/video/BV1GeBLBfE3M/</a> 。</p>
+<p>当然也挡不住闲得慌的ripper花费数个小时来破解我们的混淆。500多项还是有很大匹配的难度的。当然当他们花费几个小时只为破解我们微不足道的模型后，我就已经赢了</p>
+<h3 id="混淆后的样子"><a href="#混淆后的样子" class="headerlink" title="混淆后的样子"></a>混淆后的样子</h3><p>无论是视觉样子，还是资源占用，还有fallback shader，均无任何变化，是非常良性的不影响任何人体验，只影响ripper体验的混淆，比什么密码锁，着色器顶点偏移加密，高到不知道哪里去了。<br>下图展示了我们材质球混淆后的形式</p>
+<img src="/images/pasted-21.png" alt="" width="600">
+
+<h3 id="混淆后的作用"><a href="#混淆后的作用" class="headerlink" title="混淆后的作用"></a>混淆后的作用</h3><p><strong>我们的material被完全混淆，导致他人恢复工程文件的时候，无法使用facs一键套用</strong>，因为键值全被混淆了。但是为了保留vrc fallback的支持，我们没有混淆maintexure的键，所以套用之后只能看到没有任何特效的材质球。</p>
+<h3 id="大家的评价"><a href="#大家的评价" class="headerlink" title="大家的评价"></a>大家的评价</h3><p>我非常在意大家的评价，一条鼓励的评价会为我残破的心灵给予很大的慰藉。</p>
+<h4 id="第一条评价"><a href="#第一条评价" class="headerlink" title="第一条评价"></a>第一条评价</h4><img src="/images/pasted-17.png" alt="" width="600">
+
+<p>这位用户认为我是闲鱼卖家，我做模型就是为了盈利，我混淆我的着色器是为了保护我的黑产。我应该驳斥这种言论是完全错误的，我没有从VRChat赚取任何一分钱，我反而在改模方面帮助了很多人，并且非常抵制闲鱼模型和倒狗，买入若干booth正版商品等。</p>
+<h4 id="第二条评价"><a href="#第二条评价" class="headerlink" title="第二条评价"></a>第二条评价</h4><img src="/images/pasted-18.png" alt="" width="600">
+
+<p>这位用户认为hotswap让这个脚本屁用没有。他说的对，但是也应该指出hotswap是无法防御的，所以我们在做恶心恶意解包者的工作，保护我们自己的资产，是具有一定意义的。</p>
+<h4 id="第三条评价"><a href="#第三条评价" class="headerlink" title="第三条评价"></a>第三条评价</h4><img src="/images/pasted-19.png" alt="" width="600">
+
+<p>我没有理解他提到的gemini是什么，我尝试在搜索引擎搜索，给出的网址我无法打开，所以我无法体验他所说的gemini，我只听说过deepseek很厉害。</p>
+<h4 id="第四条评价"><a href="#第四条评价" class="headerlink" title="第四条评价"></a>第四条评价</h4><img src="/images/pasted-20.png" alt="" width="600">
+这个日本人直言不讳的提出要来偷我的模型，我已经全平台拉黑举报处理。
+
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>因为这个脚本被评论区真正有能力的大神认为是trivial的，所以我不决定开源来污染互联网。</p>
+
+    </div>
+    
+      <div class="post-tags">
+        标签：
+        
+          <a href="/tags/VRChat/">[VRChat]</a>
+        
+          <a href="/tags/%E6%A8%A1%E5%9E%8B%E4%BF%9D%E6%8A%A4/">[模型保护]</a>
+        
+          <a href="/tags/lilToon/">[lilToon]</a>
+        
+          <a href="/tags/Shader/">[Shader]</a>
+        
+      </div>
+    
+  </div>
+</article>
+<nav class="post-navigation" aria-label="文章导航">
+  <a href="/2026/04/21/oracle-qwen35-35b-a3b/">← 上一篇：oracle免费服务器跑Qwen3.5 35b a3b测试</a>
+  <a href="/2025/12/27/eac_arm_win/">下一篇：EAC现已支持arm windows！！ →</a>
+</nav>
+
+      </section>
+    </main>
+    <footer class="site-footer">
+  <div class="footer-badges">
+    <span>VALID<br><b>HTML 4.0</b></span>
+    <span>SCREEN SIZE<br><b>RESPONSIVE</b></span>
+    <span>POWERED BY<br><b>Hexo</b></span>
+    <span>✎ Made with<br><b>Notepad</b></span>
+    <span>WELCOME TO<br><b>MY HOMEPAGE</b></span>
+  </div>
+  <div class="footer-main">
+    <span>Copyright © 2024-2026 椰子梨梨花. All Rights Reserved.</span>
+    <span><a href="/about/">联系站长</a>　|　<a href="/about/">免责声明</a>　|　<a href="/about/">隐私声明</a></span>
+  </div>
+  <div class="footer-bottom">
+    <span>感谢你的访问！希望你能在这里找到有用的信息！</span>
+    <span><a href="/">↑ TOP</a></span>
+  </div>
+</footer>
+
+  </div>
+  <script src="/js/retro.js"></script>
+</body>
+</html>

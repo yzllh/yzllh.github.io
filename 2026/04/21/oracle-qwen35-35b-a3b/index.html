@@ -1,0 +1,166 @@
+
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>oracle免费服务器跑Qwen3.5 35b a3b测试 | cocokoishi&#39;s homepage</title>
+  <meta name="description" content="在Oracle免费ARM服务器上测试Qwen3.5 35B A3B。">
+  <meta name="author" content="椰子梨梨花">
+  <meta name="theme-color" content="#234970">
+  <link rel="icon" href="/img/favicon.ico">
+  <link rel="stylesheet" href="/css/retro.css">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="cocokoishi's homepage" type="application/atom+xml">
+</head>
+<body>
+  <div class="browser-frame">
+    
+<header class="site-header">
+  <div class="construction-bar">
+    <span class="construction-label">UNDER CONSTRUCTION</span>
+    <span>本站正在慢慢建设中……内容持续更新……</span>
+    <span class="browser-badge">Best viewed with <b>e</b> any modern browser</span>
+  </div>
+  <div class="brand-panel">
+    <a class="brand-avatar" href="/"><img src="/img/yzllh.png" alt="椰子梨梨花头像"></a>
+    <div class="brand-copy">
+      <div class="site-title">cocokoishi's homepage</div>
+    </div>
+    <div class="site-facts">
+      <div>◉ 建站时间：2024-01-30</div>
+      <div>◉ 最后更新：2026-08-01 <b class="new-badge">NEW!</b></div>
+      <div>▣ 文章总数：13 篇</div>
+    </div>
+  </div>
+  <div class="welcome-bar">
+    <span class="speaker">◖))</span>
+    <span>欢迎光临 cocokoishi's homepage！希望你能在这里找到有用的内容 ^_^</span>
+    <time data-clock>正在读取时间……</time>
+  </div>
+  <nav class="top-links" aria-label="主导航">
+    <a href="/">首页 Home</a>
+    <a href="/archives/">归档 Archives</a>
+    <a href="/about/">关于我 About Me</a>
+    <a href="/atom.xml">RSS Feed</a>
+  </nav>
+</header>
+
+    <main class="page-grid">
+      <aside class="sidebar">
+  <section class="side-box">
+    <h2 class="box-heading"><span class="title-mark">⌂</span>栏目导航 <small>Menu</small></h2>
+    <ul class="menu-list">
+      <li><span>▣</span><a href="/">首页 <small>(Home)</small></a></li>
+      <li><span>▣</span><a href="/archives/">归档 <small>(Archives)</small></a></li>
+      <li><span>▣</span><a href="/categories/">分类 <small>(Categories)</small></a></li>
+      <li><span>▣</span><a href="/tags/">标签 <small>(Tags)</small></a></li>
+      <li><span>▣</span><a href="/about/">关于我 <small>(About Me)</small></a></li>
+      <li><span>▣</span><a href="/atom.xml">RSS 订阅 <small>(RSS)</small></a></li>
+    </ul>
+  </section>
+
+  <section class="side-box">
+    <h2 class="box-heading"><span class="title-mark">♧</span>更多链接 <small>More Links</small></h2>
+    <div class="friend-links">
+      <a href="https://space.bilibili.com/5145514" target="_blank" rel="noopener">Bilibili</a>
+      <a href="https://github.com/cocokoishi" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="side-note">欢迎通过 Bilibili 或 Email 联系站长<br><a href="/about/">查看关于我……</a></div>
+  </section>
+
+  <section class="side-box email-box">
+    <h2 class="box-heading"><span class="title-mark">✉</span>Email me <small>Contact</small></h2>
+    <div class="email-panel">
+      <div>欢迎来信！</div>
+      <a class="email-button" href="mailto:asters.rumored-8n@icloud.com">✉ 给站长发邮件</a>
+      <div class="email-address">asters.rumored-8n@icloud.com</div>
+    </div>
+  </section>
+</aside>
+
+      <section class="main-column">
+        <article class="content-box post-page">
+  <div class="box-heading">
+    <span class="title-mark">▧</span>
+    <span>日志详情</span>
+    <small>Article / 2026-04-21</small>
+  </div>
+  <div class="post-inner">
+    <h1 class="post-title">oracle免费服务器跑Qwen3.5 35b a3b测试</h1>
+    <div class="post-meta">
+      发表于 <time datetime="2026-04-20T16:00:00.000Z">2026-04-21</time>
+      <span>|</span>
+      
+        <a href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a>
+      
+    </div>
+    <div class="article-content">
+      <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19fdDBgEN9/?spm_id_from=333.1387.upload.video_card.click">oracle免费服务器跑Qwen3.5 35b a3b测试</a></p>
+<h2 id="测试环境"><a href="#测试环境" class="headerlink" title="测试环境"></a>测试环境</h2><p>测试环境是Oracle的免费4C24GARM服务器，4核A76，3GHz。这个机器的性能非常弱，免费服务器也就不要指望它能跑出什么好成绩了。</p>
+<p>使用的是原版llama.cpp，同时编译时开启了KleidiAI等ARM专属优化。Kleidi会把权重重排成更适合ARM寄存器的布局，多少能救一点性能。</p>
+<h2 id="Q4-0量化测试"><a href="#Q4-0量化测试" class="headerlink" title="Q4_0量化测试"></a>Q4_0量化测试</h2><p>先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占用刚好，基本可以把上下文开满，几乎正好用完这台机器的内存。</p>
+<p>在前1000个token左右，prefill可以到40t&#x2F;s，decode大概13t&#x2F;s。这个速度对于一台4C24G的ARM免费机来说已经差不多是极限了。</p>
+<p>但是上下文一长就不行了。到了32k上下文以后，prefill和decode都会掉到5t&#x2F;s左右，继续往上也没有什么实用价值，做个测试记录就差不多了。</p>
+<h2 id="视频里的测试"><a href="#视频里的测试" class="headerlink" title="视频里的测试"></a>视频里的测试</h2><p>视频里面测试的是Qwen3.5 35B A3B abliterated模型，使用IQ4_NL量化，上下文长度开到了128k，理论上开到256k也不会发生swap。</p>
+<p>IQ4_NL的量化效果略弱于Q4_K_M，但是推理速度稍微快一点。短上下文情况下，prefill大约22tok&#x2F;s，decode大约9tok&#x2F;s，基本已经跑到了这台机器的硬件极限，prefill可能还剩一点优化空间。</p>
+<p>编译时开启了ARM专属的Kleidi优化，并且特意选择了IQ4_NL量化。这个量化是下载FP16模型以后在本地完成的，省下来的内存刚好可以支撑满上下文运行。</p>
+<p>另外配合<code>--mlock</code>把模型锁定在内存里，并关闭mmap，完全不使用swap。最终速度相比默认参数提升了约50%，decode从6-7t&#x2F;s提升到了9-10t&#x2F;s。</p>
+<h2 id="ik-llama-cpp"><a href="#ik-llama-cpp" class="headerlink" title="ik_llama.cpp"></a>ik_llama.cpp</h2><p>视频发出去以后又继续测了一些东西。现在看来，如果使用Q4_0量化，decode可以跑到14t&#x2F;s，prefill能到40t&#x2F;s，但是上下文一长就会掉到5t&#x2F;s以下，所以也懒得再单独录视频了。</p>
+<p>如果换成ik_llama.cpp，速度还会有比较明显的提升。同样是16k上下文，prefill大概快了三倍，长上下文下也会快很多，更适合拿来跑点后台任务。</p>
+<p>我们还做了一个<a target="_blank" rel="noopener" href="https://github.com/cocokoishi/ik_llama.cpp-disk-cache">ik_llama.cpp-disk-cache</a>，把现在比较流行的DeepSeek硬盘缓存技术也加进了ik_llama.cpp里，主要是为了节约本来就不多的内存空间。</p>
+<h2 id="这台服务器适合干什么"><a href="#这台服务器适合干什么" class="headerlink" title="这台服务器适合干什么"></a>这台服务器适合干什么</h2><p>一个比较好的利用方式是跑Qwen3.5 35B A3B IQ2_XXS。这个量化版本只有10G左右，可以给上下文留出更多空间。</p>
+<p>当然速度会低到只有5t&#x2F;s左右的prefill和decode，但如果只是跑一些后台不间断的任务，倒也不是完全不能用。</p>
+<p>至于拿它当聊天服务器实时用，体验就比较一般了。上下文短的时候还能忍，长上下文掉速以后基本只能看着它慢慢生成。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>做了个记录，没什么实用价值。</p>
+<p>Oracle免费服务器的优点就是免费、内存大，缺点就是CPU性能实在太弱。Q4_0短上下文看起来还行，但32k左右以后就会明显掉速；IQ4_NL可以换来更大的上下文，配合Kleidi和<code>--mlock</code>以后也只是勉强能用。</p>
+<p>如果只是想白嫖一台ARM机器跑后台任务，配合ik_llama.cpp和硬盘缓存还是可以折腾一下的。想要正常聊天，还是别对它抱太大希望。</p>
+
+    </div>
+    
+      <div class="post-tags">
+        标签：
+        
+          <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">[性能测试]</a>
+        
+          <a href="/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">[技术随笔]</a>
+        
+          <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/">[大语言模型]</a>
+        
+          <a href="/tags/ARM%E6%9C%8D%E5%8A%A1%E5%99%A8/">[ARM服务器]</a>
+        
+          <a href="/tags/llama-cpp/">[llama.cpp]</a>
+        
+      </div>
+    
+  </div>
+</article>
+<nav class="post-navigation" aria-label="文章导航">
+  <a href="/2026/05/05/vrchat-avatar-obfuscator/">← 上一篇：VRChat模型混淆/反盗模插件</a>
+  <a href="/2026/01/04/liltoon_obf_fackripper/">下一篇：混淆的liltoon增加盗模盗工程文件难度 →</a>
+</nav>
+
+      </section>
+    </main>
+    <footer class="site-footer">
+  <div class="footer-badges">
+    <span>VALID<br><b>HTML 4.0</b></span>
+    <span>SCREEN SIZE<br><b>RESPONSIVE</b></span>
+    <span>POWERED BY<br><b>Hexo</b></span>
+    <span>✎ Made with<br><b>Notepad</b></span>
+    <span>WELCOME TO<br><b>MY HOMEPAGE</b></span>
+  </div>
+  <div class="footer-main">
+    <span>Copyright © 2024-2026 椰子梨梨花. All Rights Reserved.</span>
+    <span><a href="/about/">联系站长</a>　|　<a href="/about/">免责声明</a>　|　<a href="/about/">隐私声明</a></span>
+  </div>
+  <div class="footer-bottom">
+    <span>感谢你的访问！希望你能在这里找到有用的信息！</span>
+    <span><a href="/">↑ TOP</a></span>
+  </div>
+</footer>
+
+  </div>
+  <script src="/js/retro.js"></script>
+</body>
+</html>

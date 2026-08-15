@@ -1,0 +1,178 @@
+
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VRChat 缓存的加密分析 | cocokoishi&#39;s homepage</title>
+  <meta name="description" content="前情提要VRChat 作为一个以 UGC（用户生成内容）为核心的社交平台，其体验高度依赖“世界（World）与化身（Avatar）资源的快速分发与复用”。在 PC 端，客户端会将下载到的资源长期保存在本地缓存中，以减少重复下载、缩短加载时间、降低带宽消耗。这一点与 Unity 引擎对 AssetBundle 的磁盘缓存机制高度一致：一旦资源通过网络请求加载，系统会将其落盘以便后续命中缓存，从而获得">
+  <meta name="author" content="椰子梨梨花">
+  <meta name="theme-color" content="#234970">
+  <link rel="icon" href="/img/favicon.ico">
+  <link rel="stylesheet" href="/css/retro.css">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="cocokoishi's homepage" type="application/atom+xml">
+</head>
+<body>
+  <div class="browser-frame">
+    
+<header class="site-header">
+  <div class="construction-bar">
+    <span class="construction-label">UNDER CONSTRUCTION</span>
+    <span>本站正在慢慢建设中……内容持续更新……</span>
+    <span class="browser-badge">Best viewed with <b>e</b> any modern browser</span>
+  </div>
+  <div class="brand-panel">
+    <a class="brand-avatar" href="/"><img src="/img/yzllh.png" alt="椰子梨梨花头像"></a>
+    <div class="brand-copy">
+      <div class="site-title">cocokoishi's homepage</div>
+    </div>
+    <div class="site-facts">
+      <div>◉ 建站时间：2024-01-30</div>
+      <div>◉ 最后更新：2026-08-01 <b class="new-badge">NEW!</b></div>
+      <div>▣ 文章总数：13 篇</div>
+    </div>
+  </div>
+  <div class="welcome-bar">
+    <span class="speaker">◖))</span>
+    <span>欢迎光临 cocokoishi's homepage！希望你能在这里找到有用的内容 ^_^</span>
+    <time data-clock>正在读取时间……</time>
+  </div>
+  <nav class="top-links" aria-label="主导航">
+    <a href="/">首页 Home</a>
+    <a href="/archives/">归档 Archives</a>
+    <a href="/about/">关于我 About Me</a>
+    <a href="/atom.xml">RSS Feed</a>
+  </nav>
+</header>
+
+    <main class="page-grid">
+      <aside class="sidebar">
+  <section class="side-box">
+    <h2 class="box-heading"><span class="title-mark">⌂</span>栏目导航 <small>Menu</small></h2>
+    <ul class="menu-list">
+      <li><span>▣</span><a href="/">首页 <small>(Home)</small></a></li>
+      <li><span>▣</span><a href="/archives/">归档 <small>(Archives)</small></a></li>
+      <li><span>▣</span><a href="/categories/">分类 <small>(Categories)</small></a></li>
+      <li><span>▣</span><a href="/tags/">标签 <small>(Tags)</small></a></li>
+      <li><span>▣</span><a href="/about/">关于我 <small>(About Me)</small></a></li>
+      <li><span>▣</span><a href="/atom.xml">RSS 订阅 <small>(RSS)</small></a></li>
+    </ul>
+  </section>
+
+  <section class="side-box">
+    <h2 class="box-heading"><span class="title-mark">♧</span>更多链接 <small>More Links</small></h2>
+    <div class="friend-links">
+      <a href="https://space.bilibili.com/5145514" target="_blank" rel="noopener">Bilibili</a>
+      <a href="https://github.com/cocokoishi" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="side-note">欢迎通过 Bilibili 或 Email 联系站长<br><a href="/about/">查看关于我……</a></div>
+  </section>
+
+  <section class="side-box email-box">
+    <h2 class="box-heading"><span class="title-mark">✉</span>Email me <small>Contact</small></h2>
+    <div class="email-panel">
+      <div>欢迎来信！</div>
+      <a class="email-button" href="mailto:asters.rumored-8n@icloud.com">✉ 给站长发邮件</a>
+      <div class="email-address">asters.rumored-8n@icloud.com</div>
+    </div>
+  </section>
+</aside>
+
+      <section class="main-column">
+        <article class="content-box post-page">
+  <div class="box-heading">
+    <span class="title-mark">▧</span>
+    <span>日志详情</span>
+    <small>Article / 2025-12-19</small>
+  </div>
+  <div class="post-inner">
+    <h1 class="post-title">VRChat 缓存的加密分析</h1>
+    <div class="post-meta">
+      发表于 <time datetime="2025-12-19T03:33:00.000Z">2025-12-19</time>
+      <span>|</span>
+      
+        <a href="/categories/VRChat/">VRChat</a>
+      
+    </div>
+    <div class="article-content">
+      <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>VRChat 作为一个以 UGC（用户生成内容）为核心的社交平台，其体验高度依赖“世界（World）与化身（Avatar）资源的快速分发与复用”。在 PC 端，客户端会将下载到的资源长期保存在本地缓存中，以减少重复下载、缩短加载时间、降低带宽消耗。这一点与 Unity 引擎对 AssetBundle 的磁盘缓存机制高度一致：一旦资源通过网络请求加载，系统会将其落盘以便后续命中缓存，从而获得性能收益。<br>缓存带来的便利也带来了长期的对抗面：当缓存内容以“可被外部直接读取的形式”存在时，它天然成为内容盗用、二次分发与“资源提取”的高价值目标。围绕“是否应对缓存进行加密&#x2F;混淆”的诉求，多年来在社区持续出现，并被反复提及为对抗恶意内容窃取的方向之一。<br>平台侧的安全基线在 2022 年出现明显拐点：VRChat 在 2022.2.2 版本引入 Easy Anti-Cheat（EAC）与 Secure Instances，并在官方安全更新中明确将“对抗修改客户端与滥用行为”作为核心目标之一。这类反篡改&#x2F;反修改能力并不能直接“阻止内容被渲染”，但它显著改变了客户端被动暴露资产的方式，为后续更强的本地内容保护（包括缓存侧保护）创造了条件。<strong>然而缓存依然是无加密的存放在本地的，这导致偷模型依然非常简单，EAC只是阻止了开挂。同时强制了所有玩家更新到最新客户端。</strong><br>进入 2025 年，围绕“缓存侧加密”的变化开始被外部工具作者与用户集中观察到：<strong>2025年3月28日的更新，本地的缓存进行了加密</strong>。同期，VRChat 官方补丁说明亦出现“将再次清空缓存”的公告，提示缓存结构&#x2F;条目可能发生了需要强制刷新才能规避的兼容性问题。<br><strong>好了好了上面都是ai总结的，总结的比我强多了，接下来来点我自己研究的了</strong></p>
+<h2 id="总论"><a href="#总论" class="headerlink" title="总论"></a>总论</h2><p>我们使用了il2cppdumper、cheat engine两项工具，得出以下结论。</p>
+<h3 id="加密的方式"><a href="#加密的方式" class="headerlink" title="加密的方式"></a>加密的方式</h3><p>VRChat的assetbundle在伺服器端是没有任何加密的，用户端通过AssetBundleDownloadManager会把EncryptionKey附加到 UnityWebRequestAssetBundle&#x2F;DownloadHandlerAssetBundle的创建链路上，<br>UnityWebRequestAssetBundle.GetAssetBundle(…, Nullable<EncryptionKey> key)等方法在下载的时候进行流式的加密，加密后保存在本地C:\Users\username\AppData\LocalLow\VRChat\VRChat\Cache-WindowsPlayer，方法是AES-GCM 256bit。<br>根据搜索可得知unity原版是没有传入这个参数的，所以vrc大概率魔改了unity，使其支援了aes流式加密。</p>
+<h3 id="加密密钥的产生"><a href="#加密密钥的产生" class="headerlink" title="加密密钥的产生"></a>加密密钥的产生</h3><p>加密密钥是联网产生的。下面介绍其基本预期的方式。<br>请求(curl)(网页端）</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET <span class="string">&quot;https://api.vrchat.cloud/api/1/analysis/file_00000000-0000-0000-0000-000000000000/1/security&quot;</span> \</span><br><span class="line">  --cookie <span class="string">&quot;auth=&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>网页端预期的返回</strong>：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;avatarStats&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;animatorCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;audioSourceCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;blendShapeCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;boneCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;bounds&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="number">0</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;cameraCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;clothCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;constraintCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;constraintDepth&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;contactCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;customExpressions&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;customizeAnimationLayers&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;enableEyeLook&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;lightCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;lineRendererCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;lipSync&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;materialCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;materialSlotsUsed&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;meshCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;meshIndices&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;meshParticleMaxPolygons&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;meshPolygons&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;meshVertices&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;particleCollisionEnabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;particleSystemCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;particleTrailsEnabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;physBoneColliderCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;physBoneCollisionCheckCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;physBoneComponentCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;physBoneTransformCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;physicsColliders&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;physicsRigidbodies&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;skinnedMeshCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;skinnedMeshIndices&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;skinnedMeshPolygons&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;skinnedMeshVertices&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;totalClothVertices&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;totalIndices&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;totalMaxParticles&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;totalPolygons&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;totalTextureUsage&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;totalVertices&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;trailRendererCount&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;writeDefaultsUsed&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;created_at&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2019-08-24T14:15:22Z&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;encryptionKey&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;fileSize&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;performanceRating&quot;</span><span class="punctuation">:</span> <span class="string">&quot;string&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;success&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;uncompressedSize&quot;</span><span class="punctuation">:</span> <span class="number">0</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>其中 <code>encryptionKey</code> 及其周围的选项中，是3月28日更新后新加入的，并且 <code>encryptionKey</code> 预期是一个256位的密钥。<br>在游戏中请求头则更为复杂，大致为下面的形式<br><strong>游戏内预期的请求</strong>：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">GET /api/<span class="number">1</span>/analysis/file_00000000<span class="number">-0000</span><span class="number">-0000</span><span class="number">-0000</span><span class="number">-000000000000</span>/<span class="number">1</span>/security HTTP/<span class="number">1.1</span></span><br><span class="line">X-MacAddress<span class="punctuation">:</span> <span class="string">&quot;string&quot;</span></span><br><span class="line">X-Client-Version<span class="punctuation">:</span> <span class="number">2025.4</span><span class="number">.1</span>p1<span class="number">-1750</span>--Release</span><br><span class="line">X-Platform<span class="punctuation">:</span> standalonewindows</span><br><span class="line">X-GameServer-Version<span class="punctuation">:</span> Release_1626</span><br><span class="line">X-Unity-Version<span class="punctuation">:</span> <span class="number">2022.3</span><span class="number">.22</span>f1-DWR</span><br><span class="line">X-Store<span class="punctuation">:</span> steam</span><br><span class="line">X-VRC-Client-Framework<span class="punctuation">:</span> unity</span><br><span class="line">Content-Type<span class="punctuation">:</span> application/x-www-form-urlencoded</span><br><span class="line">Host<span class="punctuation">:</span> api.vrchat.cloud</span><br><span class="line">Accept-Encoding<span class="punctuation">:</span> gzip<span class="punctuation">,</span> identity</span><br><span class="line">Connection<span class="punctuation">:</span> Keep-Alive<span class="punctuation">,</span> TE</span><br><span class="line">TE<span class="punctuation">:</span> identity</span><br><span class="line">User-Agent<span class="punctuation">:</span> VRC.Core.BestHTTP</span><br><span class="line">Content-Length<span class="punctuation">:</span> <span class="number">0</span></span><br><span class="line">Cookie<span class="punctuation">:</span> auth=<span class="string">&quot;string&quot;</span>; SameSite=Lax; twoFactorAuth=<span class="string">&quot;string&quot;</span></span><br></pre></td></tr></table></figure>
+<p>在游戏内和网页内请求同一个东西是返回不同的信息，并且能请求的权限也不同。在VRCX（网页端）里面可以直接看到自己上传的角色、任何世界的 <code>encryptionKey</code> 等信息。他人的私有模型和公开模型则不返回此内容。游戏里面请求则会返回。<strong>注意这里是个人能访问任何世界的encryptionKey，虽然这其实没用。</strong></p>
+<h3 id="加密前后的区别"><a href="#加密前后的区别" class="headerlink" title="加密前后的区别"></a>加密前后的区别</h3><p>并非是将整个assetbundle进行加密，而是分CAB进行加密，CAB里面部分空间会用@@@进行填充，显示了AES流式加密的特征。<br>并且文件头的版本号会变成VRChat专属的-DWR后缀的unity标识。<br><img src="/images/pasted-12.png" alt="" width="500"><br>在崩溃的时候也能看见-DWR，和大家改模用的unity版本不太一样，有后缀。<br>我也不太清楚这是什么，我猜这是vrc自己魔改的unity识别。</p>
+<h2 id="avatar的加密"><a href="#avatar的加密" class="headerlink" title="avatar的加密"></a>avatar的加密</h2><p>角色资源的加密密钥确实由服务器下发，并且实际使用了该密钥。UnityWebRequestAssetBundle.GetAssetBundle(…, Nullable<EncryptionKey> key)等方法会在下载的时候流式加密，使用之前提到的从api返回的密钥。加载的时候亦需要从伺服器返回密钥。</p>
+<h2 id="world的加密"><a href="#world的加密" class="headerlink" title="world的加密"></a>world的加密</h2><p>世界资源虽然同样存在服务器下发的密钥，<strong>但实际并未使用</strong>，而是直接在本地通过world id+固定字符串计算SHA256得到加密密钥。<br>换句话说，世界资源的加密过程完全没有使用到服务器发的密钥，而且任何人都能在了解原理后手动生成然后破解世界的缓存加密，这简直是没有任何道理的。<br>下面是具体的加密算法： (world id(wrld_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)+-MKEf6MXxgp5zN4YZkSdoj3oVygj6rLDTLXk6BQHnpyCRdv6R7d8Hm4nGs6LwQ9Ce)的SHA256形式<br><img src="/images/pasted-11.png" alt="" width="500"><br>截图显示了下载方法传入的参数。<br>你没看错world id后面那一串是所有人都一样，不变的。我不清楚为什么伺服器返回了encryption key之后不用，要自己生成一个，可能是我水平太低没看懂。</p>
+<h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><p>本来我并不打算用key来破缓存加密的，但是github上一个工程给了我兴趣，没有这个工程我是看不出来world的加密不使用伺服器下发的key的，也不会去逆向分析的。这个工程也确实能破解缓存加密。<br><a target="_blank" rel="noopener" href="https://github.com/VRC1337/VRChatStudio/">https://github.com/VRC1337/VRChatStudio/</a></p>
+<h2 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h2><h3 id="1-Q-还有哪些方法可以偷模型？"><a href="#1-Q-还有哪些方法可以偷模型？" class="headerlink" title="1.Q:还有哪些方法可以偷模型？"></a>1.Q:还有哪些方法可以偷模型？</h3><p>我不支持任何形式的偷模型等严重违反条例的行动，但是我可以提供我知道的信息：<br>方法A 使用一些直接从伺服器请求下载角色的assetbundle<br>方法B 使用作弊客户端&#x2F;自己绕EAC调试游戏来获取必要信息等内容。<br>我认为目前只有这两种方法，基本上无法防御，只能靠无能的官方。</p>
+<h3 id="2-Q-为什么偷模型之后能直接完整上传？和工程文件上传的区别？"><a href="#2-Q-为什么偷模型之后能直接完整上传？和工程文件上传的区别？" class="headerlink" title="2.Q:为什么偷模型之后能直接完整上传？和工程文件上传的区别？"></a>2.Q:为什么偷模型之后能直接完整上传？和工程文件上传的区别？</h3><p>因为获取了你的模型的assetbundle文件之后，就能通过hotswap的方式进行上传，代表软件是SARS(ARC)，将你的模型内部的蓝图id改成倒模者自己的就能上传使用了。</p>
+<h4 id="如何防止被hotswap"><a href="#如何防止被hotswap" class="headerlink" title="如何防止被hotswap"></a>如何防止被hotswap</h4><p>没有办法。</p>
+<h4 id="和工程文件上传的区别？"><a href="#和工程文件上传的区别？" class="headerlink" title="和工程文件上传的区别？"></a>和工程文件上传的区别？</h4><p>工程文件需要自己复原。</p>
+<h4 id="官方有没有隐水印制裁盗模者"><a href="#官方有没有隐水印制裁盗模者" class="headerlink" title="官方有没有隐水印制裁盗模者"></a>官方有没有隐水印制裁盗模者</h4><p>没有。vrc官方是傻逼。我不用研究就知道没有隐藏水印，闲鱼上一堆倒模上传模型的，购买他们的用户那么多没一个被封的，足以证明。</p>
+<h4 id="为什么SDK3-9-0强制更新了，是不是添加隐水印了？"><a href="#为什么SDK3-9-0强制更新了，是不是添加隐水印了？" class="headerlink" title="为什么SDK3.9.0强制更新了，是不是添加隐水印了？"></a>为什么SDK3.9.0强制更新了，是不是添加隐水印了？</h4><p>没有。只是更新了avtr id的生成方式（在这之前你可以通过一些方式来自定义自己的avatar id），强制老sdk无法上传。但是老sdk依然可以更新已有的模型。</p>
+<h3 id="3-Q-如何防护自己的模型和资产不被偷？"><a href="#3-Q-如何防护自己的模型和资产不被偷？" class="headerlink" title="3.Q:如何防护自己的模型和资产不被偷？"></a>3.Q:如何防护自己的模型和资产不被偷？</h3><p>目前没有任何办法防止他们偷你们的assetbundle文件。但是我依然会给出我的一些方法，来帮助大家防止自己的资产被盗。</p>
+<h4 id="合并贴图和网格"><a href="#合并贴图和网格" class="headerlink" title="合并贴图和网格"></a>合并贴图和网格</h4><p>偷模型的都是傻逼，我们认为他们是缺乏任何改模型能力的。AAO就很适合治治他们，开个自动优化就会重新映射uv等内容，对他们来说贴图就无法直接复用等。合并的网格对于不会不冷的的人也是噩梦。</p>
+<h4 id="混淆的名字"><a href="#混淆的名字" class="headerlink" title="混淆的名字"></a>混淆的名字</h4><p>使用只有自己会的语言（五笔，双拼，注音，日语等）来命名里面的各项参数，可以有效增加他人的阅读难度，偷controller等内容显著变难。</p>
+<h4 id="ctf大神"><a href="#ctf大神" class="headerlink" title="ctf大神"></a>ctf大神</h4><p>运用一些ctf方面的知识。例如，通过自制shader，在特定颜色通道中隐藏信息，使其在正常渲染流程下不易察觉，但可通过来自其他模型的prefab等类似物来看到。</p>
+<h4 id="自制着色器"><a href="#自制着色器" class="headerlink" title="自制着色器"></a>自制着色器</h4><p>使用魔改的着色器来显著增加他人复原效果难度。即使只是liltoon的混淆也会让解包你模型的人无法套用参数，从而大幅提升成本。使用自制的着色器后处理来防止他人他人通过拍照的方式逆向出你的效果。</p>
+<h4 id="混淆着色器"><a href="#混淆着色器" class="headerlink" title="混淆着色器"></a>混淆着色器</h4><p>我觉得性价比较高的一种方法，反正能恶心倒工程文件的。<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GeBLBfE3M">https://www.bilibili.com/video/BV1GeBLBfE3M</a></p>
+<h4 id="贴图水印"><a href="#贴图水印" class="headerlink" title="贴图水印"></a>贴图水印</h4><p>在无法被察觉的地方大量加入自己的水印，最好使用不冷的来进行名字的写死在mesh网格里面的雕刻，来大幅提升盗用成本。当然不适用于不要脸的。</p>
+<h4 id="Esska-AV3Obfuscator"><a href="#Esska-AV3Obfuscator" class="headerlink" title="Esska AV3Obfuscator"></a>Esska AV3Obfuscator</h4><p>一个能混淆的插件。但是早已停止开发，并且不适用几乎所有工程文件（带MA似乎就不行了）<br><img src="/images/pasted-13.png" alt="" width="700"><br>但是我观察到Suroom的工程文件就是类似混淆的。似乎有其他的插件甚至是非vrc专属的插件进行加密？我不清楚。可能是他们自制的。</p>
+<h4 id="不推荐着色器顶点加密"><a href="#不推荐着色器顶点加密" class="headerlink" title="不推荐着色器顶点加密"></a>不推荐着色器顶点加密</h4><p>不能以严重损失他人性能为代价来对自己模型进行有限的保护。</p>
+<h4 id="不要用密码锁"><a href="#不要用密码锁" class="headerlink" title="不要用密码锁"></a>不要用密码锁</h4><p>密码锁屁用没有，下面是原因</p>
+<h3 id="4-Q-我给我模型加个密码锁怎么样？"><a href="#4-Q-我给我模型加个密码锁怎么样？" class="headerlink" title="4.Q:我给我模型加个密码锁怎么样？"></a>4.Q:我给我模型加个密码锁怎么样？</h3><p>不行哦，因为模型的parameter也是明文存储的，他可以偷完模型用UABEA把你PASS_OK等参数给直接勾选上，这样子不输入密码就直接给你破了，或者也能直接看你状态机密码锁怎么写的。</p>
+<h3 id="5-Q-为什么偷模型之后还能变成工程文件"><a href="#5-Q-为什么偷模型之后还能变成工程文件" class="headerlink" title="5.Q:为什么偷模型之后还能变成工程文件"></a>5.Q:为什么偷模型之后还能变成工程文件</h3><p>虽然assetbundle是二进制形式，但是包含了工程文件里面打包的几乎所有内容，的已编译形式。一般我认为下面两个东西是无法无损还原的：<br>Shader：已经编译成给gpu看的形式。<br>Scripts：已经编译成csharp&#x2F;udonsharp中间形式<br><strong>而其他内容都可以无损复原</strong><br>但是因为大家都用liltoon等通用的着色器，shader的参数又会被保留，所以在知道你用的着色器之后，就能直接复原。自制着色器则不能。<br>而VRC又禁止引入csharp自制脚本。udonsharp的中间形式又能直接在工程文件里面被调用，所以脚本是100%能还原的。<br>一般来说你足够用心，是能还原任何拼凑无自制着色器的模型工程文件的，100%还原哦。一些控制层会坏掉，但是在有素体prefab的情况下也不是问题，也可以直接叉掉用默认的。所以显示了自制着色器的重要性，只有着色器偷不了。</p>
+<h2 id="总结和声明"><a href="#总结和声明" class="headerlink" title="总结和声明"></a>总结和声明</h2><p>我认为vrc做的还是非常有限的，但是已经把倒模门槛拉高到绕eac然后开挂了。  本文章也完全没有支持偷取模型等任何不法行为。我们希望通过逆向的分析来更好的保护我们的资产。<br><strong>本文章的作者亦没有尝试绕过EAC,所有分析均在离线模式（VCC）分析下完成，亦没有盗取过任何人的模型和世界，只使用自己的素材作为研究，未违反任何条例。</strong><br><strong>所做的一切是为了更好的防止被盗模。</strong></p>
+
+    </div>
+    
+      <div class="post-tags">
+        标签：
+        
+          <a href="/tags/VRChat/">[VRChat]</a>
+        
+          <a href="/tags/%E7%BC%93%E5%AD%98%E5%88%86%E6%9E%90/">[缓存分析]</a>
+        
+          <a href="/tags/%E5%8A%A0%E5%AF%86%E7%A0%94%E7%A9%B6/">[加密研究]</a>
+        
+          <a href="/tags/%E9%80%86%E5%90%91%E5%88%86%E6%9E%90/">[逆向分析]</a>
+        
+      </div>
+    
+  </div>
+</article>
+<nav class="post-navigation" aria-label="文章导航">
+  <a href="/2025/12/27/eac_arm_win/">← 上一篇：EAC现已支持arm windows！！</a>
+  <a href="/2025/12/07/8cxgen3_trivial/">下一篇：2年深度体验：Matebook E Go (8cx gen3)  →</a>
+</nav>
+
+      </section>
+    </main>
+    <footer class="site-footer">
+  <div class="footer-badges">
+    <span>VALID<br><b>HTML 4.0</b></span>
+    <span>SCREEN SIZE<br><b>RESPONSIVE</b></span>
+    <span>POWERED BY<br><b>Hexo</b></span>
+    <span>✎ Made with<br><b>Notepad</b></span>
+    <span>WELCOME TO<br><b>MY HOMEPAGE</b></span>
+  </div>
+  <div class="footer-main">
+    <span>Copyright © 2024-2026 椰子梨梨花. All Rights Reserved.</span>
+    <span><a href="/about/">联系站长</a>　|　<a href="/about/">免责声明</a>　|　<a href="/about/">隐私声明</a></span>
+  </div>
+  <div class="footer-bottom">
+    <span>感谢你的访问！希望你能在这里找到有用的信息！</span>
+    <span><a href="/">↑ TOP</a></span>
+  </div>
+</footer>
+
+  </div>
+  <script src="/js/retro.js"></script>
+</body>
+</html>
