@@ -9,7 +9,7 @@
     <atom:link href="https://yzllh.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>个人写的垃圾的存档之处，或许会对你有一些帮助。</description>
-    <pubDate>Sat, 15 Aug 2026 12:16:42 GMT</pubDate>
+    <pubDate>Sat, 15 Aug 2026 12:31:40 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -18,13 +18,7 @@
       <guid>https://yzllh.github.io/2026/08/14/udon-nes-emulator/</guid>
       <pubDate>Fri, 14 Aug 2026 04:00:00 GMT</pubDate>
       
-        
-        
-      <description>&lt;blockquote&gt;
-&lt;p&gt;这是草稿，根据项目进度我们会更新文章。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;我一直都对udon有很浓厚的兴趣</description>
-        
+      <description>尝试在VRChat里用Udon和Shader模拟NES，记录原型机性能、协同优化和瓶颈定位。</description>
       
       
       
@@ -34,11 +28,11 @@
       <category domain="https://yzllh.github.io/categories/VRChat/">VRChat</category>
       
       
+      <category domain="https://yzllh.github.io/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</category>
+      
       <category domain="https://yzllh.github.io/tags/VRChat/">VRChat</category>
       
       <category domain="https://yzllh.github.io/tags/Udon/">Udon</category>
-      
-      <category domain="https://yzllh.github.io/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</category>
       
       <category domain="https://yzllh.github.io/tags/Shader/">Shader</category>
       
@@ -57,7 +51,7 @@
       <guid>https://yzllh.github.io/2026/08/01/vrchat-udon-chinese-chess/</guid>
       <pubDate>Fri, 31 Jul 2026 16:20:00 GMT</pubDate>
       
-      <description>一个使用Udon与Shader协作实现的VRChat中国象棋AI地图。</description>
+      <description>用Udon调度Shader协同运行中国象棋AI，记录从性能瓶颈到实际可玩性的折腾过程。</description>
       
       
       
@@ -80,7 +74,7 @@
       <guid>https://yzllh.github.io/2026/07/27/vrchat-gemma3-1b/</guid>
       <pubDate>Sun, 26 Jul 2026 16:10:00 GMT</pubDate>
       
-      <description>在VRChat中本地部署大语言模型Gemma 3 1B。</description>
+      <description>把Gemma3 1B的模型权重烘焙进贴图，在VRChat里用ShaderGPT和Udon实现本地推理。</description>
       
       
       
@@ -109,7 +103,7 @@
       <guid>https://yzllh.github.io/2026/05/05/vrchat-avatar-obfuscator/</guid>
       <pubDate>Mon, 04 May 2026 16:00:00 GMT</pubDate>
       
-      <description>VRChat模型混淆/反盗模插件介绍与下载。</description>
+      <description>介绍一个用于混淆VRChat模型内部名称和参数的Unity插件，并记录它的使用方式、兼容性和局限。</description>
       
       
       
@@ -138,7 +132,7 @@
       <guid>https://yzllh.github.io/2026/04/21/oracle-qwen35-35b-a3b/</guid>
       <pubDate>Mon, 20 Apr 2026 16:00:00 GMT</pubDate>
       
-      <description>在Oracle免费ARM服务器上测试Qwen3.5 35B A3B。</description>
+      <description>在甲骨文免费ARM服务器上测试Qwen3.5 35B A3B，记录不同量化、上下文长度和llama.cpp优化下的速度。</description>
       
       
       
@@ -169,11 +163,7 @@
       <guid>https://yzllh.github.io/2026/02/03/vrchat-private-server/</guid>
       <pubDate>Mon, 02 Feb 2026 16:00:00 GMT</pubDate>
       
-        
-        
-      <description>&lt;p&gt;更多主要信息请参考视频：&lt;a href=&quot;https://www.bilibili.com/video/BV1r3FLzcE1y/&quot;&gt;https://www.bilibili.com/video/BV1r3FLzcE1y/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/ima</description>
-        
+      <description>记录搭建VRChat build1207私服的过程，以及MelonLoader劫持通信、HTTP占位和Photon同步测试。</description>
       
       
       
@@ -204,7 +194,7 @@
       <guid>https://yzllh.github.io/2026/01/04/liltoon_obf_fackripper/</guid>
       <pubDate>Sun, 04 Jan 2026 04:23:00 GMT</pubDate>
       
-      <description>引言最近倒模非常猖獗，甚至能直接还原成工程文件. 从原理上来说，倒模者仅能获取AssetBundle及其序列化数据，而无法直接恢复 Shader 的源代码。然而在实际环境中，由于社区高度集中使用lilToon这一标准化 Shader，而解包后material又完整保留了键值，信息几乎决定了最终渲染效果，导致即使缺失 Shader 源码，也能通过直接导入liltoon然后手动选中来100%复刻源模型</description>
+      <description>从AssetBundle和lilToon的工作方式出发，聊聊为什么模型混淆能增加倒模和还原工程文件的难度。</description>
       
       
       
@@ -233,7 +223,7 @@
       <guid>https://yzllh.github.io/2025/12/27/eac_arm_win/</guid>
       <pubDate>Sat, 27 Dec 2025 02:43:00 GMT</pubDate>
       
-      <description>自从EAC在2022年7月被加入至VRChat以来，arm windows已经有三年多完全无法运行联机版本的vrchat了。而25年末，随着epic上游对eac的更新，所有的在线联网eac保护的游戏都直接支持arm设备了！这意味着Apple silicon，高通骁龙等能运行arm windows的设备也支持eac保护的游戏了！并且根据测试，同样是内核级反作弊，无法作弊，可以正确调用签名的gpu驱动</description>
+      <description>记录EAC支持Windows on ARM后的VRChat运行情况，并测试8cx Gen3的实际帧率。</description>
       
       
       
@@ -262,7 +252,7 @@
       <guid>https://yzllh.github.io/2025/12/19/vrc-cache-anal/</guid>
       <pubDate>Fri, 19 Dec 2025 03:33:00 GMT</pubDate>
       
-      <description>前情提要VRChat 作为一个以 UGC（用户生成内容）为核心的社交平台，其体验高度依赖“世界（World）与化身（Avatar）资源的快速分发与复用”。在 PC 端，客户端会将下载到的资源长期保存在本地缓存中，以减少重复下载、缩短加载时间、降低带宽消耗。这一点与 Unity 引擎对 AssetBundle 的磁盘缓存机制高度一致：一旦资源通过网络请求加载，系统会将其落盘以便后续命中缓存，从而获得</description>
+      <description>通过il2cppdumper和Cheat Engine分析VRChat缓存加密的实现、密钥获取和本地存储方式。</description>
       
       
       
@@ -291,7 +281,7 @@
       <guid>https://yzllh.github.io/2025/12/07/8cxgen3_trivial/</guid>
       <pubDate>Sun, 07 Dec 2025 06:54:00 GMT</pubDate>
       
-      <description>我为什么会入手这台机器嗯，单纯是因为我想要一台二合一的windows设备。小众又独特，又能完美切合我的需求，最重要的是便宜点。这台平板于2023年7月份购入，当时市面上的windows板子一般都是11/12代酷睿。这intel都是电老虎，性能凑合的同时续航极差。而华为的这款机器倒是有意思，采用了高通用三星5nm做的桌面级arm cpu（骁龙8cx gen3)，显然能耗比是吊打当时的int</description>
+      <description>两年使用Matebook E Go的记录，聊聊8cx Gen3的性能、续航、Windows on ARM和实际体验。</description>
       
       
       
@@ -301,9 +291,9 @@
       <category domain="https://yzllh.github.io/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</category>
       
       
-      <category domain="https://yzllh.github.io/tags/Windows-on-ARM/">Windows on ARM</category>
-      
       <category domain="https://yzllh.github.io/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</category>
+      
+      <category domain="https://yzllh.github.io/tags/Windows-on-ARM/">Windows on ARM</category>
       
       <category domain="https://yzllh.github.io/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</category>
       
@@ -320,7 +310,7 @@
       <guid>https://yzllh.github.io/2025/08/12/rdp_error/</guid>
       <pubDate>Tue, 12 Aug 2025 07:26:00 GMT</pubDate>
       
-      <description>在近期对一台基于Ryzen 2200G的电脑进行rdp连接的时候，经常会出现掉线的情况。配置：处理器：AMD Ryzen 3 2200G内存：16GB DDR4 2666 MHz显卡：集成 Radeon Vega 8操作系统：Windows 10 LTSC 2021网络环境：小米 AX3000T（有线连接）RDP 客户端与主机版本：均为 Windows 10 LTSC 2021   排查了很久之后</description>
+      <description>排查RDP意外断联，最后发现Radeon Vega 8显存分配才是问题所在。</description>
       
       
       
@@ -349,7 +339,7 @@
       <guid>https://yzllh.github.io/2025/03/04/vrchat_hotswap_map/</guid>
       <pubDate>Tue, 04 Mar 2025 02:29:00 GMT</pubDate>
       
-      <description>起因2025年二月份的时候我们的著名mmd图iy mmd world遭到来自日本音游的版权炮而被迫下架。原作者之后又开了个以朝鲜传统英雄洪吉童（可以类比为罗宾汉）为名字，黑人戏仿洪吉童（韩国本土meme）为封面的地图补档，可惜不久后又被删除。不久后原作者也删除了社交账户，完全没有了任何联系方式。  点击展开图片      于是我开始探索是否有方法来通过缓存来重新上传我们的世界。经过在互联网上的一番</description>
+      <description>记录没有Unity工程文件时，如何利用本地缓存重新上传VRChat世界，以及过程中遇到的问题。</description>
       
       
       
@@ -378,7 +368,7 @@
       <guid>https://yzllh.github.io/2025/02/16/VRChat-bypass-vip/</guid>
       <pubDate>Sun, 16 Feb 2025 00:40:00 GMT</pubDate>
       
-      <description>引言这是一篇帮助地图作者更好保护自己地图资产不被侵犯的文章，并不是教你如何免费游玩地图付费内容的恶意内容。 地图vip权限的方式我们介绍四种。 Udon网络获取使用udon脚本从远端服务器下载json文本，然后使用udon脚本解析并且赋予权限代表：HANI.缺点：本机玩家访问远端服务器，会信任系统根证书，可以轻易中间人攻击然后替换。优点：可实时更新。2026年依然没有 Udon密码锁用静态的密码锁</description>
+      <description>从地图作者的角度整理VRChat地图VIP权限的实现方式，以及它们各自的安全问题。</description>
       
       
       
@@ -407,7 +397,7 @@
       <guid>https://yzllh.github.io/2024/09/01/2c2g_2c4g_jvav_minecraft/</guid>
       <pubDate>Sun, 01 Sep 2024 07:22:00 GMT</pubDate>
       
-      <description>嗯就简单说一下， 因为正好有开联机的需求，手上又有这配置的服务器先简单介绍一下配置，阿里云的超便宜服务器，cpu都是2.5ghz的，可能是Skylake架构的服务器版，反正单核性能挺烂。开的是mc java版 1.21 purpur，原版服务器。没装几个插件，viaversion系列和fakeplayer，luckyperms主要，不太占性能。系统均是debian11，未安装宝塔面板，图形化界面等</description>
+      <description>折腾阿里云2核2G和2核4G服务器，记录Minecraft Java版的性能、内存和玩家承载表现。</description>
       
       
       
@@ -436,7 +426,7 @@
       <guid>https://yzllh.github.io/2024/01/30/lgg7_arm_win/</guid>
       <pubDate>Mon, 29 Jan 2024 19:05:00 GMT</pubDate>
       
-      <description>首先是解bl锁。和华为mate50/p60一样，被神秘人士泄露了工程机或者工厂文件，因此使用9008刷入abl分区之后即可获得临时的无avb验证状态。然后在此基础上获得oem解锁以得到bl锁的解锁。 在这之后就可以简单的一键刷入。使用了某贼工具箱，虽然没适配，但是非常简单。 可能是因为内存太小，只要刷入显卡驱动就会出现如下的无限蓝屏 蓝屏   因此只能忍痛把显示卡驱动删掉，然后再启动就没</description>
+      <description>记录LG G7解锁并刷入Windows on ARM的过程，以及显卡驱动导致的蓝屏问题。</description>
       
       
       

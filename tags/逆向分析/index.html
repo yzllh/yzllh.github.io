@@ -114,7 +114,7 @@
     <h2><a href="/2025/12/19/vrc-cache-anal/">VRChat 缓存的加密分析</a></h2>
     <time datetime="2025-12-19T03:33:00.000Z">(2025-12-19)</time>
   </div>
-  <div class="post-excerpt">前情提要VRChat 作为一个以 UGC（用户生成内容）为核心的社交平台，其体验高度依赖“世界（World）与化身（Avatar）资源的快速分发与复用”。在 PC 端，客户端会将下载到的资源长期保存在本地缓存中，以减少重复下载、缩短加载时间、降低带宽消耗。这一点与 Unity 引擎对 AssetBundle 的磁盘缓存机制高度一致：一旦资源通过网络请求加载，系统会将其落盘以便后续命中缓存，从而获得性能收益。缓存带来的便利也带来了长期的对抗面：当缓存内容以“可被外部直接读取的形式”存在时，它天然成为内容盗用、二次分发……</div>
+  <div class="post-excerpt">通过il2cppdumper和Cheat Engine分析VRChat缓存加密的实现、密钥获取和本地存储方式。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/VRChat/">VRChat</a>

@@ -114,11 +114,7 @@
     <h2><a href="/2026/04/21/oracle-qwen35-35b-a3b/">oracle免费服务器跑Qwen3.5 35b a3b测试</a></h2>
     <time datetime="2026-04-20T16:00:00.000Z">(2026-04-21)</time>
   </div>
-  <div class="post-excerpt">oracle免费服务器跑Qwen3.5 35b a3b测试
-测试环境测试环境是Oracle的免费4C24GARM服务器，4核A76，3GHz。这个机器的性能非常弱，免费服务器也就不要指望它能跑出什么好成绩了。
-使用的是原版llama.cpp，同时编译时开启了KleidiAI等ARM专属优化。Kleidi会把权重重排成更适合ARM寄存器的布局，多少能救一点性能。
-Q4_0量化测试先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占用刚好，基本可以把上下文开满，几乎正好用完这台机器的内存。
-在前1000……</div>
+  <div class="post-excerpt">在甲骨文免费ARM服务器上测试Qwen3.5 35B A3B，记录不同量化、上下文长度和llama.cpp优化下的速度。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a>

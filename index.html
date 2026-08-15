@@ -114,17 +114,13 @@
     <h2><a href="/2026/08/14/udon-nes-emulator/">【WIP】Udon NES模拟器</a></h2>
     <time datetime="2026-08-14T04:00:00.000Z">(2026-08-14)</time>
   </div>
-  <div class="post-excerpt">
-这是草稿，根据项目进度我们会更新文章。
-
-前言我一直都对udon有很浓厚的兴趣。根据官方的wiki，udon有高达1000倍的性能损失。简单查询后得知，这会导致现代cpu的性能降低到大概是80486数量级还不如的性能，这非常的难绷。
-不过，除了udon，我们还有同样图灵完备，但是高性能计算的shader可用：我们可以使用udon-shader协同，来获得现代化计算的性能。根据这个思想，我已经做了一个基于ShaderGPT但是使用gemma3 1b的地图，和中国象棋AI的地图。在中国象棋地图中，我们的udon-sh……</div>
+  <div class="post-excerpt">尝试在VRChat里用Udon和Shader模拟NES，记录原型机性能、协同优化和瓶颈定位。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/VRChat/">VRChat</a>
     <span>|</span>
     标签：
-    <a href="/tags/VRChat/">VRChat</a><a href="/tags/Udon/">Udon</a><a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><a href="/tags/Shader/">Shader</a><a href="/tags/NES%E6%A8%A1%E6%8B%9F%E5%99%A8/">NES模拟器</a><a href="/tags/%E7%A1%AC%E4%BB%B6%E6%A8%A1%E6%8B%9F/">硬件模拟</a>
+    <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><a href="/tags/VRChat/">VRChat</a><a href="/tags/Udon/">Udon</a><a href="/tags/Shader/">Shader</a><a href="/tags/NES%E6%A8%A1%E6%8B%9F%E5%99%A8/">NES模拟器</a><a href="/tags/%E7%A1%AC%E4%BB%B6%E6%A8%A1%E6%8B%9F/">硬件模拟</a>
     <a class="read-more" href="/2026/08/14/udon-nes-emulator/">[阅读全文...]</a>
   </div>
 </article>
@@ -136,12 +132,7 @@
     <h2><a href="/2026/08/01/vrchat-udon-chinese-chess/">Udon实现的AI中国象棋地图</a></h2>
     <time datetime="2026-07-31T16:20:00.000Z">(2026-08-01)</time>
   </div>
-  <div class="post-excerpt">Udon实现的AI中国象棋地图
-地图：VRChat中国象棋AI
-
-这是什么地图大家好喵，今天给大家介绍一个VRChat里的中国象棋AI地图。
-接触过红白机或者小霸王的朋友，应该玩过那款《中国象棋》吧。当年人机对战还是很新鲜的东西，游戏里的老头经常把玩家狂虐。我们的象棋AI，同样基于Alpha-Beta搜索这一类传统算法实现。
-Udon的问题VRChat世界的逻辑主要由Udon控制。Udon本质上是一种运行在VRChat虚拟机上的编程语言，但执行效率非常低，官方曾提到它相比原生代码可能存在200-1000倍的性能损失……</div>
+  <div class="post-excerpt">用Udon调度Shader协同运行中国象棋AI，记录从性能瓶颈到实际可玩性的折腾过程。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/VRChat/">VRChat</a>
@@ -159,13 +150,7 @@ Udon的问题VRChat世界的逻辑主要由Udon控制。Udon本质上是一种�
     <h2><a href="/2026/07/27/vrchat-gemma3-1b/">在VRChat中本地部署大语言模型Gemma 3 1B</a></h2>
     <time datetime="2026-07-26T16:10:00.000Z">(2026-07-27)</time>
   </div>
-  <div class="post-excerpt">这是什么地图：VRChat Gemma 3 1B
-使用的推理引擎：ShaderGPT
-ShaderGPT原作者的地图（lfm2.5-1.2b）：A local GPT World
-A local GPT World.powered by ShaderGPT https://gitlab.com/lox9973/ShaderGPT.
-这个地图基于lox9973的ShaderGPT，把模型权重烘焙成贴图，再通过Shader实现模型推理，最后在游戏里面用Udon调用执行，是纯本地的。
-
-为什么选Gemma 3 1BGem……</div>
+  <div class="post-excerpt">把Gemma3 1B的模型权重烘焙进贴图，在VRChat里用ShaderGPT和Udon实现本地推理。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/VRChat/">VRChat</a>
@@ -183,13 +168,7 @@ A local GPT World.powered by ShaderGPT https://gitlab.com/lox9973/ShaderGPT.
     <h2><a href="/2026/05/05/vrchat-avatar-obfuscator/">VRChat模型混淆/反盗模插件</a></h2>
     <time datetime="2026-05-04T16:00:00.000Z">(2026-05-05)</time>
   </div>
-  <div class="post-excerpt">引言VRChat模型混淆&#x2F;反盗模插件介绍
-下载地址
-
-安装非常简单，把unitypackage导入Unity，然后直接在角色根节点挂载插件就行，不需要再配置一堆奇怪的东西。用极低的成本，就能让解包模型的人感到困扰。
-这个插件完全无损，不会影响模型的性能评级，也不会修改原工程文件。目前我还没有遇到不能使用这个脚本的工程。
-这是什么这个功能不一定能直接防住什么东西，不过在热上传举报的时候，或许可以作为一条辅助取证信息。
-如果官方可以检查角色内部数据，直接打开角色Debug菜单，那么在角色文件里看到大量和当前蓝……</div>
+  <div class="post-excerpt">介绍一个用于混淆VRChat模型内部名称和参数的Unity插件，并记录它的使用方式、兼容性和局限。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/VRChat/">VRChat</a>
@@ -207,11 +186,7 @@ A local GPT World.powered by ShaderGPT https://gitlab.com/lox9973/ShaderGPT.
     <h2><a href="/2026/04/21/oracle-qwen35-35b-a3b/">oracle免费服务器跑Qwen3.5 35b a3b测试</a></h2>
     <time datetime="2026-04-20T16:00:00.000Z">(2026-04-21)</time>
   </div>
-  <div class="post-excerpt">oracle免费服务器跑Qwen3.5 35b a3b测试
-测试环境测试环境是Oracle的免费4C24GARM服务器，4核A76，3GHz。这个机器的性能非常弱，免费服务器也就不要指望它能跑出什么好成绩了。
-使用的是原版llama.cpp，同时编译时开启了KleidiAI等ARM专属优化。Kleidi会把权重重排成更适合ARM寄存器的布局，多少能救一点性能。
-Q4_0量化测试先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占用刚好，基本可以把上下文开满，几乎正好用完这台机器的内存。
-在前1000……</div>
+  <div class="post-excerpt">在甲骨文免费ARM服务器上测试Qwen3.5 35B A3B，记录不同量化、上下文长度和llama.cpp优化下的速度。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a>
@@ -229,11 +204,7 @@ Q4_0量化测试先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占
     <h2><a href="/2026/02/03/vrchat-private-server/">VRChat私服的搭建和简单游玩</a></h2>
     <time datetime="2026-02-02T16:00:00.000Z">(2026-02-03)</time>
   </div>
-  <div class="post-excerpt">更多主要信息请参考视频：https://www.bilibili.com/video/BV1r3FLzcE1y/
-
-在这个视频中，我们搭建了VRChat build1207(2022EAC前最后一个版本)的私服。
-具体而言，我们制作了一个Melonloader mod，用于劫持所有的通讯到本地的伺服器中。我们需要解决VRChat基本https和photon同步等问题。vrchat早已引入证书固定，所以在melonloader这一块我们就遇到了巨大困难。
-在解决了melonloader问题后，所有数据都被路由到了本地……</div>
+  <div class="post-excerpt">记录搭建VRChat build1207私服的过程，以及MelonLoader劫持通信、HTTP占位和Photon同步测试。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/VRChat/">VRChat</a>
@@ -251,8 +222,7 @@ Q4_0量化测试先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占
     <h2><a href="/2026/01/04/liltoon_obf_fackripper/">混淆的liltoon增加盗模盗工程文件难度</a></h2>
     <time datetime="2026-01-04T04:23:00.000Z">(2026-01-04)</time>
   </div>
-  <div class="post-excerpt">引言最近倒模非常猖獗，甚至能直接还原成工程文件.
-从原理上来说，倒模者仅能获取AssetBundle及其序列化数据，而无法直接恢复 Shader 的源代码。然而在实际环境中，由于社区高度集中使用lilToon这一标准化 Shader，而解包后material又完整保留了键值，信息几乎决定了最终渲染效果，导致即使缺失 Shader 源码，也能通过直接导入liltoon然后手动选中来100%复刻源模型效果。 liltoon又是比较新的广泛使用的shader，社区里面的混淆方案并不成熟，相关的变种shader极少，不像隔……</div>
+  <div class="post-excerpt">从AssetBundle和lilToon的工作方式出发，聊聊为什么模型混淆能增加倒模和还原工程文件的难度。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/VRChat/">VRChat</a>
@@ -270,7 +240,7 @@ Q4_0量化测试先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占
     <h2><a href="/2025/12/27/eac_arm_win/">EAC现已支持arm windows！！</a></h2>
     <time datetime="2025-12-27T02:43:00.000Z">(2025-12-27)</time>
   </div>
-  <div class="post-excerpt">自从EAC在2022年7月被加入至VRChat以来，arm windows已经有三年多完全无法运行联机版本的vrchat了。而25年末，随着epic上游对eac的更新，所有的在线联网eac保护的游戏都直接支持arm设备了！这意味着Apple silicon，高通骁龙等能运行arm windows的设备也支持eac保护的游戏了！并且根据测试，同样是内核级反作弊，无法作弊，可以正确调用签名的gpu驱动。运行效率方面取决于你使用的设备，我的8cx gen3在vrchat的风景图（指HANI.的）中在2k分辨率下仅有2-5……</div>
+  <div class="post-excerpt">记录EAC支持Windows on ARM后的VRChat运行情况，并测试8cx Gen3的实际帧率。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/VRChat/">VRChat</a>
@@ -288,7 +258,7 @@ Q4_0量化测试先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占
     <h2><a href="/2025/12/19/vrc-cache-anal/">VRChat 缓存的加密分析</a></h2>
     <time datetime="2025-12-19T03:33:00.000Z">(2025-12-19)</time>
   </div>
-  <div class="post-excerpt">前情提要VRChat 作为一个以 UGC（用户生成内容）为核心的社交平台，其体验高度依赖“世界（World）与化身（Avatar）资源的快速分发与复用”。在 PC 端，客户端会将下载到的资源长期保存在本地缓存中，以减少重复下载、缩短加载时间、降低带宽消耗。这一点与 Unity 引擎对 AssetBundle 的磁盘缓存机制高度一致：一旦资源通过网络请求加载，系统会将其落盘以便后续命中缓存，从而获得性能收益。缓存带来的便利也带来了长期的对抗面：当缓存内容以“可被外部直接读取的形式”存在时，它天然成为内容盗用、二次分发……</div>
+  <div class="post-excerpt">通过il2cppdumper和Cheat Engine分析VRChat缓存加密的实现、密钥获取和本地存储方式。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/VRChat/">VRChat</a>
@@ -306,13 +276,13 @@ Q4_0量化测试先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占
     <h2><a href="/2025/12/07/8cxgen3_trivial/">2年深度体验：Matebook E Go (8cx gen3) </a></h2>
     <time datetime="2025-12-07T06:54:00.000Z">(2025-12-07)</time>
   </div>
-  <div class="post-excerpt">我为什么会入手这台机器嗯，单纯是因为我想要一台二合一的windows设备。小众又独特，又能完美切合我的需求，最重要的是便宜点。这台平板于2023年7月份购入，当时市面上的windows板子一般都是11&#x2F;12代酷睿。这intel都是电老虎，性能凑合的同时续航极差。而华为的这款机器倒是有意思，采用了高通用三星5nm做的桌面级arm cpu（骁龙8cx gen3)，显然能耗比是吊打当时的intel 7的。在geekbench数据库搜了一下，性能换算一下应该是打得过11代酷睿的，再加上价格，已经和发布时接近腰斩，……</div>
+  <div class="post-excerpt">两年使用Matebook E Go的记录，聊聊8cx Gen3的性能、续航、Windows on ARM和实际体验。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a>
     <span>|</span>
     标签：
-    <a href="/tags/Windows-on-ARM/">Windows on ARM</a><a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><a href="/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a><a href="/tags/ARM%E8%AE%BE%E5%A4%87/">ARM设备</a>
+    <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><a href="/tags/Windows-on-ARM/">Windows on ARM</a><a href="/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a><a href="/tags/ARM%E8%AE%BE%E5%A4%87/">ARM设备</a>
     <a class="read-more" href="/2025/12/07/8cxgen3_trivial/">[阅读全文...]</a>
   </div>
 </article>
@@ -324,8 +294,7 @@ Q4_0量化测试先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占
     <h2><a href="/2025/08/12/rdp_error/">rdp经常意外断联故障</a></h2>
     <time datetime="2025-08-12T07:26:00.000Z">(2025-08-12)</time>
   </div>
-  <div class="post-excerpt">在近期对一台基于Ryzen 2200G的电脑进行rdp连接的时候，经常会出现掉线的情况。配置：处理器：AMD Ryzen 3 2200G内存：16GB DDR4 2666 MHz显卡：集成 Radeon Vega 8操作系统：Windows 10 LTSC 2021网络环境：小米 AX3000T（有线连接）RDP 客户端与主机版本：均为 Windows 10 LTSC 2021  
-排查了很久之后，注意到Vega 8的显存是固定分配为128MB的，开机后显卡的显存会被占满。虽然是虚拟分配的，但或许是这里出了问题。我……</div>
+  <div class="post-excerpt">排查RDP意外断联，最后发现Radeon Vega 8显存分配才是问题所在。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/">折腾日记</a>
@@ -343,16 +312,7 @@ Q4_0量化测试先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占
     <h2><a href="/2025/03/04/vrchat_hotswap_map/">VRChat 无工程文件重新上传世界</a></h2>
     <time datetime="2025-03-04T02:29:00.000Z">(2025-03-04)</time>
   </div>
-  <div class="post-excerpt">起因2025年二月份的时候我们的著名mmd图iy mmd world遭到来自日本音游的版权炮而被迫下架。原作者之后又开了个以朝鲜传统英雄洪吉童（可以类比为罗宾汉）为名字，黑人戏仿洪吉童（韩国本土meme）为封面的地图补档，可惜不久后又被删除。不久后原作者也删除了社交账户，完全没有了任何联系方式。
-
-点击展开图片
-
-
-
-
-
-于是我开始探索是否有方法来通过缓存来重新上传我们的世界。经过在互联网上的一番搜索，发现没有公开的教程。但是相关没有持有工程文件就上传的世界是真实存在的，这让我坚定了信心。
-介绍rip模型的hots……</div>
+  <div class="post-excerpt">记录没有Unity工程文件时，如何利用本地缓存重新上传VRChat世界，以及过程中遇到的问题。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/VRChat/">VRChat</a>
@@ -370,11 +330,7 @@ Q4_0量化测试先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占
     <h2><a href="/2025/02/16/VRChat-bypass-vip/">VRChat 地图VIP权限的绕过</a></h2>
     <time datetime="2025-02-16T00:40:00.000Z">(2025-02-16)</time>
   </div>
-  <div class="post-excerpt">引言这是一篇帮助地图作者更好保护自己地图资产不被侵犯的文章，并不是教你如何免费游玩地图付费内容的恶意内容。
-地图vip权限的方式我们介绍四种。
-Udon网络获取使用udon脚本从远端服务器下载json文本，然后使用udon脚本解析并且赋予权限代表：HANI.缺点：本机玩家访问远端服务器，会信任系统根证书，可以轻易中间人攻击然后替换。优点：可实时更新。2026年依然没有
-Udon密码锁用静态的密码锁解锁更高级的功能。  
-缺点：没有任何安全性，密码就在地图assetbundle里。大佬eeacks甚至创建了一个专门的……</div>
+  <div class="post-excerpt">从地图作者的角度整理VRChat地图VIP权限的实现方式，以及它们各自的安全问题。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/VRChat/">VRChat</a>
@@ -392,7 +348,7 @@ Udon密码锁用静态的密码锁解锁更高级的功能。
     <h2><a href="/2024/09/01/2c2g_2c4g_jvav_minecraft/">阿里云 2核4g/2核2g开mc服务器体验</a></h2>
     <time datetime="2024-09-01T07:22:00.000Z">(2024-09-01)</time>
   </div>
-  <div class="post-excerpt">嗯就简单说一下， 因为正好有开联机的需求，手上又有这配置的服务器先简单介绍一下配置，阿里云的超便宜服务器，cpu都是2.5ghz的，可能是Skylake架构的服务器版，反正单核性能挺烂。开的是mc java版 1.21 purpur，原版服务器。没装几个插件，viaversion系列和fakeplayer，luckyperms主要，不太占性能。系统均是debian11，未安装宝塔面板，图形化界面等任何东西，只有java和系统依赖。鉴于java版mc是单核游戏，所以原版服务器双核足以。生电服务器可能会用多核优化服务端……</div>
+  <div class="post-excerpt">折腾阿里云2核2G和2核4G服务器，记录Minecraft Java版的性能、内存和玩家承载表现。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/">折腾日记</a>
@@ -410,15 +366,7 @@ Udon密码锁用静态的密码锁解锁更高级的功能。
     <h2><a href="/2024/01/30/lgg7_arm_win/">LG G7 4+64刷windows on arm</a></h2>
     <time datetime="2024-01-29T19:05:00.000Z">(2024-01-30)</time>
   </div>
-  <div class="post-excerpt">首先是解bl锁。和华为mate50&#x2F;p60一样，被神秘人士泄露了工程机或者工厂文件，因此使用9008刷入abl分区之后即可获得临时的无avb验证状态。然后在此基础上获得oem解锁以得到bl锁的解锁。
-在这之后就可以简单的一键刷入。使用了某贼工具箱，虽然没适配，但是非常简单。
-可能是因为内存太小，只要刷入显卡驱动就会出现如下的无限蓝屏
-蓝屏
-
-
-因此只能忍痛把显示卡驱动删掉，然后再启动就没问题了。
-娱乐价值远大于实际意义，没显卡驱动什么都做不了，测了点东西就刷回去当备用机了。
-相关视频：https://ww……</div>
+  <div class="post-excerpt">记录LG G7解锁并刷入Windows on ARM的过程，以及显卡驱动导致的蓝屏问题。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/">折腾日记</a>

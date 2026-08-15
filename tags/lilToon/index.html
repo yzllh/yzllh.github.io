@@ -114,8 +114,7 @@
     <h2><a href="/2026/01/04/liltoon_obf_fackripper/">混淆的liltoon增加盗模盗工程文件难度</a></h2>
     <time datetime="2026-01-04T04:23:00.000Z">(2026-01-04)</time>
   </div>
-  <div class="post-excerpt">引言最近倒模非常猖獗，甚至能直接还原成工程文件.
-从原理上来说，倒模者仅能获取AssetBundle及其序列化数据，而无法直接恢复 Shader 的源代码。然而在实际环境中，由于社区高度集中使用lilToon这一标准化 Shader，而解包后material又完整保留了键值，信息几乎决定了最终渲染效果，导致即使缺失 Shader 源码，也能通过直接导入liltoon然后手动选中来100%复刻源模型效果。 liltoon又是比较新的广泛使用的shader，社区里面的混淆方案并不成熟，相关的变种shader极少，不像隔……</div>
+  <div class="post-excerpt">从AssetBundle和lilToon的工作方式出发，聊聊为什么模型混淆能增加倒模和还原工程文件的难度。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/VRChat/">VRChat</a>

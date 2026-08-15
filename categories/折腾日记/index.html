@@ -114,8 +114,7 @@
     <h2><a href="/2025/08/12/rdp_error/">rdp经常意外断联故障</a></h2>
     <time datetime="2025-08-12T07:26:00.000Z">(2025-08-12)</time>
   </div>
-  <div class="post-excerpt">在近期对一台基于Ryzen 2200G的电脑进行rdp连接的时候，经常会出现掉线的情况。配置：处理器：AMD Ryzen 3 2200G内存：16GB DDR4 2666 MHz显卡：集成 Radeon Vega 8操作系统：Windows 10 LTSC 2021网络环境：小米 AX3000T（有线连接）RDP 客户端与主机版本：均为 Windows 10 LTSC 2021  
-排查了很久之后，注意到Vega 8的显存是固定分配为128MB的，开机后显卡的显存会被占满。虽然是虚拟分配的，但或许是这里出了问题。我……</div>
+  <div class="post-excerpt">排查RDP意外断联，最后发现Radeon Vega 8显存分配才是问题所在。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/">折腾日记</a>
@@ -133,7 +132,7 @@
     <h2><a href="/2024/09/01/2c2g_2c4g_jvav_minecraft/">阿里云 2核4g/2核2g开mc服务器体验</a></h2>
     <time datetime="2024-09-01T07:22:00.000Z">(2024-09-01)</time>
   </div>
-  <div class="post-excerpt">嗯就简单说一下， 因为正好有开联机的需求，手上又有这配置的服务器先简单介绍一下配置，阿里云的超便宜服务器，cpu都是2.5ghz的，可能是Skylake架构的服务器版，反正单核性能挺烂。开的是mc java版 1.21 purpur，原版服务器。没装几个插件，viaversion系列和fakeplayer，luckyperms主要，不太占性能。系统均是debian11，未安装宝塔面板，图形化界面等任何东西，只有java和系统依赖。鉴于java版mc是单核游戏，所以原版服务器双核足以。生电服务器可能会用多核优化服务端……</div>
+  <div class="post-excerpt">折腾阿里云2核2G和2核4G服务器，记录Minecraft Java版的性能、内存和玩家承载表现。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/">折腾日记</a>
@@ -151,15 +150,7 @@
     <h2><a href="/2024/01/30/lgg7_arm_win/">LG G7 4+64刷windows on arm</a></h2>
     <time datetime="2024-01-29T19:05:00.000Z">(2024-01-30)</time>
   </div>
-  <div class="post-excerpt">首先是解bl锁。和华为mate50&#x2F;p60一样，被神秘人士泄露了工程机或者工厂文件，因此使用9008刷入abl分区之后即可获得临时的无avb验证状态。然后在此基础上获得oem解锁以得到bl锁的解锁。
-在这之后就可以简单的一键刷入。使用了某贼工具箱，虽然没适配，但是非常简单。
-可能是因为内存太小，只要刷入显卡驱动就会出现如下的无限蓝屏
-蓝屏
-
-
-因此只能忍痛把显示卡驱动删掉，然后再启动就没问题了。
-娱乐价值远大于实际意义，没显卡驱动什么都做不了，测了点东西就刷回去当备用机了。
-相关视频：https://ww……</div>
+  <div class="post-excerpt">记录LG G7解锁并刷入Windows on ARM的过程，以及显卡驱动导致的蓝屏问题。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/">折腾日记</a>

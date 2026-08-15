@@ -114,8 +114,7 @@
     <h2><a href="/2025/08/12/rdp_error/">rdp经常意外断联故障</a></h2>
     <time datetime="2025-08-12T07:26:00.000Z">(2025-08-12)</time>
   </div>
-  <div class="post-excerpt">在近期对一台基于Ryzen 2200G的电脑进行rdp连接的时候，经常会出现掉线的情况。配置：处理器：AMD Ryzen 3 2200G内存：16GB DDR4 2666 MHz显卡：集成 Radeon Vega 8操作系统：Windows 10 LTSC 2021网络环境：小米 AX3000T（有线连接）RDP 客户端与主机版本：均为 Windows 10 LTSC 2021  
-排查了很久之后，注意到Vega 8的显存是固定分配为128MB的，开机后显卡的显存会被占满。虽然是虚拟分配的，但或许是这里出了问题。我……</div>
+  <div class="post-excerpt">排查RDP意外断联，最后发现Radeon Vega 8显存分配才是问题所在。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/">折腾日记</a>

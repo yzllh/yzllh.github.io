@@ -114,17 +114,13 @@
     <h2><a href="/2026/08/14/udon-nes-emulator/">【WIP】Udon NES模拟器</a></h2>
     <time datetime="2026-08-14T04:00:00.000Z">(2026-08-14)</time>
   </div>
-  <div class="post-excerpt">
-这是草稿，根据项目进度我们会更新文章。
-
-前言我一直都对udon有很浓厚的兴趣。根据官方的wiki，udon有高达1000倍的性能损失。简单查询后得知，这会导致现代cpu的性能降低到大概是80486数量级还不如的性能，这非常的难绷。
-不过，除了udon，我们还有同样图灵完备，但是高性能计算的shader可用：我们可以使用udon-shader协同，来获得现代化计算的性能。根据这个思想，我已经做了一个基于ShaderGPT但是使用gemma3 1b的地图，和中国象棋AI的地图。在中国象棋地图中，我们的udon-sh……</div>
+  <div class="post-excerpt">尝试在VRChat里用Udon和Shader模拟NES，记录原型机性能、协同优化和瓶颈定位。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/VRChat/">VRChat</a>
     <span>|</span>
     标签：
-    <a href="/tags/VRChat/">VRChat</a><a href="/tags/Udon/">Udon</a><a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><a href="/tags/Shader/">Shader</a><a href="/tags/NES%E6%A8%A1%E6%8B%9F%E5%99%A8/">NES模拟器</a><a href="/tags/%E7%A1%AC%E4%BB%B6%E6%A8%A1%E6%8B%9F/">硬件模拟</a>
+    <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><a href="/tags/VRChat/">VRChat</a><a href="/tags/Udon/">Udon</a><a href="/tags/Shader/">Shader</a><a href="/tags/NES%E6%A8%A1%E6%8B%9F%E5%99%A8/">NES模拟器</a><a href="/tags/%E7%A1%AC%E4%BB%B6%E6%A8%A1%E6%8B%9F/">硬件模拟</a>
     <a class="read-more" href="/2026/08/14/udon-nes-emulator/">[阅读全文...]</a>
   </div>
 </article>
@@ -136,11 +132,7 @@
     <h2><a href="/2026/04/21/oracle-qwen35-35b-a3b/">oracle免费服务器跑Qwen3.5 35b a3b测试</a></h2>
     <time datetime="2026-04-20T16:00:00.000Z">(2026-04-21)</time>
   </div>
-  <div class="post-excerpt">oracle免费服务器跑Qwen3.5 35b a3b测试
-测试环境测试环境是Oracle的免费4C24GARM服务器，4核A76，3GHz。这个机器的性能非常弱，免费服务器也就不要指望它能跑出什么好成绩了。
-使用的是原版llama.cpp，同时编译时开启了KleidiAI等ARM专属优化。Kleidi会把权重重排成更适合ARM寄存器的布局，多少能救一点性能。
-Q4_0量化测试先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占用刚好，基本可以把上下文开满，几乎正好用完这台机器的内存。
-在前1000……</div>
+  <div class="post-excerpt">在甲骨文免费ARM服务器上测试Qwen3.5 35B A3B，记录不同量化、上下文长度和llama.cpp优化下的速度。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a>
@@ -158,13 +150,13 @@ Q4_0量化测试先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占
     <h2><a href="/2025/12/07/8cxgen3_trivial/">2年深度体验：Matebook E Go (8cx gen3) </a></h2>
     <time datetime="2025-12-07T06:54:00.000Z">(2025-12-07)</time>
   </div>
-  <div class="post-excerpt">我为什么会入手这台机器嗯，单纯是因为我想要一台二合一的windows设备。小众又独特，又能完美切合我的需求，最重要的是便宜点。这台平板于2023年7月份购入，当时市面上的windows板子一般都是11&#x2F;12代酷睿。这intel都是电老虎，性能凑合的同时续航极差。而华为的这款机器倒是有意思，采用了高通用三星5nm做的桌面级arm cpu（骁龙8cx gen3)，显然能耗比是吊打当时的intel 7的。在geekbench数据库搜了一下，性能换算一下应该是打得过11代酷睿的，再加上价格，已经和发布时接近腰斩，……</div>
+  <div class="post-excerpt">两年使用Matebook E Go的记录，聊聊8cx Gen3的性能、续航、Windows on ARM和实际体验。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a>
     <span>|</span>
     标签：
-    <a href="/tags/Windows-on-ARM/">Windows on ARM</a><a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><a href="/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a><a href="/tags/ARM%E8%AE%BE%E5%A4%87/">ARM设备</a>
+    <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</a><a href="/tags/Windows-on-ARM/">Windows on ARM</a><a href="/tags/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a><a href="/tags/ARM%E8%AE%BE%E5%A4%87/">ARM设备</a>
     <a class="read-more" href="/2025/12/07/8cxgen3_trivial/">[阅读全文...]</a>
   </div>
 </article>
@@ -176,7 +168,7 @@ Q4_0量化测试先测试Qwen3.5 35B A3B的Q4_0量化。这个版本的内存占
     <h2><a href="/2024/09/01/2c2g_2c4g_jvav_minecraft/">阿里云 2核4g/2核2g开mc服务器体验</a></h2>
     <time datetime="2024-09-01T07:22:00.000Z">(2024-09-01)</time>
   </div>
-  <div class="post-excerpt">嗯就简单说一下， 因为正好有开联机的需求，手上又有这配置的服务器先简单介绍一下配置，阿里云的超便宜服务器，cpu都是2.5ghz的，可能是Skylake架构的服务器版，反正单核性能挺烂。开的是mc java版 1.21 purpur，原版服务器。没装几个插件，viaversion系列和fakeplayer，luckyperms主要，不太占性能。系统均是debian11，未安装宝塔面板，图形化界面等任何东西，只有java和系统依赖。鉴于java版mc是单核游戏，所以原版服务器双核足以。生电服务器可能会用多核优化服务端……</div>
+  <div class="post-excerpt">折腾阿里云2核2G和2核4G服务器，记录Minecraft Java版的性能、内存和玩家承载表现。</div>
   <div class="post-card-meta">
     分类：
     <a href="/categories/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/">折腾日记</a>
