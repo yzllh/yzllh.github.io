@@ -95,6 +95,7 @@
   const defaultLanguage = savedLanguage || (hasAllowedChineseLocale ? 'zh-CN' : 'en');
   let googleTranslateLoading = false;
   let pendingLanguage = null;
+  const googleLanguageCodes = { he: 'iw' };
 
   function getTranslateCombo() {
     return document.querySelector('.goog-te-combo');
@@ -103,7 +104,9 @@
   function applyTranslation(language) {
     const translateCombo = getTranslateCombo();
     if (!translateCombo) return false;
-    translateCombo.value = language === 'zh-CN' ? '' : language;
+    document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
+    const googleLanguage = googleLanguageCodes[language] || language;
+    translateCombo.value = language === 'zh-CN' ? '' : googleLanguage;
     translateCombo.dispatchEvent(new Event('change'));
     return true;
   }
@@ -121,7 +124,7 @@
     window.googleTranslateElementInit = function () {
       new window.google.translate.TranslateElement({
         pageLanguage: 'zh-CN',
-        includedLanguages: 'en,zh-CN,ru,ja',
+        includedLanguages: 'en,zh-CN,ru,ja,vi,iw,eo',
         autoDisplay: false
       }, 'google_translate_element');
       applyPendingTranslation(0);
@@ -150,5 +153,5 @@
     });
   });
 
-  if (defaultLanguage === 'en') loadGoogleTranslate('en');
+  if (defaultLanguage !== 'zh-CN') loadGoogleTranslate(defaultLanguage);
 })();
