@@ -111,13 +111,16 @@
     const translateCombo = getTranslateCombo();
     if (!translateCombo) return false;
     const googleLanguage = googleLanguageCodes[language] || language;
-    translateCombo.value = language === 'zh-CN' ? '' : googleLanguage;
+    const targetValue = language === 'zh-CN' ? '' : googleLanguage;
+    const hasTargetOption = [...translateCombo.options].some(option => option.value === targetValue);
+    if (!hasTargetOption) return false;
+    translateCombo.value = targetValue;
     translateCombo.dispatchEvent(new Event('change'));
     return true;
   }
 
   function applyPendingTranslation(attempt) {
-    if (!pendingLanguage || applyTranslation(pendingLanguage) || attempt > 20) return;
+    if (!pendingLanguage || applyTranslation(pendingLanguage) || attempt > 100) return;
     window.setTimeout(() => applyPendingTranslation(attempt + 1), 150);
   }
 
@@ -137,6 +140,9 @@
     const script = document.createElement('script');
     script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
     script.async = true;
+    script.addEventListener('error', () => {
+      googleTranslateLoading = false;
+    });
     document.head.appendChild(script);
   }
 
