@@ -519,6 +519,68 @@ a:hover { color: #ff0000; background: #ffff00; }
   .footer-badges span { min-width: 78px; }
 }
 
+.browser-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 520px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.browser-badge img, .footer-compat img, .footer-links img {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+.site-footer {
+  padding: 6px;
+  border-top: 2px inset #ffffff;
+  background: #c0c0c0;
+  color: #000000;
+  text-align: center;
+}
+.footer-compat {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 4px;
+  border: 2px inset #ffffff;
+  background: #ffffcc;
+  font: 12px/1.4 "Courier New", monospace;
+}
+.footer-compat span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.footer-copy {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  padding: 6px 4px 3px;
+  font: 12px/1.4 "Courier New", monospace;
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding-top: 3px;
+  font: 12px/1.4 "Courier New", monospace;
+}
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+@media (max-width: 560px) {
+  .footer-compat, .footer-copy, .footer-links { flex-wrap: wrap; gap: 6px 10px; }
+  .footer-copy { display: flex; }
+}
+@media (max-width: 780px) {
+  .browser-badge { display: none; }
+}
+
 .sidebar-search, .search-inner { padding: 6px; background: #c0c0c0; }
 .sidebar-search label, .site-search-form label { display: block; margin-bottom: 3px; color: #000080; font-weight: 700; }
 .sidebar-search-row, .site-search-row { display: flex; gap: 3px; }
