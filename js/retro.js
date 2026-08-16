@@ -97,14 +97,19 @@
   let pendingLanguage = null;
   const googleLanguageCodes = { he: 'iw' };
 
+  function setDocumentLanguage(language) {
+    document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
+    document.documentElement.lang = language === 'zh-CN' ? 'zh-CN' : language;
+  }
+
   function getTranslateCombo() {
     return document.querySelector('.goog-te-combo');
   }
 
   function applyTranslation(language) {
+    setDocumentLanguage(language);
     const translateCombo = getTranslateCombo();
     if (!translateCombo) return false;
-    document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
     const googleLanguage = googleLanguageCodes[language] || language;
     translateCombo.value = language === 'zh-CN' ? '' : googleLanguage;
     translateCombo.dispatchEvent(new Event('change'));
@@ -136,8 +141,17 @@
   }
 
   function clearGoogleTranslation() {
-    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
-    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${window.location.hostname}`;
+    pendingLanguage = null;
+    window.localStorage.setItem('site-language', 'zh-CN');
+    setDocumentLanguage('zh-CN');
+    const cookieNames = ['googtrans', 'googtransopt'];
+    const cookieDomains = ['', `domain=${window.location.hostname}`, `domain=.${window.location.hostname}`];
+    cookieNames.forEach(cookieName => {
+      cookieDomains.forEach(cookieDomain => {
+        const domainSuffix = cookieDomain ? `; ${cookieDomain}` : '';
+        document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${domainSuffix}`;
+      });
+    });
     window.location.reload();
   }
 
@@ -153,5 +167,6 @@
     });
   });
 
+  setDocumentLanguage(defaultLanguage);
   if (defaultLanguage !== 'zh-CN') loadGoogleTranslate(defaultLanguage);
 })();
