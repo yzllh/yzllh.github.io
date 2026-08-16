@@ -28,11 +28,11 @@
       <category domain="https://yzllh.github.io/categories/VRChat/">VRChat</category>
       
       
+      <category domain="https://yzllh.github.io/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</category>
+      
       <category domain="https://yzllh.github.io/tags/VRChat/">VRChat</category>
       
       <category domain="https://yzllh.github.io/tags/Udon/">Udon</category>
-      
-      <category domain="https://yzllh.github.io/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</category>
       
       <category domain="https://yzllh.github.io/tags/Shader/">Shader</category>
       
@@ -185,6 +185,37 @@
       
       
       <comments>https://yzllh.github.io/2026/02/03/vrchat-private-server/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>VRChat 上传备用模型</title>
+      <link>https://yzllh.github.io/2026/01/14/vrchat-fallback-avatar/</link>
+      <guid>https://yzllh.github.io/2026/01/14/vrchat-fallback-avatar/</guid>
+      <pubDate>Tue, 13 Jan 2026 16:00:00 GMT</pubDate>
+      
+      <description>介绍VRChat备用模型的上传条件、SDK设置方法，以及让其他玩家优先看到备用模型的使用方式。</description>
+      
+      
+      
+      <content:encoded><![CDATA[<p><a href="https://www.bilibili.com/video/BV1Mg6RBiExx/">视频：VRChat上传备用模型</a></p><p>备用模型是当别人无法或不允许加载你的主模型时自动显示的轻量替代模型，好处是避免变成默认机器人并让更多玩家都能看到你自定义的形象。</p><p>本文章只介绍PC玩家的备用模型方案。</p><h2 id="上传条件"><a href="#上传条件" class="headerlink" title="上传条件"></a>上传条件</h2><p>上传备用模型需要至少满足以下条件：</p><ol><li>PC端为绿模</li><li>Android端也为绿模型</li><li>同时上传了PC端和Android端的模型（为同一蓝图ID）</li></ol><p>当满足上述条件后，官方的SDK中会出现按钮：</p><p><img src="/images/vrchat-fallback-sdk-button.png" alt="SDK中的设置备用模型按钮"></p><h2 id="实际上传"><a href="#实际上传" class="headerlink" title="实际上传"></a>实际上传</h2><p>实操的时候，鉴于大多数人都是PC玩家，所以只做PC端绿模就行了，移动端可以上传空模型&#x2F;任意评级的模型。</p><p>因为上述的“设置角色为备用模型”按钮的判定是纯本地的，因此在我们上传完PC端绿模后，切换到安卓端，将任何高负载模型上传为安卓端。然后将符合条件的空模型重新设置成安卓端模型而不上传，即可骗出“设置角色为备用模型”按钮。</p><h2 id="修改SDK"><a href="#修改SDK" class="headerlink" title="修改SDK"></a>修改SDK</h2><p>因为判定纯本地，可以直接修改SDK的代码来直接显示这个按钮，具体在：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Packages\com.vrchat.avatars\Editor\VRCSDK\SDK3A\VRCSdkControlPanelAvatarBuilder.cs</span><br></pre></td></tr></table></figure><p>位于第454行的：</p><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (rating &gt; PerformanceRating.Good)</span><br></pre></td></tr></table></figure><p>改成：</p><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (<span class="literal">false</span>)</span><br></pre></td></tr></table></figure><p>即可无条件设置为备用模型。</p><h2 id="设置备用模型"><a href="#设置备用模型" class="headerlink" title="设置备用模型"></a>设置备用模型</h2><p>设置为备用模型后，角色满足条件，可以在官网&#x2F;VRCX设定为备用模型：</p><p><img src="/images/vrchat-fallback-vrcx.png" alt="官网或VRCX中的Use as Fallback按钮"></p><p>在这之后，在游戏设置-虚拟形象-使用模型替身这一选项关闭，即可激活备用模型。</p><p><img src="/images/vrchat-fallback-settings.png" alt="游戏设置中的使用模型替身选项"></p><h2 id="游戏中的效果"><a href="#游戏中的效果" class="headerlink" title="游戏中的效果"></a>游戏中的效果</h2><p>备用模型在游戏中的效果：</p><p><img src="/images/vrchat-fallback-in-game.png" alt="备用模型在游戏中的效果"></p><p><img src="/images/vrchat-fallback-avatar-page.png" alt="备用模型的模型页面"></p><p>备用模型只会在主模型不符合其他玩家模型限制的时候，才会强制开启。这有助于你在使用高负载模型的时候让所有人都至少看见你的绿模版而不是机器人或者impostor。</p>]]></content:encoded>
+      
+      
+      <category domain="https://yzllh.github.io/categories/VRChat/">VRChat</category>
+      
+      
+      <category domain="https://yzllh.github.io/tags/VRChat/">VRChat</category>
+      
+      <category domain="https://yzllh.github.io/tags/Avatar/">Avatar</category>
+      
+      <category domain="https://yzllh.github.io/tags/SDK/">SDK</category>
+      
+      <category domain="https://yzllh.github.io/tags/%E5%A4%87%E7%94%A8%E6%A8%A1%E5%9E%8B/">备用模型</category>
+      
+      <category domain="https://yzllh.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">性能优化</category>
+      
+      
+      <comments>https://yzllh.github.io/2026/01/14/vrchat-fallback-avatar/#disqus_thread</comments>
       
     </item>
     
