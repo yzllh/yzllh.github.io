@@ -581,6 +581,23 @@ a:hover { color: #ff0000; background: #ffff00; }
   .browser-badge { display: none; }
 }
 
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+}
+.sidebar .side-box {
+  width: 100%;
+  min-width: 0;
+  flex: 0 0 auto;
+}
+@media (max-width: 780px) {
+  .page-grid { grid-template-columns: 1fr; }
+  .sidebar { display: flex; }
+  .sidebar .side-box:first-child { grid-row: auto; }
+}
+
 .sidebar-search, .search-inner { padding: 6px; background: #c0c0c0; }
 .sidebar-search label, .site-search-form label { display: block; margin-bottom: 3px; color: #000080; font-weight: 700; }
 .sidebar-search-row, .site-search-row { display: flex; gap: 3px; }
