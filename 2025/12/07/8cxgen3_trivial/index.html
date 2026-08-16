@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-site-verification" content="Ufv6dY50VdcVXGu-4GWPo5u7ZNv28RoZtzrf0YhNuEk">
   <meta name="msvalidate.01" content="30A33B8F9471A59B5B15731B8670D3AD">
-  <title>2年深度体验：Matebook E Go (8cx gen3)  | cocokoishi&#39;s homepage</title>
-  <meta name="description" content="两年使用Matebook E Go的记录，聊聊8cx Gen3的性能、续航、Windows on ARM和实际体验。">
+  <title>3年深度体验：Matebook E Go (8cx gen3) | cocokoishi&#39;s homepage</title>
+  <meta name="description" content="对Matebook E Go三年使用体验的系统性回顾，涵盖8cx Gen3性能、游戏、办公、续航、触控和Windows on ARM兼容性。">
   <meta name="author" content="椰子梨梨花">
   <meta name="theme-color" content="#234970">
   <link rel="icon" href="/img/favicon.ico">
@@ -109,7 +109,7 @@
     <small>Article / 2025-12-07</small>
   </div>
   <div class="post-inner">
-    <h1 class="post-title">2年深度体验：Matebook E Go (8cx gen3) </h1>
+    <h1 class="post-title">3年深度体验：Matebook E Go (8cx gen3)</h1>
     <div class="post-meta">
       发表于 <time datetime="2025-12-07T06:54:00.000Z">2025-12-07</time>
       <span>|</span>
@@ -118,33 +118,94 @@
       
     </div>
     <div class="article-content">
-      <h2 id="我为什么会入手这台机器"><a href="#我为什么会入手这台机器" class="headerlink" title="我为什么会入手这台机器"></a>我为什么会入手这台机器</h2><p>嗯，单纯是因为我想要一台二合一的windows设备。小众又独特，又能完美切合我的需求，最重要的是便宜点。这台平板于2023年7月份购入，当时市面上的windows板子一般都是11&#x2F;12代酷睿。这intel都是电老虎，性能凑合的同时续航极差。而华为的这款机器倒是有意思，采用了高通用三星5nm做的桌面级arm cpu（骁龙8cx gen3)，显然能耗比是吊打当时的intel 7的。<br>在geekbench数据库搜了一下，性能换算一下应该是打得过11代酷睿的，再加上价格，已经和发布时接近腰斩，于是直接入了这台机器。反正也没指望这玩意打游戏，长续航能办公加上有原汁原味的windows才是好的。<br>于是入手了，具体型号是华为Matebook E Go 2022性能版。是没有阉割的8cx gen3。</p>
-<h2 id="8cx-gen3的性能表现"><a href="#8cx-gen3的性能表现" class="headerlink" title="8cx gen3的性能表现"></a>8cx gen3的性能表现</h2><h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><p>CPU架构采用了4核X1 3ghz+4核A78 2.4ghz，天玑9300前瞻版了属于是。<br>鉴于这平板是罕见的被动散热，所以传统的需要长时间跑分的软件就不试了，用了比较传统的cpuz。这个软件分两个版本，arm和x86版。arm下能跑到单核550分，多核3500分。x86转译下能跑到单核340，多核2250分。<br><strong>即使转译下的多核性能也打过了价位更高的1135g7,原生下更是直逼经典的i7-8700k。</strong><br>同为桌面arm cpu，也得和M1比比。在此可以引用cinebench 2024官方的分数，多核下8cx gen3为430分，作为对比m1为509分。<br>还有在android子系统下跑的gb5，可以跑到单核1120，多核5950分，不敌麒麟9030Pro，大概多核分数是A16-A17PRO的样子。<br>gb6下同设备多核6116分，结合cpu占满的时候约占12w功耗，放在极客湾的能耗曲线上大概是这个位置。<br><img src="/images/pasted-9.png" alt="" width="500"><br>因为参照物都是手机的主板所以仅供参考。从这里能看出能耗比其实还行，居然能和手机碰一碰了，这是x86当时想都不敢想的。</p>
-<h3 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h3><p>GPU是骁龙888同架构的，最后一代adreno600系，规模上有16组单元，888只有6组。看起来很豪华，实际上因为架构太落后，8+gen1就秒了。<br>在windows下，这玩意GPU驱动及其拉跨，<strong>只支持DX12</strong>，其他任何图形接口都要转译。这玩意就不跑测试了，也没指望这玩意能打游戏。</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>NPU部分<strong>没有达到copilot的最低算力要求</strong>，也不会在任务管理器里面显示，也不会有软件去调用，其他部分更是如此。8cx gen3同时还是车机芯片8295的马甲，估计是卖不出去就给车企用了。</p>
-<h2 id="实际游戏"><a href="#实际游戏" class="headerlink" title="实际游戏"></a>实际游戏</h2><p>因为ARM架构下基本上没有任何游戏，所以几乎所有游戏都是跑在转译上面的。可能这机器能原生跑的唯一一个大作就只有Minecraft。</p>
-<h3 id="大型游戏"><a href="#大型游戏" class="headerlink" title="大型游戏"></a>大型游戏</h3><p>我尝试跑了一些年代较为久远的大型游戏，以优化差和优化好的GTA4 GTA5为代表，因为转译似乎不支持较新的指令集，在新游戏上可能会遇到更严重的性能问题。<br><img src="/images/pasted-6.png" alt="" width="500"><br><img src="/images/pasted-7.png" alt="" width="500"><br>可以看到gta4和gta5都处于完全不能玩的情况，即使已经是十几年前的游戏了。其他大型游戏也是如此。因为机器是被动散热所以性能很差，但也有一定参考价值。<br>两款游戏均在1080p左右的分辨率下，最低画质原生分辨率，GPU占用均未超过50%，大约在30%左右，可以看出转译大型游戏效率极其低下。<br>在csgo下（是的就是csgo）大概只能跑30fps左右，不能玩。</p>
-<h4 id="大型在线游戏"><a href="#大型在线游戏" class="headerlink" title="大型在线游戏"></a>大型在线游戏</h4><p>值得一提的是，<strong>EAC不支持ARM WINDOWS</strong>，启动的时候会直接报错架构不支持并且不让你进游戏。所以这个设备完全无法游玩eac保护的游戏，包括VRChat，Apex等。（可能是因为内核驱动不支持转译）<br>理论上能刷成linux就能在转译下玩这些游戏了，反作弊在proton下是用户态的，自然是美美游玩。<br>VAC保护的游戏倒是能正常玩。steam也是跑在转译下的，但是功能一切正常。</p>
-<h3 id="小游戏"><a href="#小游戏" class="headerlink" title="小游戏"></a>小游戏</h3><p>我也尝试跑了小游戏。这里以Minecraft为代表。因为java8并没有arm版，较新的openjdk17就有，所以老版本的mc就没戏了，只能玩1.17及以上的版本。在转译下老版本的mc非常容易崩溃，无法游玩。而原生的较新版本mc可以非常流畅的正常游玩。<br>还跑了其他独立游戏，比如东方夜雀食堂等，非常流畅，也没有显卡驱动问题。</p>
-<h3 id="音游"><a href="#音游" class="headerlink" title="音游"></a>音游</h3><p>因为只玩过osu所以只介绍osu了</p>
-<h4 id="OSU"><a href="#OSU" class="headerlink" title="OSU"></a>OSU</h4><p>虽然lazer是开源的，但ppy也没构建woa(windows on arm)的，所以只能跑在转译下。大家都知道lazer有严重的性能问题，所以是基本不可玩的。<br>stable倒是可以正常游玩。<br>数位板驱动这一块我用的wacom的，wacom是有原生woa驱动的。不想用官方的驱动也可以用社区的驱动。<br>stable下操作延迟并不是很明显，处于娱乐状态，想正经玩还是上正常x86 pc吧。</p>
-<h2 id="办公体验"><a href="#办公体验" class="headerlink" title="办公体验"></a>办公体验</h2><h3 id="软件支持"><a href="#软件支持" class="headerlink" title="软件支持"></a>软件支持</h3><p>说到办公体验，对我来说只是看看网页和网课，偶尔用用office三件套而已。这方面是没有性能问题的。不过值得注意的是如果你依赖WPS，这个直到26年也是没有原生版的，而隔壁office365是原生arm的。转译下的WPS是比较卡，但也能正常使用的。  </p>
-<h4 id="微软系"><a href="#微软系" class="headerlink" title="微软系"></a>微软系</h4><p>几乎全员适配ARM架构，经常ARM64EC，原生和转译混用。用起来丝滑流畅。</p>
-<h4 id="Adobe系"><a href="#Adobe系" class="headerlink" title="Adobe系"></a>Adobe系</h4><p>这玩意性能就别想着剪视频了。修图这里PS LR AI等都是有原生版本的。也有了适配arm版的破解版。2019及以后的x86版应该是装不上去的，会提示未满足系统要求。比如PS2018转译下也是能正常用的。但是比较卡。</p>
-<h4 id="国产系"><a href="#国产系" class="headerlink" title="国产系"></a>国产系</h4><p>在X Elite的推动下很多国产软件都被迫适配了arm版。即使没有，大多数情况下转译后还是能用的，并且最多也只是比较卡，功能都是正常的。</p>
-<h4 id="开源软件"><a href="#开源软件" class="headerlink" title="开源软件"></a>开源软件</h4><p>至于开源软件们，不出意外都是有官方arm或者社区构建的arm版的。</p>
-<h4 id="虚拟化和安卓子系统"><a href="#虚拟化和安卓子系统" class="headerlink" title="虚拟化和安卓子系统"></a>虚拟化和安卓子系统</h4><p>支援虚拟化，但不支持嵌套虚拟化，和果子一样。可以跑wsl wsa hyper-v等。wsl wsa都有显卡驱动支持，hyper-v琢磨了一下似乎没有。<br>安卓子系统是垃圾，在使用几个小时后非常容易崩溃，并且崩溃后会持续占用cpu，疑似内存泄露。使用社区构建的wsa也无法解决问题。并且子系统似乎缺乏优化，只是划个屏幕都能把性能拉满，导致非常耗电。因此不推荐使用，也不推荐有人把这平板当安卓板子买着用。</p>
-<h4 id="qemu"><a href="#qemu" class="headerlink" title="qemu"></a>qemu</h4><p>有社区构建原生的qemu。不支持whpx，纯玩具。</p>
-<h3 id="系统本体"><a href="#系统本体" class="headerlink" title="系统本体"></a>系统本体</h3><p>各种架构的windows11，理论上版本号一样，那么内容就差不多。这台windows11 on arm也是一直紧跟x86主线，没有系统功能上的缺失。</p>
-<h3 id="华为生态体验"><a href="#华为生态体验" class="headerlink" title="华为生态体验"></a>华为生态体验</h3><p>华为电脑管家在这台电脑上也是x86，需要转译，非常幽默。所以就别在这机器上谈生态了。<br><strong>海狗当时很喜欢吹华为的生态无敌，网络稳定性无敌，那么这售价接近7000的平板为什么互联功能还得跑在转译下？</strong></p>
-<h2 id="续航"><a href="#续航" class="headerlink" title="续航"></a>续航</h2><p>对于这台机器本体来说，cpu部分跑满只用12w，所以很显然soc本体的续航是很棒的。<br><img src="/images/pasted-8.png" alt="" width="500">  但是对于华为的这台机器来说，续航就不太行。大概连续办公亮屏能至少4-5h，亮度低就能到8h。这块lcd屏幕还是比较耗电的。但不管怎么说，续航也是吊打intel的二合一了。</p>
-<h3 id="温控表现"><a href="#温控表现" class="headerlink" title="温控表现"></a>温控表现</h3><p>作为一个被动散热的设备这部分就不太好说，平时使用机身就开始微热了。<br>soc应该锁80度，超过60度就开始强制降频了，80度就到顶了，开始极端的降频。同时屏幕亮度也会锁定，最极端应该会锁到30-50%。</p>
-<h2 id="二合一的双形态体验"><a href="#二合一的双形态体验" class="headerlink" title="二合一的双形态体验"></a>二合一的双形态体验</h2><p>这一段本来应该是亮点的，能触摸的windows不觉得很酷吗？但是我直接放下结论了。<br>windows的触摸体验就是垃圾，应用们也不会为触摸屏适配。再加上这个平板的触摸屏驱动居然是x86的，每次触摸还要转译，如果想正常流畅的使用，只能老老实实用键盘鼠标操控了。<br>微软也知道自己系统的触摸体验是屎，所以给你了一个抽象至极的折中方案：虚拟触摸板。就是笔电上的触摸板放在屏幕上模拟鼠标操作。。我已经不知道说什么了<br><img src="/images/pasted-10.png" alt="" width="500">  和笔电的唯一的区别估计就是键盘可拆了。除了能跑windows的程式，并没有看见比安卓平板更优越的地方。</p>
-<h3 id="外观和做工，配件"><a href="#外观和做工，配件" class="headerlink" title="外观和做工，配件"></a>外观和做工，配件</h3><p>华为当年一直在全产品线上给大伙喂屎，这台也不例外，纯塑料中框加上塑料后盖。往好的说抗弯折，往坏的说廉价又垃圾，难以想象原价卖6000的板子能这么敷衍。<br>随机附赠的键盘和触控板也是纯纯的垃圾，这个触控板是我有史以来用过最垃圾的，滑动采样率有<strong>30hz</strong>吗？还会莫名其妙的意外触发，完全是没法正常用的，肉眼都能看到延迟卡顿。键盘倒是正常。</p>
-<h3 id="屏幕"><a href="#屏幕" class="headerlink" title="屏幕"></a>屏幕</h3><p>屏幕倒是还行，12.45英寸的2560x1600 120hz 500nit，色域有100%P3。查了下是华星光电的。用起来有微微发热，比较耗电。显示素质没问题，可视角度也还行，也没有像surface有纱窗感。<br>前面提到这玩意的触摸驱动是转译的。不仅如此，这设备展示机和用户机的驱动都不一样，展示机也是转译的但是明显触摸更顺滑。我也是换成了展示机驱动，使用下来没有任何问题。可以在酷安找到驱动。</p>
-<h2 id="其他系统支持"><a href="#其他系统支持" class="headerlink" title="其他系统支持"></a>其他系统支持</h2><p>华为的这台平板本质上是windows设备，使用的uefi引导所以理论上能启动其它系统。<br>然而根据我的研究发现只能跑windows系统。安卓这里缺乏uefi引导的系统也没有驱动。linux这里倒是有人部分适配了下，但是屏幕没驱动不亮，gpu也似乎没法正常启动。而同soc的thinkpad的armbian是根本刷不进去。生态非常垃圾。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>已经2026年了， 所以购买建议没什么用。喜欢捡垃圾的垃圾佬可以捡一台玩玩，普通用户就免了。在大多数人手里都是电子垃圾。<br>真要捡能用的二合一我也不推荐woa，我推荐lunar lake，这是神。8cx gen3&#x2F;x elite只是下位替代，windows还是得绑定x86才能用得爽。lnl也证明了x86一样可以省电，期待更美好的二合一windows板子！<br>不管怎么说是一台独特的设备，非常适合我，我用的很满意。</p>
-<h2 id="正统续作：Matebook-Edge"><a href="#正统续作：Matebook-Edge" class="headerlink" title="正统续作：Matebook Edge"></a>正统续作：Matebook Edge</h2><p>Matebook Edge是时隔几年后Matebook E的唯一正统续作，原班人马做的，设计模具终于是重回高端，可惜不再是windows了，也没有装woa的可能。<br><strong>我看MateBook Edge搞得不错，模具极大升级，发热噪音基本消灭，重量控制，用户体验也受重视，如果用的是lunar lake+windows，edge就是我理想中的二合一笔电。</strong></p>
+      <p>这是一篇关于华为Matebook E Go 2022性能版的长期使用报告。从2023年7月购入至今，我已经使用这台设备三年。本文将从处理器性能、图形性能、游戏兼容性、办公体验、续航、温控、触控体验以及系统支持等多个维度，对这台设备进行较为完整的总结。</p>
+<h2 id="我为什么会入手这台机器"><a href="#我为什么会入手这台机器" class="headerlink" title="我为什么会入手这台机器"></a>我为什么会入手这台机器</h2><p>当时选择这台设备，主要是因为我需要一台二合一的Windows设备。相比当时普遍采用11代或12代酷睿处理器的Windows平板，华为Matebook E Go的定位比较特殊：它使用了高通骁龙8cx Gen3平台，在功耗、续航和便携性方面具有一定优势，同时还能保留原汁原味的Windows使用体验。</p>
+<p>这台设备在2023年7月份购买。当时它的价格已经接近发布价的一半，结合硬件配置来看，性价比非常突出。根据Geekbench数据库中的成绩进行换算，8cx Gen3的性能大致可以超过部分11代酷睿处理器。我的需求也很明确，并没有期待它能够运行大型游戏，主要用途是网页、网课、Office以及一些轻度工作。</p>
+<p>最终购买的具体型号是华为Matebook E Go 2022性能版，搭载的是没有阉割的8cx Gen3。</p>
+<h2 id="8cx-Gen3的性能表现"><a href="#8cx-Gen3的性能表现" class="headerlink" title="8cx Gen3的性能表现"></a>8cx Gen3的性能表现</h2><h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><p>8cx Gen3采用4核X1 3GHz加4核A78 2.4GHz的架构。从架构组成来看，它在当时属于比较激进的ARM桌面级方案，整体形态甚至有一些类似于提前出现的天玑9300。</p>
+<p>由于这台平板采用被动散热，长时间运行的传统性能测试并不适合作为主要参考。因此，我使用CPU-Z分别测试了ARM版本和x86版本。测试结果如下：</p>
+<table>
+<thead>
+<tr>
+<th>运行方式</th>
+<th align="right">单核</th>
+<th align="right">多核</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ARM原生</td>
+<td align="right">550分</td>
+<td align="right">3500分</td>
+</tr>
+<tr>
+<td>x86转译</td>
+<td align="right">340分</td>
+<td align="right">2250分</td>
+</tr>
+</tbody></table>
+<p>即使在转译环境下，多核性能也超过了价格更高的1135G7；在ARM原生环境下，性能甚至已经接近经典的i7-8700K。需要说明的是，这类对比只代表跑分区间的接近，并不意味着所有实际应用都能获得相同的表现。</p>
+<p>如果与同一时期的桌面级ARM处理器进行比较，8cx Gen3也可以和Apple M1进行对照。根据Cinebench 2024官方数据，8cx Gen3多核成绩约为430分，M1约为509分，两者之间存在差距，但并没有达到完全不可比较的程度。</p>
+<p>在Android子系统中运行Geekbench 5时，设备可以达到单核1120分、多核5950分。这个成绩不敌麒麟9030Pro，多核性能大致处于A16到A17 Pro的范围。Geekbench 6下，同一设备的多核成绩约为6116分。结合CPU满载时约12W的功耗来看，它的能效表现仍然具备一定竞争力。</p>
+<p><img src="/images/pasted-9.png" alt="8cx Gen3性能与能耗参考"></p>
+<p>由于对比对象主要是手机平台，因此以上结果仅供参考。不过从结果中仍然可以看出，8cx Gen3的能耗比相当不错，能够在功耗较低的情况下提供接近当时部分桌面处理器的性能，这在传统x86二合一设备上并不常见。</p>
+<h3 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h3><p>8cx Gen3的GPU与骁龙888采用相同架构，属于最后一代Adreno 600系列。它在规模上拥有16组单元，而骁龙888只有6组，纸面参数看起来比较充裕。</p>
+<p>但问题在于，这套GPU架构本身已经比较老旧，后续的8+ Gen1就可以实现明显超越。因此，GPU的理论规格并不能完全转化为Windows下的实际体验。</p>
+<p>在Windows环境中，GPU驱动是这台设备比较明显的短板。目前主要支持DX12，其他图形接口需要经过转译。综合驱动质量和性能表现来看，它并不适合被当作游戏设备使用，因此这里不再进行更多GPU跑分。</p>
+<h3 id="NPU和其他部分"><a href="#NPU和其他部分" class="headerlink" title="NPU和其他部分"></a>NPU和其他部分</h3><p>8cx Gen3的NPU没有达到Copilot的最低算力要求，在任务管理器中也不会显示为可用的独立计算设备，实际软件同样很少能够调用它。</p>
+<p>此外，8cx Gen3后来也被用于车机芯片8295。从产品路线来看，这或许说明这套平台在移动计算设备市场中的后续空间有限，但它的能效特性仍然适合被动散热和长续航设备。</p>
+<h2 id="实际游戏体验"><a href="#实际游戏体验" class="headerlink" title="实际游戏体验"></a>实际游戏体验</h2><p>由于ARM平台下可直接运行的Windows游戏数量有限，这台设备上的大多数游戏都需要依靠x86转译。唯一比较适合原生运行的大型游戏，基本就是Minecraft。</p>
+<h3 id="大型游戏"><a href="#大型游戏" class="headerlink" title="大型游戏"></a>大型游戏</h3><p>我尝试运行了GTA4、GTA5等年代较久远的3A游戏，用来观察这台设备在游戏场景中的实际表现。这里的测试结果具有一定代表性，因为这些游戏本身已经发布多年，同时还分别代表了优化较差和优化相对较好的情况。</p>
+<p><img src="/images/pasted-6.png" alt="GTA4测试画面"></p>
+<p><img src="/images/pasted-7.png" alt="GTA5测试画面"></p>
+<p>从结果来看，GTA4和GTA5都处于完全不可玩的状态。即使将分辨率设置在1080p左右、画质调至最低，GPU占用率通常也没有超过50%，大约维持在30%左右。这说明主要瓶颈并不在GPU本身，而在于x86转译对大型游戏执行效率的影响。</p>
+<p>在CS:GO中，设备大约只能运行到30FPS左右，同样不具备正常游玩的条件。由于设备采用被动散热，持续负载下还会受到温度和降频影响，因此这些结果更适合用来观察ARM Windows的兼容性，而不是评价它的游戏能力。</p>
+<h4 id="大型在线游戏"><a href="#大型在线游戏" class="headerlink" title="大型在线游戏"></a>大型在线游戏</h4><p>在游戏兼容性方面，一个重要限制是EAC当时不支持ARM Windows。启动受EAC保护的游戏时，系统会直接提示架构不支持，从而无法进入游戏。这意味着VRChat、Apex等游戏都无法在这台设备上正常运行，原因可能与内核级驱动无法通过转译有关。</p>
+<p>理论上，如果将系统更换为Linux，那么部分采用用户态反作弊的游戏可能可以通过Proton运行。但这属于另一套系统环境，不能直接视为Windows下的解决方案。</p>
+<p>相比之下，使用VAC保护的游戏可以正常运行。Steam客户端本身也运行在转译环境中，但基本功能没有明显缺失。</p>
+<h3 id="小游戏"><a href="#小游戏" class="headerlink" title="小游戏"></a>小游戏</h3><p>以Minecraft为例，Java 8并没有完善的ARM版本，而较新的OpenJDK 17提供了ARM支持。因此，较老版本的Minecraft受到运行环境限制，主要只能考虑1.17及以上版本。</p>
+<p>在转译环境下，老版本Minecraft非常容易崩溃，基本不具备可玩性。原生运行的较新版本Minecraft则可以保持非常流畅的体验。除此之外，东方夜雀食堂等独立游戏也能够正常运行，整体表现比较稳定，没有遇到明显的显卡驱动问题。</p>
+<h3 id="音游"><a href="#音游" class="headerlink" title="音游"></a>音游</h3><p>我实际测试的音游主要是osu!，因此这里仅介绍osu!的运行情况。</p>
+<h4 id="osu"><a href="#osu" class="headerlink" title="osu!"></a>osu!</h4><p>虽然osu!lazer是开源项目，但ppy并没有提供Windows on ARM构建版本，因此只能依靠x86转译运行。由于lazer本身存在较明显的性能问题，在这台设备上的体验基本不可用。</p>
+<p>相比之下，osu!stable可以正常运行。数位板使用的是Wacom设备，Wacom提供了原生Windows on ARM驱动，不使用官方驱动时也可以选择社区驱动。</p>
+<p>在stable版本下，操作延迟并不算明显，进行娱乐性游玩没有太大问题。如果希望进行更严肃的竞技游玩，仍然建议使用正常的x86电脑。</p>
+<h2 id="办公体验"><a href="#办公体验" class="headerlink" title="办公体验"></a>办公体验</h2><h3 id="软件支持"><a href="#软件支持" class="headerlink" title="软件支持"></a>软件支持</h3><p>对我来说，这台设备的办公需求主要包括网页、网课以及偶尔使用Office三件套。在这些场景中，设备的性能没有构成明显限制。</p>
+<p>需要特别说明的是，WPS直到2026年仍然没有完整的原生ARM版本，转译运行时会出现卡顿，但基本功能仍然可以使用。相比之下，Microsoft 365已经提供原生ARM支持，整体流畅度更好。</p>
+<h4 id="微软系软件"><a href="#微软系软件" class="headerlink" title="微软系软件"></a>微软系软件</h4><p>微软系软件对ARM架构的适配较为积极，许多应用采用ARM64EC，能够在原生代码和转译代码之间进行混合运行。因此实际使用时通常比较流畅，也是这台设备上体验最稳定的软件类别。</p>
+<h4 id="Adobe系软件"><a href="#Adobe系软件" class="headerlink" title="Adobe系软件"></a>Adobe系软件</h4><p>这台设备不适合进行视频剪辑等高负载工作。Photoshop、Lightroom和部分AI工具已经提供原生ARM版本，部分旧版本软件也可以在转译环境下运行。</p>
+<p>需要注意的是，2019年及之后的一些x86版本可能会因为系统要求而无法安装。例如Photoshop 2018可以通过转译运行，但使用过程中会比较卡顿。</p>
+<h4 id="国产软件"><a href="#国产软件" class="headerlink" title="国产软件"></a>国产软件</h4><p>在X Elite等平台的推动下，越来越多国产软件开始适配ARM架构。即使某些软件仍然没有原生版本，大多数情况下也可以通过转译运行，主要问题通常表现为响应速度下降，而不是功能完全不可用。</p>
+<h4 id="开源软件"><a href="#开源软件" class="headerlink" title="开源软件"></a>开源软件</h4><p>开源软件的适配情况总体较好。许多项目提供官方ARM构建版本，或者由社区提供Windows on ARM版本，因此兼容性往往优于商业软件。</p>
+<h4 id="虚拟化和Android子系统"><a href="#虚拟化和Android子系统" class="headerlink" title="虚拟化和Android子系统"></a>虚拟化和Android子系统</h4><p>设备支持虚拟化，但不支持嵌套虚拟化，可以运行WSL、WSA和Hyper-V。WSL和WSA都具备一定的显卡驱动支持，Hyper-V方面则没有进一步验证出完整的图形支持。</p>
+<p>Android子系统的实际体验比较差。运行几个小时后容易崩溃，崩溃后还可能持续占用CPU，表现疑似与内存泄漏有关。社区构建的WSA也无法完全解决这个问题。</p>
+<p>此外，Android子系统的优化并不充分，即使进行简单的界面滑动，也可能导致性能占用明显上升并增加耗电。因此，不建议将这台设备作为Android平板购买或使用。</p>
+<h4 id="QEMU"><a href="#QEMU" class="headerlink" title="QEMU"></a>QEMU</h4><p>社区提供了原生构建的QEMU，但不支持WHPX，实际使用价值有限，更接近于实验性工具。</p>
+<h3 id="Windows系统本体"><a href="#Windows系统本体" class="headerlink" title="Windows系统本体"></a>Windows系统本体</h3><p>不同架构的Windows 11在系统功能上基本保持一致，只要版本号相同，整体功能差异并不明显。这台Windows on ARM设备始终跟随x86版本的主线更新，没有出现明显的系统功能缺失。</p>
+<h3 id="华为生态体验"><a href="#华为生态体验" class="headerlink" title="华为生态体验"></a>华为生态体验</h3><p>华为电脑管家在这台设备上仍然是x86程序，需要通过转译运行，实际体验并不理想。因此，如果重点关注华为生态联动，这台设备并不能提供理想的体验。</p>
+<p>从产品宣传角度来看，华为曾经强调生态协同和网络稳定性。但一台原价接近7000元的设备，其互联功能仍然需要运行在转译环境中，这一点确实比较令人遗憾。</p>
+<h2 id="续航"><a href="#续航" class="headerlink" title="续航"></a>续航</h2><p>从8cx Gen3芯片本身来看，CPU满载功耗约为12W，因此SoC的能效表现是比较优秀的。</p>
+<p>但整机续航还会受到屏幕和其他组件影响。连续办公并保持屏幕点亮时，续航时间大约为4到5小时；在降低屏幕亮度后，可以达到约8小时。设备使用的LCD屏幕功耗相对较高，但整体续航依然明显优于同类型的Intel二合一设备。</p>
+<p><img src="/images/pasted-8.png" alt="续航与功耗测试"></p>
+<h3 id="温控表现"><a href="#温控表现" class="headerlink" title="温控表现"></a>温控表现</h3><p>作为一台被动散热设备，温度表现需要单独评价。日常使用时机身会出现明显温热，持续负载下更容易进入降频状态。</p>
+<p>根据实际表现推测，SoC的温度上限约为80℃。温度超过60℃后，系统就会开始强制降低频率；达到80℃时则会进入更明显的限制状态。同时，屏幕亮度也可能被锁定，极端情况下会下降到原来的30%到50%。</p>
+<h2 id="二合一的双形态体验"><a href="#二合一的双形态体验" class="headerlink" title="二合一的双形态体验"></a>二合一的双形态体验</h2><p>触摸屏和可拆卸键盘本应是这台设备的主要卖点，但实际使用结果并不理想。</p>
+<p>Windows本身的触控体验仍然比较薄弱，许多桌面应用也没有针对触摸屏进行优化。更令人意外的是，这台平板的触摸屏驱动本身是x86程序，每次触摸输入都需要经过转译，因此想要获得稳定流畅的操作体验，最终还是需要依赖键盘和鼠标。</p>
+<p>微软提供的虚拟触摸板方案，本质上是在屏幕上模拟笔记本触摸板来操作鼠标。这种方案虽然能够解决部分交互问题，但实际使用起来并不自然，也无法真正弥补桌面Windows触控生态的不足。</p>
+<p><img src="/images/pasted-10.png" alt="二合一触控体验"></p>
+<p>从实际使用来看，这台设备与普通笔记本最大的区别主要是键盘可以拆卸。除了能够运行Windows程序之外，它并没有展现出明显优于Android平板的地方。</p>
+<h3 id="外观、做工和配件"><a href="#外观、做工和配件" class="headerlink" title="外观、做工和配件"></a>外观、做工和配件</h3><p>机身采用塑料中框和塑料后盖，优点是抗弯折能力尚可，缺点是整体质感与原价接近6000元的产品并不匹配。</p>
+<p>随机附赠的键盘和触控板质量也比较一般。触控板的采样率和响应速度都不理想，使用过程中会出现误触和明显延迟，基本不适合进行精细操作。键盘的表现相对正常。</p>
+<h3 id="屏幕"><a href="#屏幕" class="headerlink" title="屏幕"></a>屏幕</h3><p>屏幕是这台设备中表现相对稳定的部分。它采用12.45英寸、2560×1600分辨率、120Hz刷新率和500nit亮度的LCD屏幕，色域达到100%P3，据查询面板来自华星光电。</p>
+<p>实际显示效果没有明显问题，可视角度也比较正常，没有出现类似部分Surface设备的纱窗感。缺点是屏幕会产生一定热量，并且功耗相对较高。</p>
+<p>前文提到，触摸屏驱动存在转译问题。展示机和用户机使用的驱动版本并不相同，展示机驱动虽然同样运行在转译环境中，但触摸响应明显更加顺滑。后来更换为展示机驱动后，实际使用没有遇到明显问题，相关驱动可以在酷安找到。</p>
+<h2 id="其他系统支持"><a href="#其他系统支持" class="headerlink" title="其他系统支持"></a>其他系统支持</h2><p>这台设备本质上是一台使用UEFI引导的Windows设备，因此从理论上看具备启动其他系统的可能性。</p>
+<p>但从实际研究结果来看，它对其他系统的支持并不理想。Android缺少适配这套UEFI引导方式的系统和驱动；Linux虽然有社区进行部分适配，但屏幕无法正常点亮，GPU也无法稳定启动；同SoC的ThinkPad所使用的Armbian也无法直接刷入。</p>
+<p>综合来看，这台设备的系统生态高度依赖Windows，其他系统的可用性非常有限。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>从三年的使用结果来看，Matebook E Go 2022性能版是一台定位非常明确的设备。它的优势集中在8cx Gen3的能效、被动散热、Windows on ARM体验以及相对优秀的便携性；它的短板则集中在GPU驱动、x86转译、游戏兼容性、触控体验、配件质量和其他系统支持方面。</p>
+<p>截至2026年，这台设备已经不适合根据购买建议进行选择。喜欢折腾和捡垃圾的用户可以考虑低价购买体验，但对于普通用户来说，它很容易变成一台电子垃圾。</p>
+<p>如果目标是购买一台真正好用的Windows二合一设备，我更推荐Lunar Lake平台。8cx Gen3和X Elite可以看作替代方案，但Windows生态仍然与x86架构存在较深绑定。Lunar Lake也证明了x86平台同样能够实现较好的能效表现。</p>
+<p>尽管存在许多问题，这仍然是一台非常独特的设备。它不适合所有人，但非常适合喜欢研究Windows on ARM、转译和移动平台性能的人。对我来说，三年的使用体验总体仍然令人满意。</p>
+<h2 id="正统续作：Matebook-Edge"><a href="#正统续作：Matebook-Edge" class="headerlink" title="正统续作：Matebook Edge"></a>正统续作：Matebook Edge</h2><p>Matebook Edge是Matebook E系列时隔数年后的正统续作。它重新采用了更高端的模具设计，在发热、噪音、重量控制和用户体验方面都有明显改善，但它不再运行Windows，也没有安装Windows on ARM的可能性。</p>
+<p>从产品方向来看，Matebook Edge的设计已经更接近我理想中的二合一笔记本。如果它使用Lunar Lake平台并搭载Windows，那么它或许会成为一台非常理想的设备。</p>
 
     </div>
     
