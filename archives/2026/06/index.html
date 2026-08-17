@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-site-verification" content="Ufv6dY50VdcVXGu-4GWPo5u7ZNv28RoZtzrf0YhNuEk">
   <meta name="msvalidate.01" content="30A33B8F9471A59B5B15731B8670D3AD">
-  <title>rdp经常意外断联故障 | cocokoishi&#39;s homepage</title>
-  <meta name="description" content="排查RDP意外断联，最后发现Radeon Vega 8显存分配才是问题所在。">
+  <title>cocokoishi&#39;s homepage</title>
+  <meta name="description" content="个人写的垃圾的存档之处，或许会对你有一些帮助。">
   <meta name="author" content="椰子梨梨花">
   <meta name="theme-color" content="#234970">
   <link rel="icon" type="image/x-icon" href="/img/yzllh.ico">
@@ -105,46 +105,20 @@
 </aside>
 
       <section class="main-column">
-        <article class="content-box post-page">
-  <div class="box-heading">
-    <span class="title-mark">▧</span>
-    <span>日志详情</span>
-    <small>Article / 2025-08-12</small>
-  </div>
-  <div class="post-inner">
-    <h1 class="post-title">rdp经常意外断联故障</h1>
-    <div class="post-meta">
-      发表于 <time datetime="2025-08-12T07:26:00.000Z">2025-08-12</time>
-      <span>|</span>
-      
-        <a href="/categories/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/">折腾日记</a>
-      
+        <div class="section-title">
+  <span class="title-mark">▦</span>
+  <span>文章归档</span>
+  <small>Archives</small>
+</div>
+<div class="archive-list">
+  
+    <div class="archive-row">
+      <time datetime="2026-06-06T04:00:00.000Z">2026-06-06</time>
+      <a href="/2026/06/06/vrchat-model-lock-breaking/">对VRChat模型密码锁的研究</a>
+      <span>VRChat</span>
     </div>
-    <div class="article-content">
-      <p>在近期对一台基于Ryzen 2200G的电脑进行rdp连接的时候，经常会出现掉线的情况。<br>配置：<br>处理器：AMD Ryzen 3 2200G<br>内存：16GB DDR4 2666 MHz<br>显卡：集成 Radeon Vega 8<br>操作系统：Windows 10 LTSC 2021<br>网络环境：小米 AX3000T（有线连接）<br>RDP 客户端与主机版本：均为 Windows 10 LTSC 2021  </p>
-<p>排查了很久之后，注意到Vega 8的显存是固定分配为128MB的，开机后显卡的显存会被占满。虽然是虚拟分配的，但或许是这里出了问题。我尝试设置成1g，恼人的断连问题就解决了。<br>这实在是太神奇了，bug出现在了未预料的地方，也提醒核心显卡的显存分配也是会对实际使用产生影响的。</p>
-
-    </div>
-    
-      <div class="post-tags">
-        标签：
-        
-          <a href="/tags/%E6%8A%98%E8%85%BE%E6%97%A5%E8%AE%B0/">[折腾日记]</a>, 
-        
-          <a href="/tags/Windows/">[Windows]</a>, 
-        
-          <a href="/tags/RDP/">[RDP]</a>, 
-        
-          <a href="/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/">[故障排查]</a>
-        
-      </div>
-    
-  </div>
-</article>
-<nav class="post-navigation" aria-label="文章导航">
-  <a href="/2025/12/07/8cxgen3_trivial/">← 上一篇：3年深度体验：Matebook E Go (8cx gen3)</a>
-  <a href="/2025/03/04/vrchat_hotswap_map/">下一篇：VRChat 无工程文件重新上传世界 →</a>
-</nav>
+  
+</div>
 
       </section>
     </main>
