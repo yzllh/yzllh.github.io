@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-site-verification" content="Ufv6dY50VdcVXGu-4GWPo5u7ZNv28RoZtzrf0YhNuEk">
   <meta name="msvalidate.01" content="30A33B8F9471A59B5B15731B8670D3AD">
-  <title>cocokoishi&#39;s homepage</title>
-  <meta name="description" content="个人写的垃圾的存档之处，或许会对你有一些帮助。">
+  <title>让ClientSim加载真正的VRChat Avatar | cocokoishi&#39;s homepage</title>
+  <meta name="description" content="让ClientSim在世界场景中加载并使用真正的VRChat Avatar。">
   <meta name="author" content="椰子梨梨花">
   <meta name="theme-color" content="#234970">
   <link rel="icon" type="image/x-icon" href="/img/yzllh.ico">
@@ -105,20 +105,51 @@
 </aside>
 
       <section class="main-column">
-        <div class="section-title">
-  <span class="title-mark">▦</span>
-  <span>文章归档</span>
-  <small>Archives</small>
-</div>
-<div class="archive-list">
-  
-    <div class="archive-row">
-      <time datetime="2026-04-20T16:00:00.000Z">2026-04-21</time>
-      <a href="/2026/04/21/oracle-qwen35-35b-a3b/">oracle免费服务器跑Qwen3.5 35b a3b测试</a>
-      <span>技术随笔</span>
+        <article class="content-box post-page">
+  <div class="box-heading">
+    <span class="title-mark">▧</span>
+    <span>日志详情</span>
+    <small>Article / 2026-06-09</small>
+  </div>
+  <div class="post-inner">
+    <h1 class="post-title">让ClientSim加载真正的VRChat Avatar</h1>
+    <div class="post-meta">
+      发表于 <time datetime="2026-06-09T04:00:00.000Z">2026-06-09</time>
+      <span>|</span>
+      
+        <a href="/categories/VRChat/">VRChat</a>
+      
     </div>
-  
-</div>
+    <div class="article-content">
+      <h2 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h2><p>让ClientSim加载真正的VRChat Avatar</p>
+<p>项目：<a target="_blank" rel="noopener" href="https://github.com/cocokoishi/Clientsim_avatar">ClientSim Avatar</a></p>
+<p>制作过世界的vrc玩家应该都用过clientsim吧。clientsim里面默认的玩家只是一个非常简单的替身，并不是我们真正使用的Avatar。当我想要把这个默认玩家替换成任意玩家的时候，我发现非常困难，因为并没有包含所有avatar运行所需要的sdk运行时。</p>
+<p>因此，我把gesturemanager与avatar sdk与world sdk重新融合起来，成功实现了在世界场景中使用自己自定义的角色<br>视频演示：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1RyE86bERZ/">Bilibili</a></p>
+<p><img src="/images/clientsim-avatar.png" alt="ClientSim加载VRChat Avatar"></p>
+<h2 id="难点1：角色工程文件的移植"><a href="#难点1：角色工程文件的移植" class="headerlink" title="难点1：角色工程文件的移植"></a>难点1：角色工程文件的移植</h2><p>我这里直接选用了VRCALoader <a target="_blank" rel="noopener" href="https://github.com/cocokoishi/VRCALoader/">https://github.com/cocokoishi/VRCALoader/</a> 这是我一个用于测试本地生成的模型的小插件，也帮助我进行了avatarobfuscator <a target="_blank" rel="noopener" href="https://github.com/cocokoishi/AvatarObfuscator">https://github.com/cocokoishi/AvatarObfuscator</a> 。我们这次只使用他的load assetbundle功能，直接加载角色的文件，所以不需要工程文件就行了，非常方便，不用处理ma这些爆炸的依赖</p>
+<h2 id="难点2：角色功能实际和unity的交互"><a href="#难点2：角色功能实际和unity的交互" class="headerlink" title="难点2：角色功能实际和unity的交互"></a>难点2：角色功能实际和unity的交互</h2><p>所以我们同时移植了gesturemanager，不用自己重复造轮子了。</p>
+<p>我们做到了几乎所有角色和世界的交互效果的吻合，除了和VRC本体完全一致的画面效果，角色的99.61%功能也被完全的复原到和世界可交互，如MMD世界的播放（见视频）</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>可以方便世界作者更好的测试自己世界的功能。</p>
+
+    </div>
+    
+      <div class="post-tags">
+        标签：
+        
+          <a href="/tags/VRChat/">[VRChat]</a>, 
+        
+          <a href="/tags/Avatar/">[Avatar]</a>, 
+        
+          <a href="/tags/ClientSim/">[ClientSim]</a>
+        
+      </div>
+    
+  </div>
+</article>
+<nav class="post-navigation" aria-label="文章导航">
+  <a href="/2026/07/27/vrchat-gemma3-1b/">← 上一篇：在VRChat中本地部署大语言模型Gemma 3 1B</a>
+  <a href="/2026/06/06/vrchat-model-lock-breaking/">下一篇：对VRChat模型密码锁的研究 →</a>
+</nav>
 
       </section>
     </main>

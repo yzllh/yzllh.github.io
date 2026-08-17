@@ -98,6 +98,33 @@
     </item>
     
     <item>
+      <title>让ClientSim加载真正的VRChat Avatar</title>
+      <link>https://yzllh.github.io/2026/06/09/clientsim-avatar/</link>
+      <guid>https://yzllh.github.io/2026/06/09/clientsim-avatar/</guid>
+      <pubDate>Tue, 09 Jun 2026 04:00:00 GMT</pubDate>
+      
+      <description>让ClientSim在世界场景中加载并使用真正的VRChat Avatar。</description>
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h2><p>让ClientSim加载真正的VRChat Avatar</p><p>项目：<a href="https://github.com/cocokoishi/Clientsim_avatar">ClientSim Avatar</a></p><p>制作过世界的vrc玩家应该都用过clientsim吧。clientsim里面默认的玩家只是一个非常简单的替身，并不是我们真正使用的Avatar。当我想要把这个默认玩家替换成任意玩家的时候，我发现非常困难，因为并没有包含所有avatar运行所需要的sdk运行时。</p><p>因此，我把gesturemanager与avatar sdk与world sdk重新融合起来，成功实现了在世界场景中使用自己自定义的角色<br>视频演示：<a href="https://www.bilibili.com/video/BV1RyE86bERZ/">Bilibili</a></p><p><img src="/images/clientsim-avatar.png" alt="ClientSim加载VRChat Avatar"></p><h2 id="难点1：角色工程文件的移植"><a href="#难点1：角色工程文件的移植" class="headerlink" title="难点1：角色工程文件的移植"></a>难点1：角色工程文件的移植</h2><p>我这里直接选用了VRCALoader <a href="https://github.com/cocokoishi/VRCALoader/">https://github.com/cocokoishi/VRCALoader/</a> 这是我一个用于测试本地生成的模型的小插件，也帮助我进行了avatarobfuscator <a href="https://github.com/cocokoishi/AvatarObfuscator">https://github.com/cocokoishi/AvatarObfuscator</a> 。我们这次只使用他的load assetbundle功能，直接加载角色的文件，所以不需要工程文件就行了，非常方便，不用处理ma这些爆炸的依赖</p><h2 id="难点2：角色功能实际和unity的交互"><a href="#难点2：角色功能实际和unity的交互" class="headerlink" title="难点2：角色功能实际和unity的交互"></a>难点2：角色功能实际和unity的交互</h2><p>所以我们同时移植了gesturemanager，不用自己重复造轮子了。</p><p>我们做到了几乎所有角色和世界的交互效果的吻合，除了和VRC本体完全一致的画面效果，角色的99.61%功能也被完全的复原到和世界可交互，如MMD世界的播放（见视频）</p><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>可以方便世界作者更好的测试自己世界的功能。</p>]]></content:encoded>
+      
+      
+      <category domain="https://yzllh.github.io/categories/VRChat/">VRChat</category>
+      
+      
+      <category domain="https://yzllh.github.io/tags/VRChat/">VRChat</category>
+      
+      <category domain="https://yzllh.github.io/tags/Avatar/">Avatar</category>
+      
+      <category domain="https://yzllh.github.io/tags/ClientSim/">ClientSim</category>
+      
+      
+      <comments>https://yzllh.github.io/2026/06/09/clientsim-avatar/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
       <title>对VRChat模型密码锁的研究</title>
       <link>https://yzllh.github.io/2026/06/06/vrchat-model-lock-breaking/</link>
       <guid>https://yzllh.github.io/2026/06/06/vrchat-model-lock-breaking/</guid>
