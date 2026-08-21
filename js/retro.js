@@ -99,19 +99,6 @@
     return supportedLanguages.has(primaryLanguage) ? primaryLanguage : null;
   }
 
-  function detectBrowserLanguage() {
-    const browserLocales = [
-      ...(Array.isArray(navigator.languages) ? navigator.languages : []),
-      navigator.language
-    ].filter(Boolean);
-
-    for (const locale of browserLocales) {
-      const language = normalizeLanguage(locale);
-      if (language) return language;
-    }
-    return 'en';
-  }
-
   function readStorage(key) {
     try {
       return window.localStorage.getItem(key);
@@ -129,7 +116,7 @@
   }
 
   const savedLanguage = normalizeLanguage(readStorage('site-language'));
-  const defaultLanguage = savedLanguage || detectBrowserLanguage();
+  const defaultLanguage = savedLanguage || 'zh-CN';
   let googleTranslateLoading = false;
   let pendingLanguage = null;
 
