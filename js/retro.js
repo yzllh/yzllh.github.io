@@ -85,17 +85,53 @@
 
   if (!languageButtons.length || !translateElement) return;
 
-  const allowedChineseRegions = ['cn', 'tw', 'sg', 'hk', 'mo'];
-  const browserLocales = [...new Set([...(navigator.languages || []), navigator.language].filter(Boolean))];
-  const hasAllowedChineseLocale = browserLocales.some(locale => {
-    const localeParts = locale.toLowerCase().replace('_', '-').split('-');
-    return localeParts[0] === 'zh' && localeParts.slice(1).some(part => allowedChineseRegions.includes(part));
-  });
-  const savedLanguage = window.localStorage.getItem('site-language');
-  const defaultLanguage = savedLanguage || (hasAllowedChineseLocale ? 'zh-CN' : 'en');
+  const supportedLanguages = new Set(['zh-CN', 'en', 'ru', 'ja', 'vi', 'he', 'eo']);
+  const googleLanguageCodes = { he: 'iw' };
+
+  function normalizeLanguage(value) {
+    if (typeof value !== 'string') return null;
+    const normalized = value.trim().toLowerCase().replace(/_/g, '-');
+    if (!normalized) return null;
+
+    const primaryLanguage = normalized.split('-')[0];
+    if (primaryLanguage === 'zh') return 'zh-CN';
+    if (primaryLanguage === 'he' || primaryLanguage === 'iw') return 'he';
+    return supportedLanguages.has(primaryLanguage) ? primaryLanguage : null;
+  }
+
+  function detectBrowserLanguage() {
+    const browserLocales = [
+      ...(Array.isArray(navigator.languages) ? navigator.languages : []),
+      navigator.language
+    ].filter(Boolean);
+
+    for (const locale of browserLocales) {
+      const language = normalizeLanguage(locale);
+      if (language) return language;
+    }
+    return 'en';
+  }
+
+  function readStorage(key) {
+    try {
+      return window.localStorage.getItem(key);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function writeStorage(key, value) {
+    try {
+      window.localStorage.setItem(key, value);
+    } catch (error) {
+      // 隐私模式或禁用存储时仍应允许当前页面切换语言。
+    }
+  }
+
+  const savedLanguage = normalizeLanguage(readStorage('site-language'));
+  const defaultLanguage = savedLanguage || detectBrowserLanguage();
   let googleTranslateLoading = false;
   let pendingLanguage = null;
-  const googleLanguageCodes = { he: 'iw' };
 
   function setDocumentLanguage(language) {
     document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
@@ -114,8 +150,10 @@
     const targetValue = language === 'zh-CN' ? '' : googleLanguage;
     const hasTargetOption = [...translateCombo.options].some(option => option.value === targetValue);
     if (!hasTargetOption) return false;
-    translateCombo.value = targetValue;
-    translateCombo.dispatchEvent(new Event('change'));
+    if (translateCombo.value !== targetValue) {
+      translateCombo.value = targetValue;
+      translateCombo.dispatchEvent(new Event('change'));
+    }
     return true;
   }
 
@@ -148,7 +186,6 @@
 
   function clearGoogleTranslation() {
     pendingLanguage = null;
-    window.localStorage.setItem('site-language', 'zh-CN');
     setDocumentLanguage('zh-CN');
     const cookieNames = ['googtrans', 'googtransopt'];
     const cookieDomains = ['', `domain=${window.location.hostname}`, `domain=.${window.location.hostname}`];
@@ -163,8 +200,9 @@
 
   languageButtons.forEach(button => {
     button.addEventListener('click', () => {
-      const language = button.dataset.siteLanguage;
-      window.localStorage.setItem('site-language', language);
+      const language = normalizeLanguage(button.dataset.siteLanguage);
+      if (!language) return;
+      writeStorage('site-language', language);
       if (language === 'zh-CN') {
         clearGoogleTranslation();
       } else {
