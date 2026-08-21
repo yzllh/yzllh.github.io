@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-site-verification" content="Ufv6dY50VdcVXGu-4GWPo5u7ZNv28RoZtzrf0YhNuEk">
   <meta name="msvalidate.01" content="30A33B8F9471A59B5B15731B8670D3AD">
-  <title>在VRChat中本地部署大语言模型Gemma 3 1B | cocokoishi&#39;s homepage</title>
-  <meta name="description" content="把Gemma3 1B的模型权重烘焙进贴图，在VRChat里用ShaderGPT和Udon实现本地推理。">
+  <title>cocokoishi&#39;s homepage</title>
+  <meta name="description" content="个人写的垃圾的存档之处，或许会对你有一些帮助。">
   <meta name="author" content="椰子梨梨花">
   <meta name="theme-color" content="#234970">
   <link rel="icon" type="image/x-icon" href="/img/yzllh.ico">
@@ -105,55 +105,32 @@
 </aside>
 
       <section class="main-column">
-        <article class="content-box post-page">
-  <div class="box-heading">
-    <span class="title-mark">▧</span>
-    <span>日志详情</span>
-    <small>Article / 2026-07-27</small>
+        <div class="section-title">
+  <span class="title-mark">▤</span>
+  <span>标签：Unity</span>
+  <small>Tag</small>
+</div>
+<div class="post-list">
+  
+    <article class="post-card">
+  <div class="post-card-heading">
+    <span class="paper-icon">▤</span>
+    <h2><a href="/2026/08/21/assetripper-shader-loss/">解决AssetRipper解包后丢失着色器问题</a></h2>
+    <time datetime="2026-08-21T04:00:00.000Z">(2026-08-21)</time>
   </div>
-  <div class="post-inner">
-    <h1 class="post-title">在VRChat中本地部署大语言模型Gemma 3 1B</h1>
-    <div class="post-meta">
-      发表于 <time datetime="2026-07-26T16:10:00.000Z">2026-07-27</time>
-      <span>|</span>
-      
-        <a href="/categories/VRChat/">VRChat</a>
-      
-    </div>
-    <div class="article-content">
-      <h2 id="这是什么"><a href="#这是什么" class="headerlink" title="这是什么"></a>这是什么</h2><p>地图：<a target="_blank" rel="noopener" href="https://vrchat.com/home/world/wrld_5696411e-433c-44d5-ada3-7f1010e5ca8b">VRChat Gemma 3 1B</a></p>
-<p>使用的推理引擎：<a target="_blank" rel="noopener" href="https://gitlab.com/lox9973/ShaderGPT">ShaderGPT</a></p>
-<p>ShaderGPT原作者的地图（lfm2.5-1.2b）：<a target="_blank" rel="noopener" href="https://vrchat.com/home/world/wrld_e919c1f4-8399-43cc-8305-d890dc8e2e98">A local GPT World</a></p>
-<p>A local GPT World.powered by ShaderGPT <a target="_blank" rel="noopener" href="https://gitlab.com/lox9973/ShaderGPT">https://gitlab.com/lox9973/ShaderGPT</a>.</p>
-<p>这个地图基于lox9973的ShaderGPT，把模型权重烘焙成贴图，再通过Shader实现模型推理，最后在游戏里面用Udon调用执行，是纯本地的。</p>
-<p><img src="/images/gemma3-1b-vrchat.png" alt="VRChat中的Gemma 3 1B"></p>
-<h2 id="为什么选Gemma-3-1B"><a href="#为什么选Gemma-3-1B" class="headerlink" title="为什么选Gemma 3 1B"></a>为什么选Gemma 3 1B</h2><p>Gemma 3 1B是我在2025年见过的比较惊艳的小模型。它发布得很早，也没有经过现在这么重的CoT和RLHF训练，所以更适合聊天。Shadergpt原作者的演示图本来也是qwen2.5，但是最近更换到了lfm2.5，这是一个agent模型，聊天明显不如老模型。</p>
-<h2 id="量化的问题"><a href="#量化的问题" class="headerlink" title="量化的问题"></a>量化的问题</h2><p>ShaderGPT是非常棒的工程，但是他提供的原版量化在Gemma系列模型上存在一定问题，会导致模型智商降低过大。</p>
-<p>所以我使用了谷歌亲自部署的gemma3 1b qat q4_0量化版本，既保留了原版模型绝大多数智商，又兼顾了大小做到了600MB。</p>
-<p>此外，ShaderGPT本身的推理引擎也不是完整的实现，和llama.cpp相比输出质量存在些许的降级，不过很难体会到除非真闲的没事测数学题。</p>
-<h2 id="实际体验"><a href="#实际体验" class="headerlink" title="实际体验"></a>实际体验</h2><p>不觉得这很酷吗，很符合我对未来生活的想象，科技并带着趣味</p>
-
-    </div>
-    
-      <div class="post-tags">
-        标签：
-        
-          <a href="/tags/VRChat/">[VRChat]</a>, 
-        
-          <a href="/tags/%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%9E%8B/">[本地模型]</a>, 
-        
-          <a href="/tags/Gemma/">[Gemma]</a>, 
-        
-          <a href="/tags/ShaderGPT/">[ShaderGPT]</a>
-        
-      </div>
-    
+  <div class="post-excerpt">记录使用AssetRipper恢复资产时，处理Shader丢失与AssetBundle后处理的方法。</div>
+  <div class="post-card-meta">
+    分类：
+    <a href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a>
+    <span>|</span>
+    标签：
+    <a href="/tags/AssetBundle/">AssetBundle</a>, <a href="/tags/Shader/">Shader</a>, <a href="/tags/AssetRipper/">AssetRipper</a>, <a href="/tags/UABEA/">UABEA</a>, <a href="/tags/Unity/">Unity</a>
+    <a class="read-more" href="/2026/08/21/assetripper-shader-loss/">[阅读全文...]</a>
   </div>
 </article>
-<nav class="post-navigation" aria-label="文章导航">
-  <a href="/2026/08/01/vrchat-udon-chinese-chess/">← 上一篇：Udon实现的AI中国象棋地图</a>
-  <a href="/2026/06/09/clientsim-avatar/">下一篇：让ClientSim加载真正的VRChat Avatar →</a>
-</nav>
+
+  
+</div>
 
       </section>
     </main>

@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-site-verification" content="Ufv6dY50VdcVXGu-4GWPo5u7ZNv28RoZtzrf0YhNuEk">
   <meta name="msvalidate.01" content="30A33B8F9471A59B5B15731B8670D3AD">
-  <title>在VRChat中本地部署大语言模型Gemma 3 1B | cocokoishi&#39;s homepage</title>
-  <meta name="description" content="把Gemma3 1B的模型权重烘焙进贴图，在VRChat里用ShaderGPT和Udon实现本地推理。">
+  <title>解决AssetRipper解包后丢失着色器问题 | cocokoishi&#39;s homepage</title>
+  <meta name="description" content="记录使用AssetRipper恢复资产时，处理Shader丢失与AssetBundle后处理的方法。">
   <meta name="author" content="椰子梨梨花">
   <meta name="theme-color" content="#234970">
   <link rel="icon" type="image/x-icon" href="/img/yzllh.ico">
@@ -109,50 +109,49 @@
   <div class="box-heading">
     <span class="title-mark">▧</span>
     <span>日志详情</span>
-    <small>Article / 2026-07-27</small>
+    <small>Article / 2026-08-21</small>
   </div>
   <div class="post-inner">
-    <h1 class="post-title">在VRChat中本地部署大语言模型Gemma 3 1B</h1>
+    <h1 class="post-title">解决AssetRipper解包后丢失着色器问题</h1>
     <div class="post-meta">
-      发表于 <time datetime="2026-07-26T16:10:00.000Z">2026-07-27</time>
+      发表于 <time datetime="2026-08-21T04:00:00.000Z">2026-08-21</time>
       <span>|</span>
       
-        <a href="/categories/VRChat/">VRChat</a>
+        <a href="/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</a>
       
     </div>
     <div class="article-content">
-      <h2 id="这是什么"><a href="#这是什么" class="headerlink" title="这是什么"></a>这是什么</h2><p>地图：<a target="_blank" rel="noopener" href="https://vrchat.com/home/world/wrld_5696411e-433c-44d5-ada3-7f1010e5ca8b">VRChat Gemma 3 1B</a></p>
-<p>使用的推理引擎：<a target="_blank" rel="noopener" href="https://gitlab.com/lox9973/ShaderGPT">ShaderGPT</a></p>
-<p>ShaderGPT原作者的地图（lfm2.5-1.2b）：<a target="_blank" rel="noopener" href="https://vrchat.com/home/world/wrld_e919c1f4-8399-43cc-8305-d890dc8e2e98">A local GPT World</a></p>
-<p>A local GPT World.powered by ShaderGPT <a target="_blank" rel="noopener" href="https://gitlab.com/lox9973/ShaderGPT">https://gitlab.com/lox9973/ShaderGPT</a>.</p>
-<p>这个地图基于lox9973的ShaderGPT，把模型权重烘焙成贴图，再通过Shader实现模型推理，最后在游戏里面用Udon调用执行，是纯本地的。</p>
-<p><img src="/images/gemma3-1b-vrchat.png" alt="VRChat中的Gemma 3 1B"></p>
-<h2 id="为什么选Gemma-3-1B"><a href="#为什么选Gemma-3-1B" class="headerlink" title="为什么选Gemma 3 1B"></a>为什么选Gemma 3 1B</h2><p>Gemma 3 1B是我在2025年见过的比较惊艳的小模型。它发布得很早，也没有经过现在这么重的CoT和RLHF训练，所以更适合聊天。Shadergpt原作者的演示图本来也是qwen2.5，但是最近更换到了lfm2.5，这是一个agent模型，聊天明显不如老模型。</p>
-<h2 id="量化的问题"><a href="#量化的问题" class="headerlink" title="量化的问题"></a>量化的问题</h2><p>ShaderGPT是非常棒的工程，但是他提供的原版量化在Gemma系列模型上存在一定问题，会导致模型智商降低过大。</p>
-<p>所以我使用了谷歌亲自部署的gemma3 1b qat q4_0量化版本，既保留了原版模型绝大多数智商，又兼顾了大小做到了600MB。</p>
-<p>此外，ShaderGPT本身的推理引擎也不是完整的实现，和llama.cpp相比输出质量存在些许的降级，不过很难体会到除非真闲的没事测数学题。</p>
-<h2 id="实际体验"><a href="#实际体验" class="headerlink" title="实际体验"></a>实际体验</h2><p>不觉得这很酷吗，很符合我对未来生活的想象，科技并带着趣味</p>
+      <h2 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h2><p>咱在使用AssetRipper恢复自己以前资产的时候，应该会显而易见的发现，Shader是无法被反编译的。我们的解包工程文件里面，Shader几乎一定是完全损坏的。</p>
+<h2 id="AssetRipper的导出格式"><a href="#AssetRipper的导出格式" class="headerlink" title="AssetRipper的导出格式"></a>AssetRipper的导出格式</h2><p>AssetRipper主要提供YAML源文件导出和Dummy导出两种格式。理论上来说，前者导出的是Shader的在Assetbundle内的完全原版形式，但是Unity几乎一定会完全把这个损坏而无法正常渲染。而Dummy导出只能恢复最基本的引用。<br>AssetRipper付费版提供Shader反编译效果，但是经过我的测试，其恢复能力十分有限，常见着色器如liltoon似乎能恢复个九成，但是更多的是完全无法恢复。</p>
+<h2 id="AssetBundle后处理"><a href="#AssetBundle后处理" class="headerlink" title="AssetBundle后处理"></a>AssetBundle后处理</h2><p>因此，咱必须想办法让最终的解包工程文件能完美的复刻原版的AssetBundle的Shader材质。经过我的不懈探索，浪费了很长时间后，我认为在Unity里面确实无法通过任何方式引用编译后Shader二进制形式，所以我们应该尝试对AssetBundle进行后处理。</p>
+<p>幸运的是，不像Udon程序的签名，Shader是完全可以直接替换的。所以我制作了 <a target="_blank" rel="noopener" href="https://github.com/cocokoishi/ShaderBundlePatcher">https://github.com/cocokoishi/ShaderBundlePatcher</a> 。他的作用就是，选中你的原版AssetBundle作为素材库，其原版Shader会把你选中的解包工程AssetBundle内的Dummy Shader进行替换。</p>
+<p>经过测试，我们确实可以完全恢复解包工程的Shader，即使这个方式看起来非常奇葩，但是这是唯一一种可用的方式。</p>
+<h2 id="其他尝试"><a href="#其他尝试" class="headerlink" title="其他尝试"></a>其他尝试</h2><p>其他尝试：逐个反编译Shader。这是非常不现实的，在配合我能找到的几乎所有HLSL反编译器的情况下，即使是肥波都无法完全恢复Shader，简直是浪费时间。</p>
+<h2 id="UABEA插件"><a href="#UABEA插件" class="headerlink" title="UABEA插件"></a>UABEA插件</h2><p>除此之外，我还制作了UABEA插件，利用UABEA来快捷替换Shader。</p>
+<p>本文章的内容也完全推翻了<a href="https://yzllh.github.io/2026/01/04/liltoon_obf_fackripper/">https://yzllh.github.io/2026/01/04/liltoon_obf_fackripper&#x2F;</a> 。因为技术的发展，我以前认为的很难的东西在llm agent的攻击下已经是trivial的了，完全无法挡住任何人。</p>
 
     </div>
     
       <div class="post-tags">
         标签：
         
-          <a href="/tags/VRChat/">[VRChat]</a>, 
+          <a href="/tags/AssetBundle/">[AssetBundle]</a>, 
         
-          <a href="/tags/%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%9E%8B/">[本地模型]</a>, 
+          <a href="/tags/Shader/">[Shader]</a>, 
         
-          <a href="/tags/Gemma/">[Gemma]</a>, 
+          <a href="/tags/AssetRipper/">[AssetRipper]</a>, 
         
-          <a href="/tags/ShaderGPT/">[ShaderGPT]</a>
+          <a href="/tags/UABEA/">[UABEA]</a>, 
+        
+          <a href="/tags/Unity/">[Unity]</a>
         
       </div>
     
   </div>
 </article>
 <nav class="post-navigation" aria-label="文章导航">
-  <a href="/2026/08/01/vrchat-udon-chinese-chess/">← 上一篇：Udon实现的AI中国象棋地图</a>
-  <a href="/2026/06/09/clientsim-avatar/">下一篇：让ClientSim加载真正的VRChat Avatar →</a>
+  
+  <a href="/2026/08/14/udon-nes-emulator/">下一篇：【WIP】Udon NES模拟器 →</a>
 </nav>
 
       </section>

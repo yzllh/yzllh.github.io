@@ -9,8 +9,39 @@
     <atom:link href="https://yzllh.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description>个人写的垃圾的存档之处，或许会对你有一些帮助。</description>
-    <pubDate>Sat, 15 Aug 2026 12:41:18 GMT</pubDate>
+    <pubDate>Fri, 21 Aug 2026 15:06:19 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>解决AssetRipper解包后丢失着色器问题</title>
+      <link>https://yzllh.github.io/2026/08/21/assetripper-shader-loss/</link>
+      <guid>https://yzllh.github.io/2026/08/21/assetripper-shader-loss/</guid>
+      <pubDate>Fri, 21 Aug 2026 04:00:00 GMT</pubDate>
+      
+      <description>记录使用AssetRipper恢复资产时，处理Shader丢失与AssetBundle后处理的方法。</description>
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h2><p>咱在使用AssetRipper恢复自己以前资产的时候，应该会显而易见的发现，Shader是无法被反编译的。我们的解包工程文件里面，Shader几乎一定是完全损坏的。</p><h2 id="AssetRipper的导出格式"><a href="#AssetRipper的导出格式" class="headerlink" title="AssetRipper的导出格式"></a>AssetRipper的导出格式</h2><p>AssetRipper主要提供YAML源文件导出和Dummy导出两种格式。理论上来说，前者导出的是Shader的在Assetbundle内的完全原版形式，但是Unity几乎一定会完全把这个损坏而无法正常渲染。而Dummy导出只能恢复最基本的引用。<br>AssetRipper付费版提供Shader反编译效果，但是经过我的测试，其恢复能力十分有限，常见着色器如liltoon似乎能恢复个九成，但是更多的是完全无法恢复。</p><h2 id="AssetBundle后处理"><a href="#AssetBundle后处理" class="headerlink" title="AssetBundle后处理"></a>AssetBundle后处理</h2><p>因此，咱必须想办法让最终的解包工程文件能完美的复刻原版的AssetBundle的Shader材质。经过我的不懈探索，浪费了很长时间后，我认为在Unity里面确实无法通过任何方式引用编译后Shader二进制形式，所以我们应该尝试对AssetBundle进行后处理。</p><p>幸运的是，不像Udon程序的签名，Shader是完全可以直接替换的。所以我制作了 <a href="https://github.com/cocokoishi/ShaderBundlePatcher">https://github.com/cocokoishi/ShaderBundlePatcher</a> 。他的作用就是，选中你的原版AssetBundle作为素材库，其原版Shader会把你选中的解包工程AssetBundle内的Dummy Shader进行替换。</p><p>经过测试，我们确实可以完全恢复解包工程的Shader，即使这个方式看起来非常奇葩，但是这是唯一一种可用的方式。</p><h2 id="其他尝试"><a href="#其他尝试" class="headerlink" title="其他尝试"></a>其他尝试</h2><p>其他尝试：逐个反编译Shader。这是非常不现实的，在配合我能找到的几乎所有HLSL反编译器的情况下，即使是肥波都无法完全恢复Shader，简直是浪费时间。</p><h2 id="UABEA插件"><a href="#UABEA插件" class="headerlink" title="UABEA插件"></a>UABEA插件</h2><p>除此之外，我还制作了UABEA插件，利用UABEA来快捷替换Shader。</p><p>本文章的内容也完全推翻了<a href="https://yzllh.github.io/2026/01/04/liltoon_obf_fackripper/">https://yzllh.github.io/2026/01/04/liltoon_obf_fackripper&#x2F;</a> 。因为技术的发展，我以前认为的很难的东西在llm agent的攻击下已经是trivial的了，完全无法挡住任何人。</p>]]></content:encoded>
+      
+      
+      <category domain="https://yzllh.github.io/categories/%E6%8A%80%E6%9C%AF%E9%9A%8F%E7%AC%94/">技术随笔</category>
+      
+      
+      <category domain="https://yzllh.github.io/tags/AssetBundle/">AssetBundle</category>
+      
+      <category domain="https://yzllh.github.io/tags/Shader/">Shader</category>
+      
+      <category domain="https://yzllh.github.io/tags/AssetRipper/">AssetRipper</category>
+      
+      <category domain="https://yzllh.github.io/tags/UABEA/">UABEA</category>
+      
+      <category domain="https://yzllh.github.io/tags/Unity/">Unity</category>
+      
+      
+      <comments>https://yzllh.github.io/2026/08/21/assetripper-shader-loss/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>【WIP】Udon NES模拟器</title>
@@ -28,9 +59,9 @@
       <category domain="https://yzllh.github.io/categories/VRChat/">VRChat</category>
       
       
-      <category domain="https://yzllh.github.io/tags/VRChat/">VRChat</category>
-      
       <category domain="https://yzllh.github.io/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">性能测试</category>
+      
+      <category domain="https://yzllh.github.io/tags/VRChat/">VRChat</category>
       
       <category domain="https://yzllh.github.io/tags/Udon/">Udon</category>
       
@@ -229,13 +260,13 @@
       
       <category domain="https://yzllh.github.io/tags/VRChat/">VRChat</category>
       
-      <category domain="https://yzllh.github.io/tags/%E9%80%86%E5%90%91%E7%A0%94%E7%A9%B6/">逆向研究</category>
-      
       <category domain="https://yzllh.github.io/tags/%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/">私服搭建</category>
       
       <category domain="https://yzllh.github.io/tags/MelonLoader/">MelonLoader</category>
       
       <category domain="https://yzllh.github.io/tags/Photon/">Photon</category>
+      
+      <category domain="https://yzllh.github.io/tags/%E9%80%86%E5%90%91%E7%A0%94%E7%A9%B6/">逆向研究</category>
       
       
       <comments>https://yzllh.github.io/2026/02/03/vrchat-private-server/#disqus_thread</comments>
